@@ -2,3 +2,4 @@ Barc
 ESTES ES UN MENSAJE DE RICHARD
 ESTE ES UN MENSAJE DE DANIEL
 ESTE ES UN MS DE ELENA
+It seems my authentication problem has been resolved
