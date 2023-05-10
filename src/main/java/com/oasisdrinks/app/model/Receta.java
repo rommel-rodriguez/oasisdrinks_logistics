@@ -2,6 +2,7 @@
 package com.oasisdrinks.app.model;
 
 import java.util.List;
+// Test Message
 
 public class Receta {
     private String idProducto;
