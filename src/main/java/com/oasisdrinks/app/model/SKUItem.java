@@ -1,34 +1,38 @@
 
 package com.oasisdrinks.app.model;
-
-public class SKU_Item {
+public class SKUItem {
     private String codigoItem;
     private String nombre;
-    private double precioCosto;
+    private Double precioCosto;
     
-    public SKU_Item(String codigoItem, String nombre, double precioCosto) {
+    public SKUItem(String codigoItem, String nombre, Double precioCosto) {
         this.codigoItem = codigoItem;
         this.nombre = nombre;
         this.precioCosto = precioCosto;
     }
 
-    // Just boilerplate
     public String getCodigoItem() {
         return codigoItem;
     }
+
     public void setCodigoItem(String codigoItem) {
         this.codigoItem = codigoItem;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public double getPrecioCosto() {
+
+    public Double getPrecioCosto() {
         return precioCosto;
     }
-    public void setPrecioCosto(double precioCosto) {
+
+    public void setPrecioCosto(Double precioCosto) {
         this.precioCosto = precioCosto;
     }
 }
+
