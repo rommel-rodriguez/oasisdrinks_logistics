@@ -5,18 +5,19 @@
 package com.oasisdrinks.app.dao;
 
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import com.oasisdrinks.app.config.ConfigurationManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+
+import com.oasisdrinks.app.config.ConfigurationManager;
 
 /**
  *
