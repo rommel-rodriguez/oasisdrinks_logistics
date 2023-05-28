@@ -14,7 +14,7 @@ Frmsistema objFrmsistema = new Frmsistema();
     public Vender() {
         initComponents();
         this.setLocationRelativeTo(this);
-        this.setTitle("Listar Gaseosas");
+        this.setTitle("Listar Bebidas");
         CBOMARCA.addItem(objFrmsistema.marca0);
         CBOMARCA.addItem(objFrmsistema.marca1);
 
@@ -157,7 +157,7 @@ Frmsistema objFrmsistema = new Frmsistema();
         else 
             dsct=objFrmsistema.porcentaje2/100*imp;
         pgo=imp-dsct;
-        TEXTAREAVENDER.append("Venta de Gaseosas"+"\n\n");
+        TEXTAREAVENDER.append("Venta de Bebidas"+"\n\n");
         TEXTAREAVENDER.append("Marca: "+CBOMARCA.getSelectedItem()+"\n");
         TEXTAREAVENDER.append("Precio unitario: "+p+"\n");
         TEXTAREAVENDER.append("Cantidad de cajas adquiridas: "+c+"\n");

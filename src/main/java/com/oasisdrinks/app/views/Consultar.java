@@ -14,7 +14,7 @@ Frmsistema objFrmsistema = new Frmsistema();
     public Consultar() {
         initComponents();
         this.setLocationRelativeTo(this);
-        this.setTitle("Consulta de Gaseosas");
+        this.setTitle("Consulta de Bebidas");
         CBOMARCA.addItem(objFrmsistema.marca0);
         CBOMARCA.addItem(objFrmsistema.marca1);
 ;

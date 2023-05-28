@@ -16,7 +16,7 @@ public class ConfigurarCantidadOptima extends javax.swing.JFrame {
     public ConfigurarCantidadOptima() {
         initComponents();
         this.setLocationRelativeTo(this);
-        this.setTitle("Configurar cantidad óptima de gaseosas vendidas");
+        this.setTitle("Configurar cantidad óptima de bebidas vendidas");
         TXTCANTOPT.setText(Integer.toString(objFrmsistema.cantidadOptima));
     }
 
