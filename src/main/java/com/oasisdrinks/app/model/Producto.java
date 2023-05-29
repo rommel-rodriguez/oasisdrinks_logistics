@@ -1,47 +1,30 @@
 
 package com.oasisdrinks.app.model;
-public class Producto extends SKUItem {
-    private Double precioVenta;
-    private String nomProducto;
-    private int cantProducto;
+
+public abstract class Producto{
+    private int codProducto;
+    private String nombreProducto;
     private int diasCaducidad;
+    private double cantProducto;
+    private double precioVenta;
+    private double precioCosto;
     
-    public Producto(String codigoItem, String nombre, Double precioCosto, Double precioVenta, String nomProducto, int cantProducto, int diasCaducidad) {
-        super(codigoItem, nombre, precioCosto);
-        this.precioVenta = precioVenta;
-        this.nomProducto = nomProducto;
-        this.cantProducto = cantProducto;
+    public Producto(String codigoItem, String nombre, double precioCosto,  int diasCaducidad) {
+        //super(codigoItem, nombre, precioCosto);
+        this.precioCosto = precioCosto;
         this.diasCaducidad = diasCaducidad;
     }
 
-    public Double getPrecioVenta() {
-        return precioVenta;
+    // Getters and setters for Producto
+    public double getprecioCosto() {
+        return precioCosto;
     }
-
-    public void setPrecioVenta(Double precioVenta) {
-        this.precioVenta = precioVenta;
+    public void setprecioCosto(int precioCosto) {
+        this.precioCosto = precioCosto;
     }
-
-    public String getNomProducto() {
-        return nomProducto;
-    }
-
-    public void setNomProducto(String nomProducto) {
-        this.nomProducto = nomProducto;
-    }
-
-    public int getCantProducto() {
-        return cantProducto;
-    }
-
-    public void setCantProducto(int cantProducto) {
-        this.cantProducto = cantProducto;
-    }
-
     public int getDiasCaducidad() {
         return diasCaducidad;
     }
-
     public void setDiasCaducidad(int diasCaducidad) {
         this.diasCaducidad = diasCaducidad;
     }

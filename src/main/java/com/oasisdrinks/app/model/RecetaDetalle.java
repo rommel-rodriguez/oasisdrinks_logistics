@@ -1,4 +1,3 @@
-
 package com.oasisdrinks.app.model;
 
 public class RecetaDetalle {
@@ -25,4 +24,9 @@ public class RecetaDetalle {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    public void Preparacion(){
+        System.out.println("Mostrar preparacion");
+    }
 }
+
