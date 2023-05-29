@@ -32,7 +32,7 @@ public class MockInsumoDAO implements IInsumoDAO {
     }
     @Override
     public void agregarInsumo(Insumo insumo) {
-        this.cache.get("insumos").add(insumo);
+        this.insumos.add(insumo);
     }
 
     @Override
