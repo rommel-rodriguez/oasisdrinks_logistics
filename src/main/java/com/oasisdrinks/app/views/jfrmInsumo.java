@@ -4,17 +4,26 @@
  */
 package com.oasisdrinks.app.views;
 
+import com.oasisdrinks.app.controllers.InsumoController;
+import com.oasisdrinks.app.dao.InsumoDAO;
+import com.oasisdrinks.app.dao.MockInsumoDAO;
+import com.oasisdrinks.app.model.Insumo;
 import com.oasisdrinks.app.model.InsumoLiquido;
+import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
 public class jfrmInsumo extends javax.swing.JFrame {
     
     DefaultTableModel tblModel; //MM, se asigna variable 
+    Map<String, List<?>> cache;
+    List<Insumo> insumos;
     
-    public jfrmInsumo() {
+    public jfrmInsumo(Map<String, List<?>> cache) {
         initComponents();
         tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
         tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
+        this.cache = cache;
+        this.insumos = (List<Insumo>) cache.get("insumos");
     }
 
     /**
@@ -203,20 +212,39 @@ public class jfrmInsumo extends javax.swing.JFrame {
         pcosto = Double.parseDouble(txtPrecioCosto.getText());
         dens = Double.parseDouble(txtDensidad.getText());
         
-        InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
-        agregarFila(i); //MM, sino se invoca, no se adiciona registros
+        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
+        Insumo insu = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
+        agregarFila(insu); //MM, sino se invoca, no se adiciona registros
+        addRecord(insu); //MM, sino se invoca, no se adiciona registros
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
-    private void agregarFila(InsumoLiquido i){
+    private void agregarFila(Insumo insu){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
+        InsumoLiquido i = (InsumoLiquido) insu;
         tblModel.addRow(new Object[]{i.getCodInsumo(), 
             i.getNomInsumo(), i.getCantInsumo(), i.getUnidadCompra(), i.getDensidad(), i.getPrecioCosto()
         });
     }
             
+    private void addRecord(Insumo insu){
+    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
+        System.out.println("Adding Record to DB");
+        InsumoLiquido i = (InsumoLiquido) insu;
+        // InsumoDAO inDao = new MockInsumoDAO(cache);
+        InsumoController inCon = new InsumoController();
+        inCon.setCache(cache);
+        inCon.agregarInsumo(insu);
+        System.out.printf("Insumos Record's Size: ");
+        System.out.println(cache.get("insumos").size());
+        System.out.println("Insumos Record:");
+        System.out.println(cache.get("insumos"));
+        System.out.println("Whole");
+        System.out.println(cache);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -247,7 +275,7 @@ public class jfrmInsumo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jfrmInsumo().setVisible(true);
+                new jfrmInsumo(null).setVisible(true);
             }
         });
     }

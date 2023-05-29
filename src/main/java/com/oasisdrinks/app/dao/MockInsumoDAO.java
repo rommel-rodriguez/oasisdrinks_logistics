@@ -23,7 +23,7 @@ public class MockInsumoDAO implements IInsumoDAO {
     public MockInsumoDAO (Map cache){
         this.cache = cache;
         // List<Object> objects = this.cache.get("insumos");
-        List<Insumo> insumos = (List<Insumo>) this.cache.get("insumos");
+        this.insumos = (List<Insumo>) this.cache.get("insumos");
         // for (Object obj : objects) {
         //     if (obj instanceof Insumo) {
         //         insumos.add((Insumo) obj);

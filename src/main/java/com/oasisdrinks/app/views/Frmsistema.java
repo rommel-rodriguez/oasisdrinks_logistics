@@ -1,5 +1,9 @@
 package com.oasisdrinks.app.views;
 
+import com.oasisdrinks.app.model.Insumo;
+import javax.swing.JFrame;
+import java.util.*;
+
 
 /**
  *
@@ -19,6 +23,8 @@ public class Frmsistema extends javax.swing.JFrame {
     public static int contenido1 = 13;
     public static double peso1 = 130;
     public static String sabor1 = "Chicha";
+    Map<String, List<?>> cache = new HashMap<>();
+
 
     
     // Porcentajes de descuento
@@ -47,6 +53,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
      */
     public Frmsistema() {
         initComponents();
+        initializeCache();
         this.setLocationRelativeTo(this);
         this.setTitle("Sistema de Ventas Oasis Drink");
     }
@@ -68,6 +75,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         MNUVENDER = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -120,6 +128,14 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
             }
         });
         MNUMantenimiento.add(jMenuItem1);
+
+        jMenuItem5.setText("Insumos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        MNUMantenimiento.add(jMenuItem5);
 
         jMenuBar1.add(MNUMantenimiento);
 
@@ -197,6 +213,12 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void initializeCache() {
+        List<Insumo> insumos = new ArrayList<>();
+        this.cache.put("insumos", insumos);
+    }
+
     private void MNUSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MNUSalirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
@@ -255,6 +277,15 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         this.setVisible(false);
     }//GEN-LAST:event_MNUCONFCANTOPActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        JFrame insumoView = new jfrmInsumo(cache);
+        insumoView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        insumoView.setVisible(true);
+        // this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +338,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
