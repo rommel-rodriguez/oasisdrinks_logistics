@@ -38,7 +38,7 @@
                   <Component id="TXTSABOR" min="-2" max="-2" attributes="0"/>
                   <Component id="TXTPESO" min="-2" max="-2" attributes="0"/>
                   <Component id="TXTPRECIO" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="CBOMARCA" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                  <Component id="CBOINSUMO" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="37" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -55,7 +55,7 @@
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CBOMARCA" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CBOINSUMO" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTNCERRAR" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -87,7 +87,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="MARCA"/>
+        <Property name="text" type="java.lang.String" value="INSUMO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -130,14 +130,14 @@
         <Property name="columns" type="int" value="15"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="CBOMARCA">
+    <Component class="javax.swing.JComboBox" name="CBOINSUMO">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CBOMARCAActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CBOINSUMOActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

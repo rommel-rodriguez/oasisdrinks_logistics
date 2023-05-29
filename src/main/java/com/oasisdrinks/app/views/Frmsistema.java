@@ -8,13 +8,13 @@ package com.oasisdrinks.app.views;
 public class Frmsistema extends javax.swing.JFrame {
     
     
-    public static String marca0 = "Maracuya";
+    public static String insumo0 = "Maracuya";
     public static double precio0 = 35.0;
     public static int contenido0 = 12;
     public static double peso0 = 120;
     public static String sabor0 = "Maracuya";
     
-     public static String marca1 = "Chicha";
+     public static String insumo1 = "Chicha";
     public static double precio1 = 40.0;
     public static int contenido1 = 13;
     public static double peso1 = 130;
@@ -29,17 +29,17 @@ public static double porcentaje2 = 2.0;
 // Cantidad óptima de lotes vendidas
 public static int cantidadOptima = 20;
 
-// Cantidad mínima de cajas adquiridas para acceder al obsequio
+// Cantidad mínima de paquetes adquiridos para obtener el obsequio
 public static int cantidadObsequiable = 15;
 	
-// Obsequio por cantidad mínima de cajas adquiridas
+// Obsequio por cantidad mínima de paquetes adquiridos
 public static String obsequio = "Balon de gas";
 
 // Número de cliente que recibe el premio sorpresa
 public static int numeroClienteSorpresa = 3;
 
 // Premio sorpresa
-public static String premioSorpresa = "Pochita de peluche";
+public static String premioSorpresa = "Peluche de nuestra mascota";
 
 
     /**

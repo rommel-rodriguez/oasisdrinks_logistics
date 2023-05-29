@@ -89,14 +89,14 @@ Frmsistema objFrmsistema = new Frmsistema();
 
     private void BTNLISTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNLISTARActionPerformed
         // TODO add your handling code here:
-        TXTAREALISTAR.append("Listado de Gaseosas"+"\n\n");
-        TXTAREALISTAR.append("Marca: "+objFrmsistema.marca0+"\n");
+        TXTAREALISTAR.append("Listado de Bebidas"+"\n\n");
+        TXTAREALISTAR.append("Marca: "+objFrmsistema.insumo0+"\n");
         TXTAREALISTAR.append("Precio: "+objFrmsistema.precio0+"\n");
         TXTAREALISTAR.append("Contenido: "+objFrmsistema.contenido0+"\n");
         TXTAREALISTAR.append("Peso: "+objFrmsistema.peso0+"\n");
         TXTAREALISTAR.append("Sabor: "+objFrmsistema.sabor0+"\n");
         TXTAREALISTAR.append("\n\n");
-        TXTAREALISTAR.append("Marca: "+objFrmsistema.marca1+"\n");
+        TXTAREALISTAR.append("Marca: "+objFrmsistema.insumo1+"\n");
         TXTAREALISTAR.append("Precio: "+objFrmsistema.precio1+"\n");
         TXTAREALISTAR.append("Contenido: "+objFrmsistema.contenido1+"\n");
         TXTAREALISTAR.append("Peso: "+objFrmsistema.peso1+"\n");

@@ -15,8 +15,8 @@ Frmsistema objFrmsistema = new Frmsistema();
         initComponents();
         this.setLocationRelativeTo(this);
         this.setTitle("Modificar Bebidas");
-        CBOMARCA.addItem(objFrmsistema.marca0);
-        CBOMARCA.addItem(objFrmsistema.marca1);
+        CBOINSUMO.addItem(objFrmsistema.insumo0);
+        CBOINSUMO.addItem(objFrmsistema.insumo1);
 
     }
 
@@ -38,13 +38,13 @@ Frmsistema objFrmsistema = new Frmsistema();
         TXTCONTENIDO = new javax.swing.JTextField();
         TXTPESO = new javax.swing.JTextField();
         TXTSABOR = new javax.swing.JTextField();
-        CBOMARCA = new javax.swing.JComboBox<>();
+        CBOINSUMO = new javax.swing.JComboBox<>();
         BTNCERRAR = new javax.swing.JButton();
         BTNGRABAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("MARCA");
+        jLabel1.setText("INSUMO");
 
         jLabel2.setText("PRECIO");
 
@@ -62,9 +62,9 @@ Frmsistema objFrmsistema = new Frmsistema();
 
         TXTSABOR.setColumns(15);
 
-        CBOMARCA.addActionListener(new java.awt.event.ActionListener() {
+        CBOINSUMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CBOMARCAActionPerformed(evt);
+                CBOINSUMOActionPerformed(evt);
             }
         });
 
@@ -100,7 +100,7 @@ Frmsistema objFrmsistema = new Frmsistema();
                     .addComponent(TXTSABOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXTPESO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXTPRECIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBOMARCA, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBOINSUMO, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTNCERRAR)
@@ -113,7 +113,7 @@ Frmsistema objFrmsistema = new Frmsistema();
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(CBOMARCA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBOINSUMO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNCERRAR))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -144,9 +144,9 @@ Frmsistema objFrmsistema = new Frmsistema();
         this.setVisible(false);   
     }//GEN-LAST:event_BTNCERRARActionPerformed
 
-    private void CBOMARCAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBOMARCAActionPerformed
+    private void CBOINSUMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBOINSUMOActionPerformed
         // TODO add your handling code here:
-        if (CBOMARCA.getSelectedItem()==objFrmsistema.marca0)
+        if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo0)
         {
             TXTPRECIO.setText(Double.toString(Frmsistema.precio0));
             TXTCONTENIDO.setText(Integer.toString(Frmsistema.contenido0));
@@ -154,7 +154,7 @@ Frmsistema objFrmsistema = new Frmsistema();
             TXTSABOR.setText(Frmsistema.sabor0);
         }
         else
-            if (CBOMARCA.getSelectedItem()==objFrmsistema.marca1)
+            if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo1)
         {
             TXTPRECIO.setText(Double.toString(Frmsistema.precio1));
             TXTCONTENIDO.setText(Integer.toString(Frmsistema.contenido1));
@@ -162,11 +162,11 @@ Frmsistema objFrmsistema = new Frmsistema();
             TXTSABOR.setText(Frmsistema.sabor1);
        
         }
-    }//GEN-LAST:event_CBOMARCAActionPerformed
+    }//GEN-LAST:event_CBOINSUMOActionPerformed
 
     private void BTNGRABARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGRABARActionPerformed
         // TODO add your handling code here:
-        if (CBOMARCA.getSelectedItem()==objFrmsistema.marca0)
+        if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo0)
         {
             objFrmsistema.precio0=Double.parseDouble(TXTPRECIO.getText());
             objFrmsistema.contenido0=Integer.parseInt(TXTCONTENIDO.getText());
@@ -174,7 +174,7 @@ Frmsistema objFrmsistema = new Frmsistema();
             objFrmsistema.sabor0=TXTSABOR.getText();
         }
         else
-            if (CBOMARCA.getSelectedItem()==objFrmsistema.marca1)
+            if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo1)
         {
             objFrmsistema.precio1=Double.parseDouble(TXTPRECIO.getText());
             objFrmsistema.contenido1=Integer.parseInt(TXTCONTENIDO.getText());
@@ -223,7 +223,7 @@ Frmsistema objFrmsistema = new Frmsistema();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNCERRAR;
     private javax.swing.JButton BTNGRABAR;
-    private javax.swing.JComboBox<String> CBOMARCA;
+    private javax.swing.JComboBox<String> CBOINSUMO;
     private javax.swing.JTextField TXTCONTENIDO;
     private javax.swing.JTextField TXTPESO;
     private javax.swing.JTextField TXTPRECIO;

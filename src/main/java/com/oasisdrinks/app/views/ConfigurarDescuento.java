@@ -14,8 +14,8 @@ Frmsistema objFrmsistema = new Frmsistema();
         initComponents();
         this.setLocationRelativeTo(this);
         this.setTitle("Configurar Porcentajes de Descuentos");
-        TXT1A5CAJAS.setText(Double.toString(objFrmsistema.porcentaje1));
-        TXT6A10CAJAS.setText(Double.toString(objFrmsistema.porcentaje2));
+        TXT1A5PAQUETES.setText(Double.toString(objFrmsistema.porcentaje1));
+        TXT6A10PAQUETES.setText(Double.toString(objFrmsistema.porcentaje2));
         
     }
 
@@ -30,24 +30,24 @@ Frmsistema objFrmsistema = new Frmsistema();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        TXT1A5CAJAS = new javax.swing.JTextField();
-        TXT6A10CAJAS = new javax.swing.JTextField();
+        TXT1A5PAQUETES = new javax.swing.JTextField();
+        TXT6A10PAQUETES = new javax.swing.JTextField();
         BTNACEPTAR = new javax.swing.JButton();
         BTNCERRAR = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        TXT11A15CAJAS = new javax.swing.JTextField();
+        TXT11A15PAQUETES = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TXTMAS15CAJAS = new javax.swing.JTextField();
+        TXTMAS15PAQUETES = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("1 a 5 cajas:");
+        jLabel1.setText("1 a 5 paquetes:");
 
-        jLabel2.setText("6 a 10 cajas:");
+        jLabel2.setText("6 a 10 paquetes:");
 
-        TXT1A5CAJAS.setColumns(5);
+        TXT1A5PAQUETES.setColumns(5);
 
-        TXT6A10CAJAS.setColumns(5);
+        TXT6A10PAQUETES.setColumns(5);
 
         BTNACEPTAR.setText("ACEPTAR");
         BTNACEPTAR.addActionListener(new java.awt.event.ActionListener() {
@@ -63,21 +63,21 @@ Frmsistema objFrmsistema = new Frmsistema();
             }
         });
 
-        jLabel3.setText("11 a 15 cajas:");
+        jLabel3.setText("11 a 15 paquetes:");
 
-        TXT11A15CAJAS.setColumns(5);
-        TXT11A15CAJAS.addActionListener(new java.awt.event.ActionListener() {
+        TXT11A15PAQUETES.setColumns(5);
+        TXT11A15PAQUETES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT11A15CAJASActionPerformed(evt);
+                TXT11A15PAQUETESActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Más de 15 cajas:");
+        jLabel4.setText("Más de 15 paquetes:");
 
-        TXTMAS15CAJAS.setColumns(5);
-        TXTMAS15CAJAS.addActionListener(new java.awt.event.ActionListener() {
+        TXTMAS15PAQUETES.setColumns(5);
+        TXTMAS15PAQUETES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXTMAS15CAJASActionPerformed(evt);
+                TXTMAS15PAQUETESActionPerformed(evt);
             }
         });
 
@@ -94,9 +94,9 @@ Frmsistema objFrmsistema = new Frmsistema();
                             .addComponent(jLabel2))
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TXT6A10CAJAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXT1A5CAJAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                            .addComponent(TXT6A10PAQUETES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXT1A5PAQUETES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BTNACEPTAR, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BTNCERRAR, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -107,8 +107,8 @@ Frmsistema objFrmsistema = new Frmsistema();
                             .addComponent(jLabel4))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TXT11A15CAJAS)
-                            .addComponent(TXTMAS15CAJAS))
+                            .addComponent(TXT11A15PAQUETES)
+                            .addComponent(TXTMAS15PAQUETES))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -117,22 +117,22 @@ Frmsistema objFrmsistema = new Frmsistema();
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TXT1A5CAJAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT1A5PAQUETES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNACEPTAR))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(TXT6A10CAJAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TXT6A10PAQUETES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BTNCERRAR))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(TXT11A15CAJAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT11A15PAQUETES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(TXTMAS15CAJAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXTMAS15PAQUETES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
 
@@ -147,18 +147,18 @@ Frmsistema objFrmsistema = new Frmsistema();
 
     private void BTNACEPTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNACEPTARActionPerformed
         // TODO add your handling code here:
-        objFrmsistema.porcentaje1=Double.parseDouble(TXT1A5CAJAS.getText());
-        objFrmsistema.porcentaje2=Double.parseDouble(TXT6A10CAJAS.getText());
+        objFrmsistema.porcentaje1=Double.parseDouble(TXT1A5PAQUETES.getText());
+        objFrmsistema.porcentaje2=Double.parseDouble(TXT6A10PAQUETES.getText());
 
     }//GEN-LAST:event_BTNACEPTARActionPerformed
 
-    private void TXT11A15CAJASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT11A15CAJASActionPerformed
+    private void TXT11A15PAQUETESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT11A15PAQUETESActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TXT11A15CAJASActionPerformed
+    }//GEN-LAST:event_TXT11A15PAQUETESActionPerformed
 
-    private void TXTMAS15CAJASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTMAS15CAJASActionPerformed
+    private void TXTMAS15PAQUETESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTMAS15PAQUETESActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TXTMAS15CAJASActionPerformed
+    }//GEN-LAST:event_TXTMAS15PAQUETESActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,10 +199,10 @@ Frmsistema objFrmsistema = new Frmsistema();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNACEPTAR;
     private javax.swing.JButton BTNCERRAR;
-    private javax.swing.JTextField TXT11A15CAJAS;
-    private javax.swing.JTextField TXT1A5CAJAS;
-    private javax.swing.JTextField TXT6A10CAJAS;
-    private javax.swing.JTextField TXTMAS15CAJAS;
+    private javax.swing.JTextField TXT11A15PAQUETES;
+    private javax.swing.JTextField TXT1A5PAQUETES;
+    private javax.swing.JTextField TXT6A10PAQUETES;
+    private javax.swing.JTextField TXTMAS15PAQUETES;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

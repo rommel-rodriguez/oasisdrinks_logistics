@@ -15,8 +15,8 @@ Frmsistema objFrmsistema = new Frmsistema();
         initComponents();
         this.setLocationRelativeTo(this);
         this.setTitle("Consulta de Bebidas");
-        CBOMARCA.addItem(objFrmsistema.marca0);
-        CBOMARCA.addItem(objFrmsistema.marca1);
+        CBOINSUMO.addItem(objFrmsistema.insumo0);
+        CBOINSUMO.addItem(objFrmsistema.insumo1);
 ;
     }
 
@@ -38,12 +38,12 @@ Frmsistema objFrmsistema = new Frmsistema();
         LBLCONTENIDO = new javax.swing.JLabel();
         LBLPESO = new javax.swing.JLabel();
         LBLSABOR = new javax.swing.JLabel();
-        CBOMARCA = new javax.swing.JComboBox<>();
+        CBOINSUMO = new javax.swing.JComboBox<>();
         BTNCERRA = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Marca");
+        jLabel1.setText("Insumo");
 
         jLabel2.setText("Precio (S/)");
 
@@ -61,9 +61,9 @@ Frmsistema objFrmsistema = new Frmsistema();
 
         LBLSABOR.setText("jLabel6");
 
-        CBOMARCA.addActionListener(new java.awt.event.ActionListener() {
+        CBOINSUMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CBOMARCAActionPerformed(evt);
+                CBOINSUMOActionPerformed(evt);
             }
         });
 
@@ -93,7 +93,7 @@ Frmsistema objFrmsistema = new Frmsistema();
                             .addComponent(LBLSABOR)
                             .addComponent(LBLPESO)
                             .addComponent(LBLPRECIO)
-                            .addComponent(CBOMARCA, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CBOINSUMO, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LBLCONTENIDO)
@@ -107,7 +107,7 @@ Frmsistema objFrmsistema = new Frmsistema();
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(CBOMARCA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBOINSUMO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -137,9 +137,9 @@ Frmsistema objFrmsistema = new Frmsistema();
         this.setVisible(false);
     }//GEN-LAST:event_BTNCERRAActionPerformed
 
-    private void CBOMARCAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBOMARCAActionPerformed
+    private void CBOINSUMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBOINSUMOActionPerformed
         // TODO add your handling code here:
-        if (CBOMARCA.getSelectedItem()==objFrmsistema.marca0)
+        if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo0)
         {
             LBLPRECIO.setText(Double.toString(Frmsistema.precio0));
             LBLCONTENIDO.setText(Integer.toString(Frmsistema.contenido0));
@@ -147,14 +147,14 @@ Frmsistema objFrmsistema = new Frmsistema();
             LBLSABOR.setText(Frmsistema.sabor0);
         }
         else 
-            if (CBOMARCA.getSelectedItem()==objFrmsistema.marca1)
+            if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo1)
             {
                LBLPRECIO.setText(Double.toString(Frmsistema.precio1));
                LBLCONTENIDO.setText(Integer.toString(Frmsistema.contenido1));
                LBLPESO.setText(Double.toString(Frmsistema.peso1));
                LBLSABOR.setText(Frmsistema.sabor1); 
             }
-    }//GEN-LAST:event_CBOMARCAActionPerformed
+    }//GEN-LAST:event_CBOINSUMOActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,7 +194,7 @@ Frmsistema objFrmsistema = new Frmsistema();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNCERRA;
-    private javax.swing.JComboBox<String> CBOMARCA;
+    private javax.swing.JComboBox<String> CBOINSUMO;
     private javax.swing.JLabel LBLCONTENIDO;
     private javax.swing.JLabel LBLPESO;
     private javax.swing.JLabel LBLPRECIO;

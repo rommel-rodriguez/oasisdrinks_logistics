@@ -14,7 +14,7 @@ public class dlgAcercade extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(this);
-        this.setTitle("Sistema de Venta de Gaseosas V 1.0");
+        this.setTitle("Sistema de Venta de bebidas artesanales Oasis Drink");
     }
 
     /**
