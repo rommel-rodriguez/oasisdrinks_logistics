@@ -25,8 +25,12 @@ public class jfrmInsumo extends javax.swing.JFrame {
         tblDatos.getSelectionModel().addListSelectionListener(tableSelectionListener);
         this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
         this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
-        this.cache = cache;
-        this.insumos = (List<Insumo>) cache.get("insumos");
+        if (cache != null) {
+            this.cache = cache;
+            this.insumos = (List<Insumo>) cache.get("insumos");
+        }
+        // Needs to be after all of the above this.* cause it uses them
+        loadDataToTable();
     }
 
     /**
@@ -277,6 +281,15 @@ public class jfrmInsumo extends javax.swing.JFrame {
             }
         }
     };
+
+    private void loadDataToTable(){
+        this.tblModel.setRowCount(0);
+        if (this.insumos != null) {
+            for (Insumo insu: this.insumos) {
+                agregarFila(insu);
+            }
+        }
+    }
 
     private void emptyForm () {
         this.txtCantidad.setText("");
