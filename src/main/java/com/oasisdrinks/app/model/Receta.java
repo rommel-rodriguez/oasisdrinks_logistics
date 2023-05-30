@@ -1,61 +1,47 @@
 
 package com.oasisdrinks.app.model;
 
-import java.util.List;
-//import java.util.ArrayList;
-
 public class Receta {
-    private int codReceta;
-    private Producto codProducto; //Sino, como se sabe a que producto terminado corresponde?
+    private String codReceta;
     private int cantidad;
-    private List<RecetaDetalle> detalles;
+    //private RecetaDetalle detalles ;
 
-    public Receta(int codReceta, Producto codProducto, int cantidad, List<RecetaDetalle> detalles) {
-        this.codReceta = codReceta;
-        this.codProducto = codProducto;
-        this.cantidad = cantidad;
-        this.detalles = detalles;
-    }
-
-    public void agregarDetalle(RecetaDetalle detalle) {
-        this.detalles.add(detalle);
-    }
-
-    public int getCodReceta() {
-        return codReceta;
-    }
-
-    public void setCodReceta(int codReceta) {
-        this.codReceta = codReceta;
-    }
-
-    public Producto getCodProducto() {
-        return codProducto;
-    }
-
-    public void setCodProducto(Producto codProducto) {
-        this.codProducto = codProducto;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public List<RecetaDetalle> getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(List<RecetaDetalle> detalles) {
-        this.detalles = detalles;
-    }
-
-    public void calcularCosto(){
-        
+    /*public Receta(String codReceta, int cantidad, RecetaDetalle detalles) {
+    this.codReceta = codReceta;    
+    this.cantidad = cantidad;
+    this.detalles = detalles;
+    }*/
+    public Receta(String codReceta, int cantidad) {
+    this.codReceta = codReceta;    
+    this.cantidad = cantidad;
     }
     
+    public String getCodReceta() {return codReceta;}
+    public void setCodReceta(String codReceta) {this.codReceta = codReceta;}
 
+    public int getCantidad() {return cantidad;}
+    public void setCantidad(int cantidad) {this.cantidad = cantidad;    }
+
+    /*public RecetaDetalle getdetalles(){
+        return detalles;
+    }
+        public void setRecetaDetalle(RecetaDetalle detalles){
+        this.detalles= detalles;
+    }    
+    public void agregarDetalle (RecetaDetalle x){
+        detalles.add(x);
+    }*/
+
+    @Override
+    public String toString() {
+        return "Código de receta  : "+codReceta+
+               "\nCantidad          : "+cantidad;
+    }
+
+    
+    
+
+    
+    
+    
 }

@@ -1,5 +1,6 @@
 package com.oasisdrinks.app.model;
 
+
 public class RecetaDetalle {
     private Insumo insumo;
     private int cantidad;
@@ -29,4 +30,3 @@ public class RecetaDetalle {
         System.out.println("Mostrar preparacion");
     }
 }
-

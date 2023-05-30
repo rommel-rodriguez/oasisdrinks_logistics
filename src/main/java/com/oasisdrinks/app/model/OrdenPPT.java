@@ -1,28 +1,25 @@
 
 package com.oasisdrinks.app.model;
+import java.util.Vector;
 
 public class OrdenPPT {
-    private Receta receta;
     private int cantidad;
+    private Vector<Receta> recetas = new Vector();
+    
+    public OrdenPPT(){    }
 
-    public OrdenPPT(Receta receta, int cantidad) {
-        this.receta = receta;
-        this.cantidad = cantidad;
+    public int getCantidad() {return cantidad;}
+    public void setCantidad(int cantidad) {this.cantidad = cantidad;}
+    
+    public void AgregarReceta(Receta r){
+        recetas.add(r);}
+            
+    public void MostrarListaReceta(){
+            for(int pos=0; pos<recetas.size();pos++){
+            System.out.println("Orden "+(pos+1));
+            System.out.println(recetas.get(pos));}
     }
-
-    public Receta getReceta() {
-        return receta;
-    }
-
-    public void setReceta(Receta receta) {
-        this.receta = receta;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+    
+    
 }
+
