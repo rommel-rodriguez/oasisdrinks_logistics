@@ -23,6 +23,10 @@ public abstract class Insumo{
         this.cantInsumo = cantInsumo;
     }
 
+    public Insumo() {
+
+    }
+
     public int getCodInsumo() {
         return codInsumo;
     }

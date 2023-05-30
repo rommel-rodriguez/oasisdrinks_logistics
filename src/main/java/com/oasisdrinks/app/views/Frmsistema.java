@@ -129,7 +129,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         });
         MNUMantenimiento.add(jMenuItem1);
 
-        jMenuItem5.setText("Insumos");
+        jMenuItem5.setText("Insumos - Agregar y Listar");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);

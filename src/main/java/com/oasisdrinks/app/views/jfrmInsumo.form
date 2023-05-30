@@ -27,49 +27,40 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNuevo" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
+                      <Component id="deleteButton" linkSize="1" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="updateButton" linkSize="1" min="-2" pref="134" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel3" min="-2" pref="49" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtCantidad" min="-2" pref="72" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel2" min="-2" pref="53" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtNombre" min="-2" pref="348" max="-2" attributes="0"/>
-                                  <Component id="txtCodigo" min="-2" pref="91" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" linkSize="3" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="jLabel1" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" linkSize="3" min="-2" pref="76" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtNombre" alignment="0" min="-2" pref="348" max="-2" attributes="0"/>
+                          <Component id="txtCodigo" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Component id="txtCantidad" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtPrecioCosto" pref="77" max="32767" attributes="0"/>
+                          <Component id="txtDensidad" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtUnidad" max="32767" attributes="0"/>
-                          <Component id="txtDensidad" max="32767" attributes="0"/>
-                          <Component id="txtPrecioCosto" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -85,7 +76,7 @@
                   <Component id="txtUnidad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -100,12 +91,15 @@
                   <Component id="txtPrecioCosto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnGuardar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="updateButton" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteButton" linkSize="2" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="btnGuardar" linkSize="2" alignment="2" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnNuevo" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="213" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,27 +126,15 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCodigo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="CodInsumo"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNombre">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="NombreInsumo"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCantidad">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cantidad"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUnidad">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Und"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnNuevo">
       <Properties>
@@ -175,7 +157,7 @@
         <Component class="javax.swing.JTable" name="tblDatos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="5">
+              <Table columnCount="6" rowCount="7">
                 <Column editable="true" title="Codigo" type="java.lang.Object"/>
                 <Column editable="true" title="Nombre" type="java.lang.Object"/>
                 <Column editable="true" title="Cantidad" type="java.lang.Object"/>
@@ -186,6 +168,16 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -232,9 +224,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDensidad">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Densidad"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -242,9 +231,28 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPrecioCosto">
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PrecCosto"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/oasisdrinks/app/views/imagen/delete.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="updateButton">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/oasisdrinks/app/views/imagen/system_software_update_22485.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Actualizar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

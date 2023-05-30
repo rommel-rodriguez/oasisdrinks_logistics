@@ -10,6 +10,8 @@ import com.oasisdrinks.app.dao.MockInsumoDAO;
 import com.oasisdrinks.app.model.Insumo;
 import com.oasisdrinks.app.model.InsumoLiquido;
 import java.util.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class jfrmInsumo extends javax.swing.JFrame {
@@ -20,8 +22,9 @@ public class jfrmInsumo extends javax.swing.JFrame {
     
     public jfrmInsumo(Map<String, List<?>> cache) {
         initComponents();
-        tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
-        tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
+        tblDatos.getSelectionModel().addListSelectionListener(tableSelectionListener);
+        this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
+        this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
         this.cache = cache;
         this.insumos = (List<Insumo>) cache.get("insumos");
     }
@@ -51,6 +54,8 @@ public class jfrmInsumo extends javax.swing.JFrame {
         txtDensidad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtPrecioCosto = new javax.swing.JTextField();
+        deleteButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,18 +67,11 @@ public class jfrmInsumo extends javax.swing.JFrame {
 
         jLabel4.setText("Unidad");
 
-        txtCodigo.setText("CodInsumo");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
             }
         });
-
-        txtNombre.setText("NombreInsumo");
-
-        txtCantidad.setText("Cantidad");
-
-        txtUnidad.setText("Und");
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/boton_nuevo.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
@@ -85,6 +83,8 @@ public class jfrmInsumo extends javax.swing.JFrame {
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -107,11 +107,23 @@ public class jfrmInsumo extends javax.swing.JFrame {
 
         jLabel5.setText("Densidad");
 
-        txtDensidad.setText("Densidad");
-
         jLabel6.setText("Precio Costo");
 
-        txtPrecioCosto.setText("PrecCosto");
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/delete.png"))); // NOI18N
+        deleteButton.setText("Eliminar");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/system_software_update_22485.png"))); // NOI18N
+        updateButton.setText("Actualizar");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,39 +135,40 @@ public class jfrmInsumo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNuevo)
                         .addGap(52, 52, 52)
-                        .addComponent(btnGuardar))
+                        .addComponent(btnGuardar)
+                        .addGap(208, 208, 208)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(203, 203, 203)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUnidad)
-                            .addComponent(txtDensidad, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                            .addComponent(txtPrecioCosto))))
+                            .addComponent(txtPrecioCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(txtDensidad)
+                            .addComponent(txtUnidad))
+                        .addGap(100, 100, 100)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnGuardar, btnNuevo, deleteButton, updateButton});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -177,25 +190,31 @@ public class jfrmInsumo extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(updateButton)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnGuardar, btnNuevo, deleteButton, updateButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // Asignando valores en blanco
-        txtCodigo.setText(""); //MM
-        txtNombre.setText(""); //MM
-        txtCantidad.setText(""); //MM
-        txtUnidad.setText(""); //MM
-        txtPrecioCosto.setText("");
-        txtDensidad.setText(""); //MM
-        txtCodigo.requestFocus(); //MM
+        // txtCodigo.setText(""); //MM
+        // txtNombre.setText(""); //MM
+        // txtCantidad.setText(""); //MM
+        // txtUnidad.setText(""); //MM
+        // txtPrecioCosto.setText("");
+        // txtDensidad.setText(""); //MM
+        // txtCodigo.requestFocus(); //MM
+        this.emptyForm();
         
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -221,6 +240,64 @@ public class jfrmInsumo extends javax.swing.JFrame {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateButtonActionPerformed
+    private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = tblDatos.getSelectedRow();
+                if (selectedRow >= 0) {
+                    int columnCount = tblDatos.getColumnCount();
+                    List<Object> rowObjects = new ArrayList<>();
+
+                    // Assuming the desired columns are at index 0, 1, and 2
+                    for (int i = 0; i < columnCount; i++) {
+                        Object obj = tblDatos.getValueAt(selectedRow, i);
+                        rowObjects.add(obj);
+                        // if (obj instanceof Integer) {
+                        //     int intValue = (Integer) obj;
+                        //     System.out.println("Value (int): " + intValue);
+                        // } else if (obj instanceof Double) {
+                        //     double doubleValue = (Double) obj;
+                        //     System.out.println("Value (double): " + doubleValue);
+                        // } else if (obj instanceof String) {
+                        //     String stringValue = (String) obj;
+                        //     System.out.println("Value (String): " + stringValue);
+                        // }
+                    }
+                    fillForm(rowObjects);
+                }
+            }
+        }
+    };
+
+    private void emptyForm () {
+        this.txtCantidad.setText("");
+        this.txtCodigo.setText("");
+        this.txtDensidad.setText("");
+        this.txtNombre.setText("");
+        this.txtPrecioCosto.setText("");
+        this.txtUnidad.setText("");
+    }
+
+
+    private void fillForm(List<Object> rowObjects) {
+        emptyForm();
+        this.txtCodigo.setText(rowObjects.get(0).toString());
+        this.txtNombre.setText(rowObjects.get(1).toString());
+        this.txtCantidad.setText(rowObjects.get(2).toString());
+        this.txtUnidad.setText(rowObjects.get(3).toString());
+        this.txtDensidad.setText(rowObjects.get(4).toString());
+        this.txtPrecioCosto.setText(rowObjects.get(5).toString());
+        
+    }
     private void agregarFila(Insumo insu){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
         InsumoLiquido i = (InsumoLiquido) insu;
@@ -283,6 +360,7 @@ public class jfrmInsumo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,5 +375,6 @@ public class jfrmInsumo extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioCosto;
     private javax.swing.JTextField txtUnidad;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
