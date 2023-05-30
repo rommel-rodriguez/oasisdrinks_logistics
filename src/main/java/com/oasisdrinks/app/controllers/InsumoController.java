@@ -63,5 +63,14 @@ public class InsumoController {
         }
 
     }
+
+
+    public void borrarInsumo(int codigo) {
+        if (this.cache != null) {
+            IInsumoDAO inDao = new MockInsumoDAO(cache);
+            inDao.borrarInsumo(codigo);
+        }
+
+    }
     
 }

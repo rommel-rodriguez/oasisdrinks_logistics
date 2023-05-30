@@ -247,10 +247,34 @@ public class jfrmInsumo extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        int codigo = Integer.parseInt(this.txtCodigo.getText());
+        InsumoController inCon = new InsumoController();
+        inCon.setCache(cache);
+        inCon.borrarInsumo(codigo);
+        loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
+        int cod, cant;
+        String nom, und;
+        double pcosto, dens;
+        
+        cod = Integer.parseInt(txtCodigo.getText());
+        nom = txtNombre.getText();
+        cant = Integer.parseInt(txtCantidad.getText());
+        und = txtUnidad.getText();
+        pcosto = Double.parseDouble(txtPrecioCosto.getText());
+        dens = Double.parseDouble(txtDensidad.getText());
+        
+        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
+        Insumo insu = new InsumoLiquido(
+            dens, cod, nom, cant, und, pcosto);
+
+        InsumoController inCon = new InsumoController();
+        inCon.setCache(cache);
+        inCon.actualizarInsumo(insu);
+        loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
