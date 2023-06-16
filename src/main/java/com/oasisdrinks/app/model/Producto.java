@@ -9,6 +9,7 @@ public abstract class Producto {
     private Receta receta;
     
     public Producto() {     }
+
     public Producto(int codProducto, String nomProducto, int cantProducto, double precioVenta, int diasCaducidad, Receta receta) {
         this.codProducto = codProducto;
         this.nomProducto = nomProducto;

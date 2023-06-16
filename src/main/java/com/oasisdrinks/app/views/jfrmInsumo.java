@@ -346,11 +346,11 @@ public class jfrmInsumo extends javax.swing.JFrame {
     private void addRecord(Insumo insu){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
         System.out.println("Adding Record to DB");
-        InsumoLiquido i = (InsumoLiquido) insu;
         // InsumoDAO inDao = new MockInsumoDAO(cache);
         InsumoController inCon = new InsumoController();
         inCon.setCache(cache);
         inCon.agregarInsumo(insu);
+
         System.out.printf("Insumos Record's Size: ");
         System.out.println(cache.get("insumos").size());
         System.out.println("Insumos Record:");
