@@ -6,20 +6,21 @@ package com.oasisdrinks.app.dao;
 
 import com.oasisdrinks.app.model.Insumo;
 import java.util.List;
+import java.util.*;
 import java.sql.*;
 
 /**
  *
  * @author shadowthrone
  */
-public class InsumoDAO implements BasicCRUDInterface {
+public class InsumoDAO implements BasicCRUDInterface <Insumo> {
 
     public InsumoDAO(Connection con) {
 
     }
 
     @Override
-    public void agregar(Insumo insumo) {
+    public void agregar(Insumo t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -29,7 +30,7 @@ public class InsumoDAO implements BasicCRUDInterface {
     }
 
     @Override
-    public void actualizar(Insumo insumo) {
+    public void actualizar(Insumo t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

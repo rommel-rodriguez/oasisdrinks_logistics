@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author shadowthrone
  */
-public class MockInsumoDAO implements BasicCRUDInterface {
+public class MockInsumoDAO implements BasicCRUDInterface <Insumo>{
     Map<String, List<?>> cache;
     List<Insumo> insumos;
 
@@ -31,8 +31,8 @@ public class MockInsumoDAO implements BasicCRUDInterface {
         // }
     }
     @Override
-    public void agregar(Insumo insumo) {
-        this.insumos.add(insumo);
+    public void agregar(Insumo t) {
+        this.insumos.add(t);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class MockInsumoDAO implements BasicCRUDInterface {
     }
 
     @Override
-    public void actualizar(Insumo insumo) {
-        Insumo updatedInsumo = insumo;
+    public void actualizar(Insumo t) {
+        Insumo updatedInsumo = t;
         // TODO: Need to update the Insumo model before I can test this.
         insumos.stream()
                .filter(

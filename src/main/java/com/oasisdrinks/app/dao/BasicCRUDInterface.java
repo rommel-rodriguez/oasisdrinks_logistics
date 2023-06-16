@@ -10,10 +10,10 @@ import com.oasisdrinks.app.model.Insumo;
  *
  * @author shadowthrone
  */
-public interface BasicCRUDInterface {
-    void agregar (Insumo insumo);
-    List<Insumo> listar();
-    void actualizar (Insumo insumo);
-    void eliminar(int idInsumo);
-    Insumo buscarPorID (int idinsumo);
+public interface BasicCRUDInterface <T> {
+    void agregar (T t);
+    List<T> listar();
+    void actualizar (T t);
+    void eliminar(int id);
+    Insumo buscarPorID (int id);
 }
