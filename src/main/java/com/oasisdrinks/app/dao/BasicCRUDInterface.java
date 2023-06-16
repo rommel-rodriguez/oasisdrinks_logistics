@@ -10,10 +10,10 @@ import com.oasisdrinks.app.model.Insumo;
  *
  * @author shadowthrone
  */
-public interface IInsumoDAO {
-    void agregarInsumo (Insumo insumo);
-    List<Insumo> listarInsumos();
-    void actualizarInsumo (Insumo insumo);
-    void borrarInsumo(int idInsumo);
-    Insumo buscarInsumoPorID (int idinsumo);
+public interface BasicCRUDInterface {
+    void agregar (Insumo insumo);
+    List<Insumo> listar();
+    void actualizar (Insumo insumo);
+    void eliminar(int idInsumo);
+    Insumo buscarPorID (int idinsumo);
 }

@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author shadowthrone
  */
-public class MockInsumoDAO implements IInsumoDAO {
+public class MockInsumoDAO implements BasicCRUDInterface {
     Map<String, List<?>> cache;
     List<Insumo> insumos;
 
@@ -31,17 +31,17 @@ public class MockInsumoDAO implements IInsumoDAO {
         // }
     }
     @Override
-    public void agregarInsumo(Insumo insumo) {
+    public void agregar(Insumo insumo) {
         this.insumos.add(insumo);
     }
 
     @Override
-    public List<Insumo> listarInsumos() {
+    public List<Insumo> listar() {
         return insumos;
     }
 
     @Override
-    public void actualizarInsumo(Insumo insumo) {
+    public void actualizar(Insumo insumo) {
         Insumo updatedInsumo = insumo;
         // TODO: Need to update the Insumo model before I can test this.
         insumos.stream()
@@ -60,14 +60,14 @@ public class MockInsumoDAO implements IInsumoDAO {
     }
 
     @Override
-    public void borrarInsumo(int codInsumo) {
+    public void eliminar(int codInsumo) {
         insumos.removeIf(insumo -> insumo.getCodInsumo() == codInsumo);
         // List<Object> updatedObjects = new ArrayList<>(insumos);
         // cache.put("insumos", updatedObjects);
     }
 
     @Override
-    public Insumo buscarInsumoPorID(int idinsumo) {
+    public Insumo buscarPorID(int idinsumo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

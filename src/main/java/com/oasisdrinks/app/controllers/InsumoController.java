@@ -7,9 +7,9 @@ package com.oasisdrinks.app.controllers;
 import java.util.*;
 
 import com.oasisdrinks.app.model.Insumo;
-import com.oasisdrinks.app.dao.IInsumoDAO;
 import com.oasisdrinks.app.dao.InsumoDAO;
 import com.oasisdrinks.app.dao.MockInsumoDAO;
+import com.oasisdrinks.app.dao.BasicCRUDInterface;
 
 
 
@@ -41,8 +41,8 @@ public class InsumoController {
 
     public List<Insumo> listarInsumos() {
         if (this.cache != null) {
-            IInsumoDAO inDao = new MockInsumoDAO(cache);
-            return  inDao.listarInsumos();
+            BasicCRUDInterface inDao = new MockInsumoDAO(cache);
+            return  inDao.listar();
         }
         return null;
         
@@ -50,16 +50,16 @@ public class InsumoController {
 
     public void agregarInsumo(Insumo insumo) {
         if (this.cache != null) {
-            IInsumoDAO inDao = new MockInsumoDAO(cache);
-            inDao.agregarInsumo(insumo);
+            BasicCRUDInterface inDao = new MockInsumoDAO(cache);
+            inDao.agregar(insumo);
         }
     }
 
 
     public void actualizarInsumo(Insumo insumo) {
         if (this.cache != null) {
-            IInsumoDAO inDao = new MockInsumoDAO(cache);
-            inDao.actualizarInsumo(insumo);
+            BasicCRUDInterface inDao = new MockInsumoDAO(cache);
+            inDao.actualizar(insumo);
         }
 
     }
@@ -67,8 +67,8 @@ public class InsumoController {
 
     public void borrarInsumo(int codigo) {
         if (this.cache != null) {
-            IInsumoDAO inDao = new MockInsumoDAO(cache);
-            inDao.borrarInsumo(codigo);
+            BasicCRUDInterface inDao = new MockInsumoDAO(cache);
+            inDao.eliminar(codigo);
         }
 
     }

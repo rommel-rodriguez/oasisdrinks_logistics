@@ -12,34 +12,34 @@ import java.sql.*;
  *
  * @author shadowthrone
  */
-public class InsumoDAO implements IInsumoDAO {
+public class InsumoDAO implements BasicCRUDInterface {
 
     public InsumoDAO(Connection con) {
 
     }
 
     @Override
-    public void agregarInsumo(Insumo insumo) {
+    public void agregar(Insumo insumo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Insumo> listarInsumos() {
+    public List<Insumo> listar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void actualizarInsumo(Insumo insumo) {
+    public void actualizar(Insumo insumo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void borrarInsumo(int idInsumo) {
+    public void eliminar(int idInsumo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Insumo buscarInsumoPorID(int idinsumo) {
+    public Insumo buscarPorID(int idinsumo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
