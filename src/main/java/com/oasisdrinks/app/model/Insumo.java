@@ -6,16 +6,15 @@ public abstract class Insumo{
     int codInsumo;
     protected String nomInsumo;
     protected int cantInsumo;
-    protected String unidadCompra;
+    private Medida medidaCompra;
     protected double precioCosto;
 
-    //public Insumo(int codInsumo, String nomInsumo, int cantInsumo, String unidadCompra) {
-    public Insumo(int codInsumo, String nomInsumo, int cantInsumo, String unidadCompra, 
+    public Insumo(int codInsumo, String nomInsumo, int cantInsumo, Medida medidaCompra, 
             double precioCosto) {
         this.codInsumo = codInsumo;
         this.nomInsumo = nomInsumo;
         this.cantInsumo = cantInsumo;
-        this.unidadCompra = unidadCompra;
+        this.medidaCompra = medidaCompra;
         this.precioCosto = precioCosto;
     }
     
@@ -51,13 +50,6 @@ public abstract class Insumo{
         this.cantInsumo = cantInsumo;
     }
 
-    public String getUnidadCompra() {
-        return unidadCompra;
-    }
-
-    public void setUnidadCompra(String unidadCompra) {
-        this.unidadCompra = unidadCompra;
-    }
     
     public double getPrecioCosto() {
         return precioCosto;
@@ -65,5 +57,13 @@ public abstract class Insumo{
 
     public void setPrecioCosto(double precioCosto) {
         this.precioCosto = precioCosto;
+    }
+
+    public Medida getMedidaCompra() {
+        return medidaCompra;
+    }
+
+    public void setMedidaCompra(Medida medidaCompra) {
+        this.medidaCompra = medidaCompra;
     }
 }

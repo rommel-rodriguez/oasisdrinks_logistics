@@ -8,8 +8,8 @@ public class InsumoLiquido extends Insumo{
     
 
     public InsumoLiquido(double densidad, int codInsumo, String nomInsumo, 
-            int cantInsumo, String unidadCompra, double precioCosto) {
-        super(codInsumo, nomInsumo, cantInsumo, unidadCompra, precioCosto);
+            int cantInsumo, Medida medidaCompra, double precioCosto) {
+        super(codInsumo, nomInsumo, cantInsumo, medidaCompra, precioCosto);
         this.densidad = densidad;
     } 
 
