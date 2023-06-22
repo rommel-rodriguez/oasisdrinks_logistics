@@ -5,8 +5,8 @@
 package com.oasisdrinks.app.views;
 
 import com.oasisdrinks.app.controllers.InsumoController;
-import com.oasisdrinks.app.dao.InsumoDAO;
-import com.oasisdrinks.app.dao.MockInsumoDAO;
+import com.oasisdrinks.app.dao.InsumoDao;
+import com.oasisdrinks.app.dao.InsumoCacheDao;
 import com.oasisdrinks.app.model.Insumo;
 import com.oasisdrinks.app.model.InsumoLiquido;
 import java.util.*;
@@ -346,7 +346,7 @@ public class InsumoView extends javax.swing.JFrame {
     private void addRecord(Insumo insu){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
         System.out.println("Adding Record to DB");
-        // InsumoDAO inDao = new MockInsumoDAO(cache);
+        // InsumoDao inDao = new InsumoCacheDao(cache);
         InsumoController inCon = new InsumoController();
         inCon.setCache(cache);
         inCon.agregarInsumo(insu);

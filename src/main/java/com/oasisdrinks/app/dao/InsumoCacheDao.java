@@ -4,7 +4,6 @@
  */
 package com.oasisdrinks.app.dao;
 
-import com.oasisdrinks.app.utils.dbconnection.BasicCRUDInterface;
 import com.oasisdrinks.app.model.Insumo;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,11 @@ import java.util.*;
  *
  * @author shadowthrone
  */
-public class MockInsumoDAO implements BasicCRUDInterface <Insumo>{
+public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
     Map<String, List<?>> cache;
     List<Insumo> insumos;
 
-    public MockInsumoDAO (Map cache){
+    public InsumoCacheDao (Map cache){
         this.cache = cache;
         // List<Object> objects = this.cache.get("insumos");
         this.insumos = (List<Insumo>) this.cache.get("insumos");
