@@ -9,7 +9,7 @@ import java.util.*;
 import com.oasisdrinks.app.model.Insumo;
 import com.oasisdrinks.app.dao.InsumoDAO;
 import com.oasisdrinks.app.dao.MockInsumoDAO;
-import com.oasisdrinks.app.dao.BasicCRUDInterface;
+import com.oasisdrinks.app.utils.dbconnection.BasicCRUDInterface;
 
 
 

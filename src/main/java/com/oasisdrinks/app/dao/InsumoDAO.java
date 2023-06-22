@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.utils.dbconnection.BasicCRUDInterface;
 import com.oasisdrinks.app.model.Insumo;
 import java.util.List;
 import java.util.*;
