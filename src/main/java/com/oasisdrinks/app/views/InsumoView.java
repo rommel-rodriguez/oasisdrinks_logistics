@@ -33,17 +33,6 @@ public class InsumoView extends javax.swing.JFrame {
         this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
         this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
 
-        //if (cache != null) {
-        //    this.cache = cache;
-        //    this.insumos = (List<Insumo>) cache.get("insumos");
-        //    this.medidas = (List<Medida>) cache.get("medidas");
-        //}
-        // Needs to be after all of the above this.* cause it uses them
-
-        // loadDataToTable();
-        // List<String> abrevList = new ArrayList<>();
-        // // medidas.forEach(medida -> abrevList.add(medida.getAbrev()));
-        // fillCombo(medidasCombo, abrevList);
         loadDataToView();
     }
 
@@ -241,10 +230,22 @@ public class InsumoView extends javax.swing.JFrame {
         double pcosto, dens;
         Medida med = null;
         
-        cod = Integer.parseInt(txtCodigo.getText());
         nom = txtNombre.getText();
-        cant = Integer.parseInt(txtCantidad.getText());
         und = (String) medidasCombo.getSelectedItem();
+
+        try {
+            cod = Integer.parseInt(txtCodigo.getText());
+            cant = Integer.parseInt(txtCantidad.getText());
+            pcosto = Double.parseDouble(txtPrecioCosto.getText());
+            dens = Double.parseDouble(txtDensidad.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+           this,
+               "Uno de los campos numericos posee un valor invalido",
+                  "Error no es numero",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         MedidaController medidaCtrl = new MedidaController();
         medidaCtrl.setCache(cache);
@@ -254,10 +255,7 @@ public class InsumoView extends javax.swing.JFrame {
         if (med ==  null)
             med = new Medida(0, "Not Found", "N.F.");
 
-        pcosto = Double.parseDouble(txtPrecioCosto.getText());
-        dens = Double.parseDouble(txtDensidad.getText());
         
-        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, medida, pcosto);
         Insumo insu = new InsumoLiquido(dens, cod, nom, cant, med, pcosto);
         agregarFila(insu); //MM, sino se invoca, no se adiciona registros
         addRecord(insu); //MM, sino se invoca, no se adiciona registros
@@ -268,7 +266,23 @@ public class InsumoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        int codigo = Integer.parseInt(this.txtCodigo.getText());
+
+        int codigo = 0;
+
+        try {
+            codigo = Integer.parseInt(this.txtCodigo.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+           this,
+               "El codigo indicado no es un entero",
+                  "Error no es entero",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (codigo == 0)
+            return;
+
         InsumoController inCon = new InsumoController();
         inCon.setCache(cache);
         inCon.borrarInsumo(codigo);
@@ -282,15 +296,24 @@ public class InsumoView extends javax.swing.JFrame {
         Medida med = null;
         double pcosto, dens;
         
-        cod = Integer.parseInt(txtCodigo.getText());
         nom = txtNombre.getText();
-        cant = Integer.parseInt(txtCantidad.getText());
-        // medida = (String) medidasCombo.getSelectedItem();
         med = createMedidaFromCombo();
-        pcosto = Double.parseDouble(txtPrecioCosto.getText());
-        dens = Double.parseDouble(txtDensidad.getText());
+        try {
+            cod = Integer.parseInt(txtCodigo.getText());
+            cant = Integer.parseInt(txtCantidad.getText());
+            pcosto = Double.parseDouble(txtPrecioCosto.getText());
+            dens = Double.parseDouble(txtDensidad.getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+           this,
+               "Uno de los campos numericos posee un valor invalido",
+                  "Error no es numero",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
         
-        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, medida, pcosto);
         Insumo insu = new InsumoLiquido(
             dens, cod, nom, cant, med, pcosto);
 
@@ -363,13 +386,6 @@ public class InsumoView extends javax.swing.JFrame {
 
         this.tblModel.setRowCount(0);
 
-        // if (this.insumos != null) {
-        //     for (Insumo insu: this.insumos) {
-        //         agregarFila(insu);
-        //     }
-        // }
-
-
         InsumoController insumoCtrl = new InsumoController();
 
         if (this.useCache) {
@@ -379,8 +395,6 @@ public class InsumoView extends javax.swing.JFrame {
             insumoCtrl.setUseCache(true);
             insumoCtrl.setCache(cache);
         }
-
-        // insumoCtrl.listarInsumos().forEach(insumo -> abrevList.add(insumo.getAbrev()));
 
         ins = insumoCtrl.listarInsumos();
 
@@ -405,7 +419,6 @@ public class InsumoView extends javax.swing.JFrame {
             medidaCtrl.setCache(cache);
         }
 
-        // medidaCtrl.listarMedidas().forEach(medida -> abrevList.add(medida.getAbrev()));
 
         meds = medidaCtrl.listarMedidas();
 
@@ -442,7 +455,6 @@ public class InsumoView extends javax.swing.JFrame {
         this.txtCodigo.setText(rowObjects.get(0).toString());
         this.txtNombre.setText(rowObjects.get(1).toString());
         this.txtCantidad.setText(rowObjects.get(2).toString());
-        // this.txtUnidad.setText(rowObjects.get(3).toString());
         // TODO: This way of setting medidaCombo might not be the best
         this.medidasCombo.setSelectedItem(rowObjects.get(3).toString());
         this.txtDensidad.setText(rowObjects.get(4).toString());
