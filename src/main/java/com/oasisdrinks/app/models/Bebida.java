@@ -1,5 +1,5 @@
 
-package com.oasisdrinks.app.model;
+package com.oasisdrinks.app.models;
 
 
 public class Bebida extends Producto{

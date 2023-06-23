@@ -2,7 +2,7 @@ package com.oasisdrinks.app.controllers;
 
 import java.util.*;
 
-import com.oasisdrinks.app.model.Insumo;
+import com.oasisdrinks.app.models.Insumo;
 import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.dao.InsumoCacheDao;
 import com.oasisdrinks.app.dao.BasicCRUDInterface;

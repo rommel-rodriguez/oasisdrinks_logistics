@@ -1,5 +1,5 @@
 
-package com.oasisdrinks.app.model;
+package com.oasisdrinks.app.models;
 
 import java.util.Date;
 import java.util.List;

@@ -6,7 +6,7 @@ package com.oasisdrinks.app.controllers;
 
 import java.util.*;
 
-import com.oasisdrinks.app.model.Medida;
+import com.oasisdrinks.app.models.Medida;
 import com.oasisdrinks.app.dao.MedidaDao;
 import com.oasisdrinks.app.dao.MedidaCacheDao;
 import com.oasisdrinks.app.dao.BasicCRUDInterface;

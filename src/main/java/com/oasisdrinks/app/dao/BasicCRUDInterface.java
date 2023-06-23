@@ -1,6 +1,6 @@
 package com.oasisdrinks.app.dao;
 import java.util.*;
-import com.oasisdrinks.app.model.Insumo;
+import com.oasisdrinks.app.models.Insumo;
 
 public interface BasicCRUDInterface <T> {
     void agregar (T t);

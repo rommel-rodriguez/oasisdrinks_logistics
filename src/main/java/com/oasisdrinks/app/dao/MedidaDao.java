@@ -1,6 +1,6 @@
 package com.oasisdrinks.app.dao;
 
-import com.oasisdrinks.app.model.Medida;
+import com.oasisdrinks.app.models.Medida;
 import java.util.List;
 import java.util.*;
 import java.sql.*;

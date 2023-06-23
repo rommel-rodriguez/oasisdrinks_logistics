@@ -1,7 +1,7 @@
 package com.oasisdrinks.app.views;
 
-import com.oasisdrinks.app.model.Insumo;
-import com.oasisdrinks.app.model.Medida;
+import com.oasisdrinks.app.models.Insumo;
+import com.oasisdrinks.app.models.Medida;
 import javax.swing.JFrame;
 import java.util.*;
 import javax.print.attribute.standard.Media;
