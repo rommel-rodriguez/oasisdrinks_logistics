@@ -7,7 +7,7 @@ package com.oasisdrinks.app.views;
  * @author Grupo 3
  */
 public class Modificar extends javax.swing.JFrame {
-Frmsistema objFrmsistema = new Frmsistema();
+MainView objFrmsistema = new MainView();
     /**
      * Creates new form Modificar
      */
@@ -148,18 +148,18 @@ Frmsistema objFrmsistema = new Frmsistema();
         // TODO add your handling code here:
         if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo0)
         {
-            TXTPRECIO.setText(Double.toString(Frmsistema.precio0));
-            TXTCONTENIDO.setText(Integer.toString(Frmsistema.contenido0));
-            TXTPESO.setText(Double.toString(Frmsistema.peso0));
-            TXTSABOR.setText(Frmsistema.sabor0);
+            TXTPRECIO.setText(Double.toString(MainView.precio0));
+            TXTCONTENIDO.setText(Integer.toString(MainView.contenido0));
+            TXTPESO.setText(Double.toString(MainView.peso0));
+            TXTSABOR.setText(MainView.sabor0);
         }
         else
             if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo1)
         {
-            TXTPRECIO.setText(Double.toString(Frmsistema.precio1));
-            TXTCONTENIDO.setText(Integer.toString(Frmsistema.contenido1));
-            TXTPESO.setText(Double.toString(Frmsistema.peso1));
-            TXTSABOR.setText(Frmsistema.sabor1);
+            TXTPRECIO.setText(Double.toString(MainView.precio1));
+            TXTCONTENIDO.setText(Integer.toString(MainView.contenido1));
+            TXTPESO.setText(Double.toString(MainView.peso1));
+            TXTSABOR.setText(MainView.sabor1);
        
         }
     }//GEN-LAST:event_CBOINSUMOActionPerformed

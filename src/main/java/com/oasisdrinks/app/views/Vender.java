@@ -7,7 +7,7 @@ package com.oasisdrinks.app.views;
  * @author Grupo 3
  */
 public class Vender extends javax.swing.JFrame {
-Frmsistema objFrmsistema = new Frmsistema();
+MainView objFrmsistema = new MainView();
     /**
      * Creates new form Vender
      */
@@ -136,12 +136,12 @@ Frmsistema objFrmsistema = new Frmsistema();
         // TODO add your handling code here:
         if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo0)
         {
-            LBLPRECIO.setText(Double.toString(Frmsistema.precio0));
+            LBLPRECIO.setText(Double.toString(MainView.precio0));
         }
         else 
             if (CBOINSUMO.getSelectedItem()==objFrmsistema.insumo1)
         {
-            LBLPRECIO.setText(Double.toString(Frmsistema.precio1));
+            LBLPRECIO.setText(Double.toString(MainView.precio1));
         }
     }//GEN-LAST:event_CBOINSUMOActionPerformed
 

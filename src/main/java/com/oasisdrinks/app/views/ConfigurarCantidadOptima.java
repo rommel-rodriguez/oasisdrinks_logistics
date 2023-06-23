@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  * @author Grupo 3
  */
 public class ConfigurarCantidadOptima extends javax.swing.JFrame {
-    Frmsistema objFrmsistema = new Frmsistema();
+    MainView objFrmsistema = new MainView();
 
     /**
      * Creates new form ConfigurarCantidadOptima

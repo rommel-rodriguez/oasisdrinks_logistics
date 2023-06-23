@@ -7,7 +7,7 @@ package com.oasisdrinks.app.views;
  * @author Grupo 3
  */
 public class Listar extends javax.swing.JFrame {
-Frmsistema objFrmsistema = new Frmsistema();
+MainView objFrmsistema = new MainView();
     /**
      * Creates new form Listar
      */
