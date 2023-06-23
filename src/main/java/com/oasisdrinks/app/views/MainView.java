@@ -285,12 +285,10 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     }//GEN-LAST:event_MNUCONFCANTOPActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        JFrame insumoView = new InsumoView(cache);
+        InsumoView insumoView = new InsumoView();
+        insumoView.setCache(cache);
         insumoView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         insumoView.setVisible(true);
-        // this.setVisible(false);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

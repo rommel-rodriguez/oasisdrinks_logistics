@@ -14,6 +14,7 @@ import com.oasisdrinks.app.models.Medida;
 import java.util.*;
 import javax.print.attribute.standard.Media;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -24,22 +25,26 @@ public class InsumoView extends javax.swing.JFrame {
     Map<String, List<?>> cache;
     List<Insumo> insumos = null;
     List<Medida> medidas = null;
+    boolean useCache = true;
     
-    public InsumoView(Map<String, List<?>> cache) {
+    public InsumoView() {
         initComponents();
         tblDatos.getSelectionModel().addListSelectionListener(tableSelectionListener);
         this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
         this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
-        if (cache != null) {
-            this.cache = cache;
-            this.insumos = (List<Insumo>) cache.get("insumos");
-            this.medidas = (List<Medida>) cache.get("medidas");
-        }
+
+        //if (cache != null) {
+        //    this.cache = cache;
+        //    this.insumos = (List<Insumo>) cache.get("insumos");
+        //    this.medidas = (List<Medida>) cache.get("medidas");
+        //}
         // Needs to be after all of the above this.* cause it uses them
-        loadDataToTable();
-        List<String> abrevList = new ArrayList<>();
-        medidas.forEach(medida -> abrevList.add(medida.getAbrev()));
-        fillCombo(medidasCombo, abrevList);
+
+        // loadDataToTable();
+        // List<String> abrevList = new ArrayList<>();
+        // // medidas.forEach(medida -> abrevList.add(medida.getAbrev()));
+        // fillCombo(medidasCombo, abrevList);
+        loadDataToView();
     }
 
     /**
@@ -307,16 +312,6 @@ public class InsumoView extends javax.swing.JFrame {
                     for (int i = 0; i < columnCount; i++) {
                         Object obj = tblDatos.getValueAt(selectedRow, i);
                         rowObjects.add(obj);
-                        // if (obj instanceof Integer) {
-                        //     int intValue = (Integer) obj;
-                        //     System.out.println("Value (int): " + intValue);
-                        // } else if (obj instanceof Double) {
-                        //     double doubleValue = (Double) obj;
-                        //     System.out.println("Value (double): " + doubleValue);
-                        // } else if (obj instanceof String) {
-                        //     String stringValue = (String) obj;
-                        //     System.out.println("Value (String): " + stringValue);
-                        // }
                     }
                     fillForm(rowObjects);
                 }
@@ -324,23 +319,31 @@ public class InsumoView extends javax.swing.JFrame {
         }
     };
 
+
+    public void setCache(Map<String, List<?>> cache) {
+        if (cache != null) {
+            this.cache = cache;
+            if (this.useCache){
+                this.insumos = (List<Insumo>) cache.get("insumos");
+                this.medidas = (List<Medida>) cache.get("medidas");
+            }
+        }
+
+        loadDataToView();
+    }
+
+
+
+
     private Medida createMedidaFromCombo(){
         Medida med = null;
         String und;
         und = (String) medidasCombo.getSelectedItem();
         MedidaController medidaCtrl = new MedidaController();
-        medidaCtrl.setCache(cache);
-        // TODO: Here we HAVE to create a Medidas object and add it to the Insumo object
-        // using a proper controller 
-        // Medida med = medidaController.buscarPorAbrev(und);
 
-        //if (this.medidas != null) {
-        //    Optional<Medida> optionalMedida = this.medidas.stream()
-        //                            .filter(medida -> medida.getAbrev().equals(und) )
-        //                            .findFirst();
-        //    med = optionalMedida.orElse(null);
-        //        
-        //} 
+        if (this.useCache)
+            medidaCtrl.setCache(cache);
+
         med = medidaCtrl.buscarMedidaPorAbrev(und);
 
         if (med ==  null)
@@ -351,17 +354,77 @@ public class InsumoView extends javax.swing.JFrame {
 
     private void fillCombo(JComboBox combo, List<String> items){
         combo.removeAllItems();
-        if (this.medidas != null)
-           items.forEach(combo::addItem);
+        items.forEach(combo::addItem);
     }
 
+
     private void loadDataToTable(){
+        List<Insumo> ins = new ArrayList<>();
+
         this.tblModel.setRowCount(0);
-        if (this.insumos != null) {
-            for (Insumo insu: this.insumos) {
-                agregarFila(insu);
-            }
+
+        // if (this.insumos != null) {
+        //     for (Insumo insu: this.insumos) {
+        //         agregarFila(insu);
+        //     }
+        // }
+
+
+        InsumoController insumoCtrl = new InsumoController();
+
+        if (this.useCache) {
+            if (this.cache == null || this.insumos == null)
+                return;
+
+            insumoCtrl.setUseCache(true);
+            insumoCtrl.setCache(cache);
         }
+
+        // insumoCtrl.listarInsumos().forEach(insumo -> abrevList.add(insumo.getAbrev()));
+
+        ins = insumoCtrl.listarInsumos();
+
+        if (ins  == null)
+            return;
+
+        for (Insumo insu: ins) {
+            agregarFila(insu);
+        }
+    }
+
+    private void fillMedidasCombo () {
+        List<Medida> meds = null;
+        List<String> abrevList = new ArrayList<>();
+        MedidaController medidaCtrl = new MedidaController();
+
+        if (this.useCache) {
+            if (this.cache == null || this.medidas == null)
+                return;
+
+            medidaCtrl.setUseCache(true);
+            medidaCtrl.setCache(cache);
+        }
+
+        // medidaCtrl.listarMedidas().forEach(medida -> abrevList.add(medida.getAbrev()));
+
+        meds = medidaCtrl.listarMedidas();
+
+        if (meds == null) {
+            JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
+                           "Error Medidas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        meds.forEach(medida -> abrevList.add(medida.getAbrev()));
+
+
+        fillCombo(medidasCombo, abrevList);
+    }
+
+    private void loadDataToView() {
+        loadDataToTable();
+        fillMedidasCombo();
+        
     }
 
     private void emptyForm () {
@@ -441,7 +504,7 @@ public class InsumoView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InsumoView(null).setVisible(true);
+                new InsumoView().setVisible(true);
             }
         });
     }
