@@ -5,11 +5,15 @@
 package com.oasisdrinks.app.views;
 
 import com.oasisdrinks.app.controllers.InsumoController;
+import com.oasisdrinks.app.controllers.MedidaController;
 import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.dao.InsumoCacheDao;
 import com.oasisdrinks.app.model.Insumo;
 import com.oasisdrinks.app.model.InsumoLiquido;
+import com.oasisdrinks.app.model.Medida;
 import java.util.*;
+import javax.print.attribute.standard.Media;
+import javax.swing.JComboBox;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +22,8 @@ public class InsumoView extends javax.swing.JFrame {
     
     DefaultTableModel tblModel; //MM, se asigna variable 
     Map<String, List<?>> cache;
-    List<Insumo> insumos;
+    List<Insumo> insumos = null;
+    List<Medida> medidas = null;
     
     public InsumoView(Map<String, List<?>> cache) {
         initComponents();
@@ -28,9 +33,13 @@ public class InsumoView extends javax.swing.JFrame {
         if (cache != null) {
             this.cache = cache;
             this.insumos = (List<Insumo>) cache.get("insumos");
+            this.medidas = (List<Medida>) cache.get("medidas");
         }
         // Needs to be after all of the above this.* cause it uses them
         loadDataToTable();
+        List<String> abrevList = new ArrayList<>();
+        medidas.forEach(medida -> abrevList.add(medida.getAbrev()));
+        fillCombo(medidasCombo, abrevList);
     }
 
     /**
@@ -49,7 +58,6 @@ public class InsumoView extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
-        txtUnidad = new javax.swing.JTextField();
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
@@ -60,6 +68,7 @@ public class InsumoView extends javax.swing.JFrame {
         txtPrecioCosto = new javax.swing.JTextField();
         deleteButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
+        medidasCombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +138,8 @@ public class InsumoView extends javax.swing.JFrame {
             }
         });
 
+        medidasCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,11 +172,14 @@ public class InsumoView extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPrecioCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                            .addComponent(txtDensidad)
-                            .addComponent(txtUnidad))
-                        .addGap(100, 100, 100)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPrecioCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                .addComponent(txtDensidad))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(medidasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)))
                 .addContainerGap())
         );
 
@@ -179,8 +193,8 @@ public class InsumoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(medidasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -211,13 +225,6 @@ public class InsumoView extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // Asignando valores en blanco
-        // txtCodigo.setText(""); //MM
-        // txtNombre.setText(""); //MM
-        // txtCantidad.setText(""); //MM
-        // txtUnidad.setText(""); //MM
-        // txtPrecioCosto.setText("");
-        // txtDensidad.setText(""); //MM
-        // txtCodigo.requestFocus(); //MM
         this.emptyForm();
         
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -227,16 +234,26 @@ public class InsumoView extends javax.swing.JFrame {
         int cod, cant;
         String nom, und;
         double pcosto, dens;
+        Medida med = null;
         
         cod = Integer.parseInt(txtCodigo.getText());
         nom = txtNombre.getText();
         cant = Integer.parseInt(txtCantidad.getText());
-        und = txtUnidad.getText();
+        und = (String) medidasCombo.getSelectedItem();
+
+        MedidaController medidaCtrl = new MedidaController();
+        medidaCtrl.setCache(cache);
+
+        med = medidaCtrl.buscarMedidaPorAbrev(und);
+
+        if (med ==  null)
+            med = new Medida(0, "Not Found", "N.F.");
+
         pcosto = Double.parseDouble(txtPrecioCosto.getText());
         dens = Double.parseDouble(txtDensidad.getText());
         
-        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
-        Insumo insu = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
+        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, medida, pcosto);
+        Insumo insu = new InsumoLiquido(dens, cod, nom, cant, med, pcosto);
         agregarFila(insu); //MM, sino se invoca, no se adiciona registros
         addRecord(insu); //MM, sino se invoca, no se adiciona registros
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -246,7 +263,6 @@ public class InsumoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
         int codigo = Integer.parseInt(this.txtCodigo.getText());
         InsumoController inCon = new InsumoController();
         inCon.setCache(cache);
@@ -257,19 +273,21 @@ public class InsumoView extends javax.swing.JFrame {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         int cod, cant;
-        String nom, und;
+        String nom;
+        Medida med = null;
         double pcosto, dens;
         
         cod = Integer.parseInt(txtCodigo.getText());
         nom = txtNombre.getText();
         cant = Integer.parseInt(txtCantidad.getText());
-        und = txtUnidad.getText();
+        // medida = (String) medidasCombo.getSelectedItem();
+        med = createMedidaFromCombo();
         pcosto = Double.parseDouble(txtPrecioCosto.getText());
         dens = Double.parseDouble(txtDensidad.getText());
         
-        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, und, pcosto);
+        // InsumoLiquido i = new InsumoLiquido(dens, cod, nom, cant, medida, pcosto);
         Insumo insu = new InsumoLiquido(
-            dens, cod, nom, cant, und, pcosto);
+            dens, cod, nom, cant, med, pcosto);
 
         InsumoController inCon = new InsumoController();
         inCon.setCache(cache);
@@ -306,6 +324,37 @@ public class InsumoView extends javax.swing.JFrame {
         }
     };
 
+    private Medida createMedidaFromCombo(){
+        Medida med = null;
+        String und;
+        und = (String) medidasCombo.getSelectedItem();
+        MedidaController medidaCtrl = new MedidaController();
+        medidaCtrl.setCache(cache);
+        // TODO: Here we HAVE to create a Medidas object and add it to the Insumo object
+        // using a proper controller 
+        // Medida med = medidaController.buscarPorAbrev(und);
+
+        //if (this.medidas != null) {
+        //    Optional<Medida> optionalMedida = this.medidas.stream()
+        //                            .filter(medida -> medida.getAbrev().equals(und) )
+        //                            .findFirst();
+        //    med = optionalMedida.orElse(null);
+        //        
+        //} 
+        med = medidaCtrl.buscarMedidaPorAbrev(und);
+
+        if (med ==  null)
+            med = new Medida(0, "Not Found", "N.F.");
+
+        return med;
+    } 
+
+    private void fillCombo(JComboBox combo, List<String> items){
+        combo.removeAllItems();
+        if (this.medidas != null)
+           items.forEach(combo::addItem);
+    }
+
     private void loadDataToTable(){
         this.tblModel.setRowCount(0);
         if (this.insumos != null) {
@@ -321,7 +370,7 @@ public class InsumoView extends javax.swing.JFrame {
         this.txtDensidad.setText("");
         this.txtNombre.setText("");
         this.txtPrecioCosto.setText("");
-        this.txtUnidad.setText("");
+        //this.txtUnidad.setText("");
     }
 
 
@@ -330,7 +379,9 @@ public class InsumoView extends javax.swing.JFrame {
         this.txtCodigo.setText(rowObjects.get(0).toString());
         this.txtNombre.setText(rowObjects.get(1).toString());
         this.txtCantidad.setText(rowObjects.get(2).toString());
-        this.txtUnidad.setText(rowObjects.get(3).toString());
+        // this.txtUnidad.setText(rowObjects.get(3).toString());
+        // TODO: This way of setting medidaCombo might not be the best
+        this.medidasCombo.setSelectedItem(rowObjects.get(3).toString());
         this.txtDensidad.setText(rowObjects.get(4).toString());
         this.txtPrecioCosto.setText(rowObjects.get(5).toString());
         
@@ -339,7 +390,7 @@ public class InsumoView extends javax.swing.JFrame {
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
         InsumoLiquido i = (InsumoLiquido) insu;
         tblModel.addRow(new Object[]{i.getCodInsumo(), 
-            i.getNomInsumo(), i.getCantInsumo(), i.getUnidadCompra(), i.getDensidad(), i.getPrecioCosto()
+            i.getNomInsumo(), i.getCantInsumo(), i.getMedidaCompra().getAbrev(), i.getDensidad(), i.getPrecioCosto()
         });
     }
             
@@ -406,13 +457,13 @@ public class InsumoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> medidasCombo;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDensidad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioCosto;
-    private javax.swing.JTextField txtUnidad;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

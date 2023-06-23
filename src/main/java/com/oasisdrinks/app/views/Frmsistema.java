@@ -1,8 +1,10 @@
 package com.oasisdrinks.app.views;
 
 import com.oasisdrinks.app.model.Insumo;
+import com.oasisdrinks.app.model.Medida;
 import javax.swing.JFrame;
 import java.util.*;
+import javax.print.attribute.standard.Media;
 
 
 /**
@@ -216,7 +218,12 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
 
     private void initializeCache() {
         List<Insumo> insumos = new ArrayList<>();
+        List<Medida> medidas = new ArrayList<>();
+        medidas.add(new Medida(1, "Kilogramos", "Kg"));
+        medidas.add(new Medida(2, "Litros", "Lt"));
+        medidas.add(new Medida(3, "Unidades", "Uni"));
         this.cache.put("insumos", insumos);
+        this.cache.put("medidas", medidas);
     }
 
     private void MNUSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MNUSalirActionPerformed

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.oasisdrinks.app.controllers;
 
 import java.util.*;
@@ -13,14 +9,11 @@ import com.oasisdrinks.app.dao.BasicCRUDInterface;
 
 
 
-/**
- *
- * @author shadowthrone
- */
 public class InsumoController {
 
     private Map<String, List<?>> cache;
     private List<Insumo> insumos;
+    private boolean useCache;
 
 
     public Map<String, List<?>> getCache() {
@@ -38,6 +31,8 @@ public class InsumoController {
         //     }
         // }
     }
+
+
 
     public List<Insumo> listarInsumos() {
         if (this.cache != null) {
@@ -71,6 +66,10 @@ public class InsumoController {
             inDao.eliminar(codigo);
         }
 
+    }
+
+    public void setUseCache(boolean useCache) {
+        this.useCache = useCache;
     }
     
 }

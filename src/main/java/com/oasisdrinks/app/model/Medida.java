@@ -9,6 +9,13 @@ public class Medida {
 
     }
 
+    public Medida(int id, String nombre, String abrev) {
+        this.id = id;
+        this.nombre = nombre;
+        this.abrev = abrev;
+    }
+
+
     public int getId() {
         return id;
     }
@@ -31,6 +38,11 @@ public class Medida {
 
     public void setAbrev(String abrev) {
         this.abrev = abrev;
+    }
+
+    @Override
+    public String toString() {
+        return "Medida{" + "id=" + id + ", nombre=" + nombre + '}';
     }
     
     
