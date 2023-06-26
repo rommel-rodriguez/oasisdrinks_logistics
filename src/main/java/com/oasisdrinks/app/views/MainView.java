@@ -78,6 +78,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         MNUVENDER = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -138,6 +139,14 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
             }
         });
         MNUMantenimiento.add(jMenuItem5);
+
+        jMenuItem8.setText("Medidas");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        MNUMantenimiento.add(jMenuItem8);
 
         jMenuBar1.add(MNUMantenimiento);
 
@@ -291,6 +300,14 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         insumoView.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        MedidaView medidaView = new MedidaView();
+        medidaView.setCache(cache);
+        medidaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        medidaView.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -348,6 +365,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
