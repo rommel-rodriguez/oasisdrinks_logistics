@@ -50,9 +50,6 @@ public static int numeroClienteSorpresa = 3;
 public static String premioSorpresa = "Peluche de nuestra mascota";
 
 
-    /**
-     * Creates new form Frmsistema
-     */
     public MainView() {
         initComponents();
         initializeCache();

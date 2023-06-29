@@ -4,24 +4,44 @@ public abstract class Producto {
     private int codProducto;
     private String nomProducto;
     protected int cantProducto;
-    protected double precioVenta;
     private int diasCaducidad;
     private Receta receta;
+    private String tipo;
+    private double margenGanancia; // NOTE: Should be a percentage of the total cost after adding the
+    // packaging costs.
     
-    public Producto() {     }
+    public Producto() {  
 
-    public Producto(int codProducto, String nomProducto, int cantProducto, double precioVenta, int diasCaducidad, Receta receta) {
+    }
+
+    public Producto(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, Receta receta, String tipo, double margenGanancia) {
         this.codProducto = codProducto;
         this.nomProducto = nomProducto;
         this.cantProducto = cantProducto;
-        this.precioVenta = precioVenta;
         this.diasCaducidad = diasCaducidad;
         this.receta = receta;
+        this.tipo = tipo;
+        this.margenGanancia = margenGanancia;
     }
-    public Producto(int cantProducto, double precioVenta) {
+
+    public Producto(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, Receta receta, double margenGanancia) {
+        this.codProducto = codProducto;
+        this.nomProducto = nomProducto;
         this.cantProducto = cantProducto;
-        this.precioVenta = precioVenta;
+        this.diasCaducidad = diasCaducidad;
+        this.receta = receta;
+        this.margenGanancia = margenGanancia;
     }
+
+
+
+
+
+    public Producto(int codProducto, String nomProducto) {
+        this.codProducto = codProducto;
+        this.nomProducto = nomProducto;
+    }
+
     
     public Receta getReceta(){return receta;}
     public void setReceta(Receta receta){this.receta = receta;}
@@ -35,23 +55,51 @@ public abstract class Producto {
     public int getCantProducto() {return cantProducto;}
     public void setCantProducto(int cantProducto) {this.cantProducto = cantProducto;}
 
-    public double getPrecioVenta() {return precioVenta;}
-    public void setPrecioVenta(double precioVenta) {this.precioVenta = precioVenta;}
-
     public int getDiasCaducidad() {return diasCaducidad;}
     public void setDiasCaducidad(int diasCaducidad) {this.diasCaducidad = diasCaducidad;}
-    
-    public void ValoresCosto(int c,double v){
-        cantProducto=c;
-        precioVenta=v;
+
+    public double getMargenGanancia() {
+        return margenGanancia;
     }
-    
+
+    public void setMargenGanancia(double margenGanancia) {
+        this.margenGanancia = margenGanancia;
+    }
+
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public double calcularCostoEmpaquetado() {
+        // TODO: Where do I get this from ?
+        return 0;
+    }
+
+    public double calcularCostoInsumos() {
+        double costo;
+
+        costo = 0;
+
+        for ( RecetaDetalle detalle : receta.getdetalles() ) {
+            costo += detalle.getInsumo().getPrecioCosto();
+        }
+
+        return costo;
+    }
+
+    public double calcularCostoTotal() {
+        return calcularCostoInsumos() + calcularCostoEmpaquetado();
+    }
+
     @Override
-    public String toString(){
-        return "\nCódigo de producto   : "+codProducto+
-               "\nNombre de producto   : "+nomProducto+
-               "\nCantidad de producto : "+cantProducto+
-               "\nPrecio de venta      : "+precioVenta+
-               "\nDías de Caducidad    : "+diasCaducidad;
-                }
+    public String toString() {
+        return "Producto{" + "codProducto=" + codProducto + ", nomProducto=" + nomProducto + ", cantProducto=" + cantProducto + ", diasCaducidad=" + diasCaducidad + ", receta=" + receta + ", tipo=" + tipo + ", margenGanancia=" + margenGanancia + '}';
+    }
+
+    
 }
