@@ -1,12 +1,25 @@
 
 package com.oasisdrinks.app.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Receta {
     private int codReceta;
-    private int cantidad;
-    private List<RecetaDetalle> detalles ;
+    private int cantidad = 1;
+    private List<RecetaDetalle> detalles = new ArrayList<>();
+
+    public Receta() {
+    }
+
+    public Receta(int codReceta) {
+        this.codReceta = codReceta;
+    }
+
+    public Receta(int codReceta, int cantidad) {
+    this.codReceta = codReceta;    
+    this.cantidad = cantidad;
+    }
 
     public Receta(int codReceta, int cantidad, List<RecetaDetalle> detalles) {
     this.codReceta = codReceta;    
@@ -14,10 +27,6 @@ public class Receta {
     this.detalles = detalles;
     }
 
-    public Receta(int codReceta, int cantidad) {
-    this.codReceta = codReceta;    
-    this.cantidad = cantidad;
-    }
     
     public int getCodReceta() {return codReceta;}
 
@@ -25,10 +34,6 @@ public class Receta {
 
     public int getCantidad() {return cantidad;}
     public void setCantidad(int cantidad) {this.cantidad = cantidad;    }
-
-    public List<RecetaDetalle> getdetalles(){
-        return detalles;
-    }
 
     //    public void setRecetaDetalle(List<RecetaDetalle> detalles){
     //    this.detalles= detalles;
@@ -38,16 +43,40 @@ public class Receta {
         detalles.add(detalle);
     }
 
+    public void setDetalles(List<RecetaDetalle> detalles) {
+        this.detalles = detalles;
+    }
+
+
+
+    public List<RecetaDetalle> getDetalles() {
+        return detalles;
+    }
+
+    public void removerDetalle(RecetaDetalle detalle) {
+        detalles.remove(detalle);
+    }
+
+    public void updateDetalle(RecetaDetalle detalle) {
+       detalles
+           .stream()
+           .filter( (det) -> det.equals(detalle))
+           .findFirst()
+           .ifPresent(
+               (det) -> {
+                   int index = detalles.indexOf(det);
+                   detalles.set(index, det);
+               }
+           );
+    }
+
+
+
     @Override
     public String toString() {
         return "Código de receta  : "+codReceta+
                "\nCantidad          : "+cantidad;
     }
 
-    
-    
-
-    
-    
     
 }

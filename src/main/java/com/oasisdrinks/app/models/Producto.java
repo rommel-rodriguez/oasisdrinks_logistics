@@ -5,9 +5,10 @@ public abstract class Producto {
     private String nomProducto;
     protected int cantProducto;
     private int diasCaducidad;
-    private Receta receta;
+    private Receta receta = null;
     private String tipo;
-    private double margenGanancia; // NOTE: Should be a percentage of the total cost after adding the
+    private double margenGanancia = 0; // NOTE: Should be a percentage of the total cost after adding the
+    private Medida medida; // NOTE: Should be a percentage of the total cost after adding the
     // packaging costs.
     
     public Producto() {  
@@ -30,6 +31,21 @@ public abstract class Producto {
         this.cantProducto = cantProducto;
         this.diasCaducidad = diasCaducidad;
         this.receta = receta;
+        this.margenGanancia = margenGanancia;
+    }
+
+    public Producto(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, double margenGanancia) {
+        this.codProducto = codProducto;
+        this.nomProducto = nomProducto;
+        this.cantProducto = cantProducto;
+        this.diasCaducidad = diasCaducidad;
+        this.margenGanancia = margenGanancia;
+    }
+
+    public Producto(String nomProducto, int cantProducto, int diasCaducidad, double margenGanancia) {
+        this.nomProducto = nomProducto;
+        this.cantProducto = cantProducto;
+        this.diasCaducidad = diasCaducidad;
         this.margenGanancia = margenGanancia;
     }
 
@@ -85,7 +101,11 @@ public abstract class Producto {
 
         costo = 0;
 
-        for ( RecetaDetalle detalle : receta.getdetalles() ) {
+        if (receta == null)
+            return 0;
+
+
+        for ( RecetaDetalle detalle : receta.getDetalles()) {
             costo += detalle.getInsumo().getPrecioCosto();
         }
 
@@ -96,9 +116,23 @@ public abstract class Producto {
         return calcularCostoInsumos() + calcularCostoEmpaquetado();
     }
 
+    public double calcularPrecioDeVenta() {
+        return (1 + this.margenGanancia) * calcularCostoInsumos();
+    }
+
+
+
+    public Medida getMedida() {
+        return medida;
+    }
+
+    public void setMedida(Medida medida) {
+        this.medida = medida;
+    }
+
     @Override
     public String toString() {
-        return "Producto{" + "codProducto=" + codProducto + ", nomProducto=" + nomProducto + ", cantProducto=" + cantProducto + ", diasCaducidad=" + diasCaducidad + ", receta=" + receta + ", tipo=" + tipo + ", margenGanancia=" + margenGanancia + '}';
+        return "Producto{" + "codProducto=" + codProducto + ", nomProducto=" + nomProducto + ", cantProducto=" + cantProducto + ", diasCaducidad=" + diasCaducidad + ", receta=" + receta + ", tipo=" + tipo + ", margenGanancia=" + margenGanancia + ", medida=" + medida + '}';
     }
 
     

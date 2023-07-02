@@ -63,14 +63,22 @@ public class ProductoController {
     public List<String> listarTipos() {
         // TODO: Need to add the actual logic here
         if (this.cache != null) {
-            BasicCRUDInterface inDao = new ProductoCacheDao(cache);
-            return  inDao.listar();
+            ProductoCacheDao inDao = new ProductoCacheDao(cache);
+            return  inDao.listarTipos();
         }
         return null;
     }
 
     public void setUseCache(boolean useCache) {
         this.useCache = useCache;
+    }
+
+
+    public Producto buscarPorId(int id) {
+        BasicCRUDInterface<Producto> dao = new ProductoCacheDao(cache);
+        
+        return dao.buscarPorID(id);
+
     }
     
 }

@@ -10,6 +10,7 @@ import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.dao.InsumoCacheDao;
 import com.oasisdrinks.app.models.Insumo;
 import com.oasisdrinks.app.models.InsumoLiquido;
+import com.oasisdrinks.app.models.InsumoSolido;
 import com.oasisdrinks.app.models.Medida;
 import java.util.*;
 import javax.print.attribute.standard.Media;
@@ -65,6 +66,7 @@ public class InsumoView extends javax.swing.JFrame {
         medidasCombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Insumos Management");
 
         jLabel1.setText("Codigo");
 
@@ -213,6 +215,8 @@ public class InsumoView extends javax.swing.JFrame {
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnGuardar, btnNuevo, deleteButton, updateButton});
+
+        getAccessibleContext().setAccessibleName("Administracion de Insumos");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -461,12 +465,84 @@ public class InsumoView extends javax.swing.JFrame {
         this.txtPrecioCosto.setText(rowObjects.get(5).toString());
         
     }
+
+    private Object[]  insumoModelToArray (Insumo model) {
+
+        String insumoFQClass; // Fully Qualified name of the Insumo subclass
+        String insumoClass;
+        String classParts[] = null;
+        Object[] modelArray;
+
+        insumoFQClass = model.getClass().toString();
+        classParts = insumoFQClass.split("\\.");
+        insumoClass = classParts[classParts.length - 1];
+
+        if (model == null)
+            return null;
+        
+        modelArray = new Object[]{
+            model.getCodInsumo(), 
+            model.getNomInsumo(),
+            model.getCantInsumo(),
+            model.getMedidaCompra().getAbrev(),
+            0,
+            model.getPrecioCosto()
+        };
+
+        switch (insumoClass){
+            case "InsumoLiquido":
+                modelArray = new Object[]{
+                    model.getCodInsumo(), 
+                    model.getNomInsumo(),
+                    model.getCantInsumo(),
+                    model.getMedidaCompra().getAbrev(),
+                    ((InsumoLiquido) model).getDensidad(), // NOTE: Quite sure this is a bad practice.
+                    model.getPrecioCosto()
+                };
+                break;
+            case "InsumoSolido":
+                modelArray = new Object[]{
+                    model.getCodInsumo(), 
+                    model.getNomInsumo(),
+                    model.getCantInsumo(),
+                    model.getMedidaCompra().getAbrev(),
+                    0, // NOTE: Quite sure this is a bad practice.
+                    model.getPrecioCosto()
+                };
+                break;
+
+            default:
+                return null;
+
+        }
+        return modelArray;
+    }
+
     private void agregarFila(Insumo insu){
-    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        InsumoLiquido i = (InsumoLiquido) insu;
-        tblModel.addRow(new Object[]{i.getCodInsumo(), 
-            i.getNomInsumo(), i.getCantInsumo(), i.getMedidaCompra().getAbrev(), i.getDensidad(), i.getPrecioCosto()
-        });
+        //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
+        String insumoFQClass; // Fully Qualified name of the Insumo subclass
+        String insumoClass;
+        String classParts[] = null;
+
+
+        insumoFQClass = insu.getClass().toString();
+        classParts = insumoFQClass.split("\\.");
+        insumoClass = classParts[classParts.length - 1];
+        switch (insumoClass){
+            case "InsumoLiquido":
+                InsumoLiquido i = (InsumoLiquido) insu;
+                tblModel.addRow(new Object[]{i.getCodInsumo(), 
+                    i.getNomInsumo(), i.getCantInsumo(), i.getMedidaCompra().getAbrev(), i.getDensidad(), i.getPrecioCosto()
+                });
+                break;
+            case "InsumoSolido":
+                Insumo s = (InsumoSolido) insu;
+                tblModel.addRow(new Object[]{s.getCodInsumo(), 
+                    s.getNomInsumo(), s.getCantInsumo(), s.getMedidaCompra().getAbrev(), 0, s.getPrecioCosto()
+                });
+                break;
+
+        }
     }
             
     private void addRecord(Insumo insu){

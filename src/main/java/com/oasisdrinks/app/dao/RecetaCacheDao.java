@@ -4,21 +4,34 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Receta;
+import com.oasisdrinks.app.models.RecetaDetalle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toCollection;
 
 
 public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
     Map<String, List<?>> cache;
-    List<Receta> recetas;
+    List<Receta> recetas = new ArrayList<>();
+    List<Producto> productos;
 
     public RecetaCacheDao (Map cache){
         this.cache = cache;
+        // this.recetas = (List<Receta>) this.cache.get("recetas");
+        this.productos = (List<Producto>) this.cache.get("productos");
+        // Add all "Linked " Recetas to the recetas list
+        // this.productos.forEach( ( prod ) -> {
+        //         if (prod.getReceta() != null)
+        //             recetas.add(prod.getReceta());
+        //         });
         this.recetas = (List<Receta>) this.cache.get("recetas");
+        System.out.println("[INFO] Inside RecetaCacheDao const. recetas: " + this.recetas);
     }
 
     @Override
@@ -35,19 +48,21 @@ public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
     public void actualizar(Receta t) {
         Receta updatedReceta = t;
         // TODO: Need to update the Receta model before I can test this.
+        // TODO: Need to Mock the database changes, like the connection breaks between Receta
+        // and each individual detail.
+        List<RecetaDetalle> detalles = updatedReceta.getDetalles();
+
         recetas.stream()
                .filter(
-                   insu -> insu.getCodReceta() ==
+                   rec -> rec.getCodReceta() ==
                        updatedReceta.getCodReceta()
                )
               .findFirst()
-              .ifPresent(insu -> {
-                  int index = recetas.indexOf(insu);
+              .ifPresent(rec -> {
+                  int index = recetas.indexOf(rec);
                   recetas.set(index, updatedReceta);
               }); 
 
-        // List<Object> updatedObjects = new ArrayList<>(recetas);
-        // cache.put("recetas", updatedObjects);
     }
 
     @Override
@@ -58,8 +73,13 @@ public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
     }
 
     @Override
-    public Receta buscarPorID(int idreceta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Receta buscarPorID(int idReceta) {
+        Optional<Receta> foundReceta = recetas.stream()
+               .filter(
+                   receta -> receta.getCodReceta() == idReceta
+               ).findFirst();
+
+        return foundReceta.orElse(null);
     }
     
 }

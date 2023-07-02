@@ -68,8 +68,20 @@ public class InsumoController {
 
     }
 
+
+    public Insumo buscarPorNombre(String nombre) {
+
+        InsumoCacheDao inDao = new InsumoCacheDao(cache);
+
+        return inDao.buscarPorNombre(nombre);
+    }
+
+
+
     public void setUseCache(boolean useCache) {
         this.useCache = useCache;
     }
+
+
     
 }

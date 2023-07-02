@@ -70,5 +70,15 @@ public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
     public Insumo buscarPorID(int idinsumo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
+    public Insumo buscarPorNombre(String nombre) {
+        Optional<Insumo> foundInsumo = insumos.stream()
+               .filter(
+                   insumo -> insumo.getNomInsumo().equals(nombre)
+               ).findFirst();
+
+        return foundInsumo.orElse(null);
+    }
     
 }

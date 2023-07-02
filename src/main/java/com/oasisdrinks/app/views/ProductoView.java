@@ -7,11 +7,13 @@ package com.oasisdrinks.app.views;
 import com.oasisdrinks.app.controllers.ProductoController;
 import com.oasisdrinks.app.controllers.MedidaController;
 import com.oasisdrinks.app.models.Bebida;
+import com.oasisdrinks.app.models.Medida;
 import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Receta;
 import java.util.*;
 import javax.print.attribute.standard.Media;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,6 +24,7 @@ public class ProductoView extends javax.swing.JFrame {
     DefaultTableModel tblModel; //MM, se asigna variable 
     Map<String, List<?>> cache;
     List<Producto> productos = null;
+    List<Medida> medidas = null;
     List<String> tipos = null;
     boolean useCache = true;
     
@@ -55,14 +58,16 @@ public class ProductoView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtPrecioVenta = new javax.swing.JTextField();
         deleteButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         tiposCombo = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         txtDiasCaducidad = new javax.swing.JTextField();
         detailButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtMargen = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        medidasCombo = new javax.swing.JComboBox<>();
 
         updateButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/system_software_update_22485.png"))); // NOI18N
         updateButton1.setText("Actualizar");
@@ -98,16 +103,16 @@ public class ProductoView extends javax.swing.JFrame {
 
         tblDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Cantidad", "Unidad", "Densidad", "PrecioCosto"
+                "Codigo", "Nombre", "Tipo", "Medida", "Cantidad Ref.", "Caducidad", "Margen", "Costo", "Prec. Venta"
             }
         ));
         jScrollPane1.setViewportView(tblDatos);
@@ -119,8 +124,6 @@ public class ProductoView extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-
-        jLabel5.setText("Precio Venta");
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/delete.png"))); // NOI18N
         deleteButton.setText("Eliminar");
@@ -150,6 +153,18 @@ public class ProductoView extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Margen Ganancia (%)");
+
+        txtMargen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMargenActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Medida");
+
+        medidasCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,44 +172,47 @@ public class ProductoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNuevo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(detailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9))
+                        .addComponent(jLabel4)
+                        .addGap(87, 87, 87)
+                        .addComponent(tiposCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5))
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPrecioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                                    .addComponent(txtDiasCaducidad)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(87, 87, 87)
-                                .addComponent(tiposCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDiasCaducidad, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(medidasCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMargen, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(57, 57, 57))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(btnNuevo)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(detailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 814, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnGuardar, btnNuevo, deleteButton, updateButton});
@@ -205,35 +223,36 @@ public class ProductoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))))
+                            .addComponent(jLabel8)
+                            .addComponent(txtMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtDiasCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel5)
+                            .addComponent(medidasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tiposCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(tiposCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtDiasCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(updateButton)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,15 +281,24 @@ public class ProductoView extends javax.swing.JFrame {
         // TODO:  Shoould precio venta also be calculated? Like according to a margin or expected profit? 
         int cod, cant, diasCaducidad=0;
         String nom, tipo;
+        double margen;
         Producto producto = null;
+        Medida medida = new Medida();
+        String medidaAbrev = null;
+        MedidaController medidaCtrl = new MedidaController();
+
+        medidaCtrl.setCache(cache);
         
         nom = txtNombre.getText();
         tipo = (String) tiposCombo.getSelectedItem();
+        medidaAbrev = (String) medidasCombo.getSelectedItem();
+        medida = medidaCtrl.buscarMedidaPorAbrev(medidaAbrev);
 
         try {
             cod = Integer.parseInt(txtCodigo.getText());
             diasCaducidad = Integer.parseInt(txtDiasCaducidad.getText());
             cant = Integer.parseInt(txtCantidad.getText());
+            margen = Double.parseDouble(txtMargen.getText());
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(
            this,
@@ -279,13 +307,17 @@ public class ProductoView extends javax.swing.JFrame {
             JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+
+
 
 
 
         
         switch ( tipo ) {
-            case "Bebida":
+            case "bebida":
                 producto = new Bebida(cod, nom);
+                producto.setMedida(medida);
                 ;
             default:
                 ;
@@ -372,7 +404,57 @@ public class ProductoView extends javax.swing.JFrame {
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
+        ProductoController productoCtrl = new ProductoController();
+
+        productoCtrl.setCache(cache);
+
+        int codigo = 0;
+        Producto producto = null;
+        RecetaView recetaView = new RecetaView();
+
+
+        if (txtCodigo.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Se necesita un codigo de producto para mostrar los detalles",
+                           "Error Codigo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try{
+
+            codigo = Integer.parseInt(txtCodigo.getText());
+
+        } catch(NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Necesitamos que el codigo sea entero",
+                           "Error Codigo no es numero", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (codigo == 0)
+            return;
+
+        producto = productoCtrl.buscarPorId(codigo);
+        System.out.println("Inside ProductoView bucando: " + codigo);
+        System.out.println("Inside ProductoView producto encontrado: " + producto);
+
+        if (producto == null) {
+            JOptionPane.showMessageDialog(this, "Producto con codigo " + codigo + " no existe",
+                           "Error Codigo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        System.out.println("Inside ProductoView bucando: " + codigo);
+        System.out.println("Inside ProductoView detailButton, producto: " + producto);
+
+        recetaView.setProducto(producto);
+        recetaView.setCache(cache);
+
+        recetaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        recetaView.setVisible(true);
     }//GEN-LAST:event_detailButtonActionPerformed
+
+    private void txtMargenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMargenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMargenActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
@@ -395,16 +477,22 @@ public class ProductoView extends javax.swing.JFrame {
 
 
     public void setCache(Map<String, List<?>> cache) {
+        System.out.println("[INFO] ProductoView, inside setCache");
+        ProductoController productoCtrl = new ProductoController();
         if (cache != null) {
+            System.out.println("[INFO] ProductoView, cache is not null");
             this.cache = cache;
             if (this.useCache){
                 this.productos = (List<Producto>) cache.get("productos");
+                this.medidas = (List<Medida>) cache.get("medidas");
+                productoCtrl.setCache(cache);
                 // TODO: Fix this later, this should come either from the parsing the List or straight from
                 // producto DAO, prefer the List version.
-                this.tipos = null;
+                this.tipos = productoCtrl.listarTipos();
             }
         }
 
+        System.out.println("[INFO] ProductoView, before loading data to view");
         loadDataToView();
     }
 
@@ -432,6 +520,8 @@ public class ProductoView extends javax.swing.JFrame {
 
         productos = productoCtrl.listarProductos();
 
+        System.out.println("[INFO] Inside ProductoView's loadDataToTable, productos: " + productos);
+
         if (productos  == null)
             return;
 
@@ -456,8 +546,8 @@ public class ProductoView extends javax.swing.JFrame {
         tipos = productoCtrl.listarTipos();
 
         if (tipos == null) {
-            JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
-                           "Error Medidas", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudieron conseguir los tipos!",
+                           "Error Tipos", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -465,17 +555,48 @@ public class ProductoView extends javax.swing.JFrame {
         fillCombo(tiposCombo, tipos);
     }
 
+
+    private void fillMedidasCombo () {
+        List<Medida> meds = null;
+        List<String> abrevList = new ArrayList<>();
+        MedidaController medidaCtrl = new MedidaController();
+
+        if (this.useCache) {
+            if (this.cache == null || this.medidas == null)
+                return;
+
+            medidaCtrl.setUseCache(true);
+            medidaCtrl.setCache(cache);
+        }
+
+
+        meds = medidaCtrl.listarMedidas();
+
+        if (meds == null) {
+            JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
+                           "Error Medidas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        meds.forEach(medida -> abrevList.add(medida.getAbrev()));
+
+
+        fillCombo(medidasCombo, abrevList);
+    }
+
     private void loadDataToView() {
         loadDataToTable();
         fillTiposCombo();
+        fillMedidasCombo();
         
     }
 
     private void emptyForm () {
         this.txtCantidad.setText("");
         this.txtCodigo.setText("");
-        this.txtPrecioVenta.setText("");
+        this.txtMargen.setText("");
         this.txtNombre.setText("");
+        this.txtDiasCaducidad.setText("");
     }
 
 
@@ -483,22 +604,29 @@ public class ProductoView extends javax.swing.JFrame {
         emptyForm();
         this.txtCodigo.setText(rowObjects.get(0).toString());
         this.txtNombre.setText(rowObjects.get(1).toString());
-        this.txtCantidad.setText(rowObjects.get(2).toString());
-        // TODO: This way of setting medidaCombo might not be the best
-        this.tiposCombo.setSelectedItem(rowObjects.get(3).toString());
-        this.txtPrecioVenta.setText(rowObjects.get(4).toString());
+        this.tiposCombo.setSelectedItem(rowObjects.get(2).toString());
+        this.medidasCombo.setSelectedItem(rowObjects.get(3).toString());
+        this.txtCantidad.setText(rowObjects.get(4).toString());
+        this.txtDiasCaducidad.setText(rowObjects.get(5).toString());
+        this.txtMargen.setText(rowObjects.get(6).toString());
         
     }
     private void agregarFila(Producto producto){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        Producto item = null;
+        Producto prod = producto;
 
-        item = producto;
         // TODO: Needs to be fixed
 
-        // tblModel.addRow(new Object[]{i.getCodProducto(), 
-        //     i.getNomProducto(), i.getCantProducto(), i.getMedidaCompra().getAbrev(), i.getDensidad(), i.getPrecioCosto()
-        // });
+        tblModel.addRow(new Object[]{
+                prod.getCodProducto(), 
+                prod.getNomProducto(),
+                prod.getTipo(),
+                prod.getMedida().getAbrev(),
+                prod.getCantProducto(),
+                prod.getDiasCaducidad(),
+                prod.calcularCostoTotal(),
+                prod.calcularPrecioDeVenta()
+        });
     }
             
     private void addRecord(Producto insu){
@@ -566,14 +694,16 @@ public class ProductoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> medidasCombo;
     private javax.swing.JTable tblDatos;
     private javax.swing.JComboBox<String> tiposCombo;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDiasCaducidad;
+    private javax.swing.JTextField txtMargen;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JButton updateButton;
     private javax.swing.JButton updateButton1;
     // End of variables declaration//GEN-END:variables

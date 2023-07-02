@@ -54,8 +54,26 @@ public class ProductoCacheDao implements BasicCRUDInterface <Producto>{
     }
 
     @Override
-    public Producto buscarPorID(int idproducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Producto buscarPorID(int idProducto) {
+        Optional<Producto> foundProducto = productos.stream()
+               .filter(
+                   producto -> producto.getCodProducto() == idProducto 
+               ).findFirst();
+
+        return foundProducto.orElse(null);
     }
-    
+
+    public List<String> listarTipos() {
+        Set<String> uniqueTypes = new HashSet<>();
+        List<String> tipos;
+
+        this.productos.forEach(
+           producto -> uniqueTypes.add(producto.getTipo())
+        );
+        
+        tipos = new ArrayList<>(uniqueTypes);
+
+        return tipos;
+    }
+
 }
