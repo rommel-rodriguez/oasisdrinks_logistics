@@ -1,10 +1,11 @@
 
 package com.oasisdrinks.app.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Receta {
+public class Receta implements Serializable  {
     private int codReceta;
     private int cantidad = 1;
     private List<RecetaDetalle> detalles = new ArrayList<>();

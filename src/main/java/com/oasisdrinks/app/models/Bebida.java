@@ -1,8 +1,10 @@
 
 package com.oasisdrinks.app.models;
 
+import java.io.Serializable;
 
-public class Bebida extends Producto{
+
+public class Bebida extends Producto implements Serializable {
 
     public Bebida() { 
         super();

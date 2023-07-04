@@ -1,6 +1,8 @@
 package com.oasisdrinks.app.models;
 
-public class Medida {
+import java.io.Serializable;
+
+public class Medida implements Serializable {
     private int id;
     private String nombre;
     private String abrev;

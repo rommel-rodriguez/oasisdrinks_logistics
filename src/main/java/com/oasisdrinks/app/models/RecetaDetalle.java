@@ -1,7 +1,9 @@
 package com.oasisdrinks.app.models;
 
+import java.io.Serializable;
 
-public class RecetaDetalle {
+
+public class RecetaDetalle  implements Serializable {
     private Insumo insumo;
     private double cantidad;
 

@@ -1,6 +1,9 @@
 package com.oasisdrinks.app.models;
 
-public abstract class Producto {
+import java.io.Serializable;
+import java.util.stream.Collectors;
+
+public abstract class Producto  implements Serializable {
     private int codProducto;
     private String nomProducto;
     protected int cantProducto;
@@ -105,9 +108,31 @@ public abstract class Producto {
             return 0;
 
 
+        ComputeTotalReduce<RecetaDetalle> ctr = (t1, t2) -> {
+            return (
+                t1.getInsumo().getPrecioCosto() * t1.getCantidad() +
+                t2.getInsumo().getPrecioCosto() * t2.getCantidad()
+                );
+        }; 
+
+        ComputeTotal<RecetaDetalle> ct = (t1) -> {
+            return t1.getInsumo().getPrecioCosto() * t1.getCantidad();
+        }; 
+
         for ( RecetaDetalle detalle : receta.getDetalles()) {
-            costo += detalle.getInsumo().getPrecioCosto();
+            costo += ct.apply(detalle);
         }
+
+        // costo = receta.getDetalles()
+        //     .stream()
+        //     .map( (rd) -> (rd.getInsumo().getPrecioCosto() * rd.getCantidad()) )
+        //     .reduce( 0.0, Double::sum);
+
+            // .collect(Collectors.toList())
+            // .stream();
+        // for ( RecetaDetalle detalle : receta.getDetalles()) {
+        //     costo += detalle.getInsumo().getPrecioCosto() * detalle.getCantidad();
+        // }
 
         return costo;
     }

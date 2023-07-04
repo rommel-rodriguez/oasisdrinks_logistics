@@ -7,6 +7,7 @@ import com.oasisdrinks.app.models.InsumoSolido;
 import com.oasisdrinks.app.models.Medida;
 import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Receta;
+import com.oasisdrinks.app.utils.general.CacheUtils;
 import javax.swing.JFrame;
 import java.util.*;
 import javax.print.attribute.standard.Media;
@@ -243,6 +244,8 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     }
 
     private void loadFakeDataToCache() {
+        // Temp persistence
+        CacheUtils cu = new CacheUtils();
 
         // Initialize cache arrays
         List<Insumo> insumos = new ArrayList<>();
@@ -323,6 +326,8 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         this.cache.put("medidas", medidas);
         this.cache.put("productos", productos);
         this.cache.put("recetas", recetas);
+
+        cu.storeCache(cache);
 
     }
 

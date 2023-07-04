@@ -1,8 +1,10 @@
 
 package com.oasisdrinks.app.models;
 
+import java.io.Serializable;
 
-public class InsumoLiquido extends Insumo{
+
+public class InsumoLiquido extends Insumo implements Serializable {
     private double densidad;
     
 

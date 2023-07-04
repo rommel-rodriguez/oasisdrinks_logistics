@@ -1,6 +1,8 @@
 package com.oasisdrinks.app.models;
 
-public abstract class Insumo{
+import java.io.Serializable;
+
+public abstract class Insumo implements Serializable {
     //private String codigoIndumo;
     //private String nombre;
     int codInsumo;
