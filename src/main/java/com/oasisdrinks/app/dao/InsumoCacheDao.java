@@ -4,12 +4,14 @@
  */
 package com.oasisdrinks.app.dao;
 
-import com.oasisdrinks.app.models.Insumo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.*;
+
+import com.oasisdrinks.app.models.Insumo;
+import com.oasisdrinks.app.utils.general.CacheUtils;
 
 
 /**
@@ -19,20 +21,18 @@ import java.util.*;
 public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
     Map<String, List<?>> cache;
     List<Insumo> insumos;
+    CacheUtils cu = null;
 
     public InsumoCacheDao (Map cache){
         this.cache = cache;
         // List<Object> objects = this.cache.get("insumos");
         this.insumos = (List<Insumo>) this.cache.get("insumos");
-        // for (Object obj : objects) {
-        //     if (obj instanceof Insumo) {
-        //         insumos.add((Insumo) obj);
-        //     }
-        // }
+        this.cu = new CacheUtils();
     }
     @Override
     public void agregar(Insumo t) {
         this.insumos.add(t);
+        cu.storeCache(cache);
     }
 
     @Override
@@ -55,6 +55,7 @@ public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
                   insumos.set(index, updatedInsumo);
               }); 
 
+        cu.storeCache(cache);
         // List<Object> updatedObjects = new ArrayList<>(insumos);
         // cache.put("insumos", updatedObjects);
     }
@@ -64,6 +65,7 @@ public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
         insumos.removeIf(insumo -> insumo.getCodInsumo() == codInsumo);
         // List<Object> updatedObjects = new ArrayList<>(insumos);
         // cache.put("insumos", updatedObjects);
+        cu.storeCache(cache);
     }
 
     @Override

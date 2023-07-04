@@ -2,6 +2,9 @@ package com.oasisdrinks.app.utils.general;
 
 import java.util.*;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 
 /**
  *
@@ -9,26 +12,19 @@ import java.io.*;
  */
 public class CacheUtils {
     private static String CACHE_FILE = "cache.dat";
-    private File pathToCache;
+    private File cacheFile;
 
     public CacheUtils() {
-        this.pathToCache = getPathToCache();
+        this.cacheFile = getPathToCache();
     }
 
     private File getPathToCache() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(CACHE_FILE).getFile());
-        //File file = null;
-        //if (classLoader.getResource(CACHE_FILE) == null)
-        //    // File file = new File(classLoader.getResource(CACHE_FILE).getFile());
-        //if (!file.exists())
-        //    file.createNewFile();
-        //    .getFile());
+        File file = new File(CACHE_FILE);
         return file;
     }
 
     public void storeCache(Map<String, List<?>> cache) {
-        try (FileOutputStream fileOut = new FileOutputStream(this.pathToCache);
+        try (FileOutputStream fileOut = new FileOutputStream(this.cacheFile);
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             
             objectOut.writeObject(cache);
@@ -43,7 +39,7 @@ public class CacheUtils {
    public Map<String, List<?>> loadCache () {
          Map<String, List<?>> hashMap = null;
 
-         try (FileInputStream fileIn = new FileInputStream(this.pathToCache);
+         try (FileInputStream fileIn = new FileInputStream(this.cacheFile);
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
             
             hashMap = (HashMap<String, List<?>>) objectIn.readObject();

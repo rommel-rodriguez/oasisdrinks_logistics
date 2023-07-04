@@ -247,87 +247,93 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         // Temp persistence
         CacheUtils cu = new CacheUtils();
 
-        // Initialize cache arrays
+        // // Initialize cache arrays
         List<Insumo> insumos = new ArrayList<>();
         List<Medida> medidas = new ArrayList<>();
         List<Producto> productos = new ArrayList<>();
         List<Receta> recetas = new ArrayList<>();
 
-        // Create fake objects
+        // // Create fake objects
 
-        medidas.add(new Medida(1, "Kilogramos", "Kg"));
-        medidas.add(new Medida(2, "Litros", "Lt"));
-        medidas.add(new Medida(3, "Unidades", "Uni"));
-        medidas.add(new Medida(4, "Onzas", "Oz"));
-        medidas.add(new Medida(5, "Mililitros", "ml"));
-        medidas.add(new Medida(6, "Tazas", "Tza"));
-        medidas.add(new Medida(7, "Botellas", "Bot"));
-
-
-        insumos.add(new InsumoLiquido(3.4, 1, "Limones", 34, medidas.get(2), 1));
-
-        // Adding more InsumoLiquido objects
-        insumos.add(new InsumoLiquido(2.1, 2, "Jugo de Naranja", 20, medidas.get(1), 2));
-        insumos.add(new InsumoLiquido(1.8, 3, "Agua Mineral", 50, medidas.get(2), 3));
-
-        // Adding InsumoSolido objects
-        insumos.add(new InsumoSolido(4, "Azúcar", 10, medidas.get(0), 2));
-        insumos.add(new InsumoSolido(5, "Canela", 5, medidas.get(3), 0.5));
-
-        // Add more InsumoSolido objects
-        insumos.add(new InsumoSolido(6, "Sal", 15, medidas.get(0), 1));
-        insumos.add(new InsumoSolido(7, "Pimienta", 7, medidas.get(3), 0.23));
-        insumos.add(new InsumoSolido(8, "Comino", 8, medidas.get(3), 0.75));
-
-        // Add more InsumoLiquido objects
-        insumos.add(new InsumoLiquido(1.5, 9, "Leche", 30, medidas.get(1), 3.2));
-        insumos.add(new InsumoLiquido(2.3, 10, "Soda", 40, medidas.get(1), 4.5));
+        // medidas.add(new Medida(1, "Kilogramos", "Kg"));
+        // medidas.add(new Medida(2, "Litros", "Lt"));
+        // medidas.add(new Medida(3, "Unidades", "Uni"));
+        // medidas.add(new Medida(4, "Onzas", "Oz"));
+        // medidas.add(new Medida(5, "Mililitros", "ml"));
+        // medidas.add(new Medida(6, "Tazas", "Tza"));
+        // medidas.add(new Medida(7, "Botellas", "Bot"));
 
 
-        // Adding InsumoLiquido objects
-        insumos.add(new InsumoLiquido(1.2, 11, "Jugo de Manzana", 25, medidas.get(5), 11));
-        insumos.add(new InsumoLiquido(1.5, 12, "Agua de Coco", 35, medidas.get(5), 12));
-        insumos.add(new InsumoLiquido(2.7, 13, "Refresco de Maracuyá", 40, medidas.get(5), 13));
+        // insumos.add(new InsumoLiquido(3.4, 1, "Limones", 34, medidas.get(2), 1));
 
-        // Adding InsumoSolido objects
-        insumos.add(new InsumoSolido(17, "Harina", 5, medidas.get(6), 1.5));
-        insumos.add(new InsumoSolido(18, "Azúcar Glass", 3, medidas.get(4), 0.75));
-        insumos.add(new InsumoSolido(19, "Café Molido", 4, medidas.get(6), 0.5));
+        // // Adding more InsumoLiquido objects
+        // insumos.add(new InsumoLiquido(2.1, 2, "Jugo de Naranja", 20, medidas.get(1), 2));
+        // insumos.add(new InsumoLiquido(1.8, 3, "Agua Mineral", 50, medidas.get(2), 3));
 
-        // Adding more InsumoLiquido objects
-        insumos.add(new InsumoLiquido(2.2, 14, "Agua de Horchata", 30, medidas.get(5), 20));
-        insumos.add(new InsumoLiquido(1.8, 15, "Jugo de Mango", 25, medidas.get(5), 21));
-        insumos.add(new InsumoLiquido(2.5, 16, "Refresco de Fresa", 40, medidas.get(5), 22));
+        // // Adding InsumoSolido objects
+        // insumos.add(new InsumoSolido(4, "Azúcar", 10, medidas.get(0), 2));
+        // insumos.add(new InsumoSolido(5, "Canela", 5, medidas.get(3), 0.5));
 
-        // Adding more InsumoSolido objects
-        insumos.add(new InsumoSolido(20, "Sal Marina", 2, medidas.get(4), 0.5));
-        insumos.add(new InsumoSolido(21, "Chocolate en Polvo", 4, medidas.get(6), 0.25));
-        insumos.add(new InsumoSolido(22, "Levadura", 3, medidas.get(4), 0.8));
+        // // Add more InsumoSolido objects
+        // insumos.add(new InsumoSolido(6, "Sal", 15, medidas.get(0), 1));
+        // insumos.add(new InsumoSolido(7, "Pimienta", 7, medidas.get(3), 0.23));
+        // insumos.add(new InsumoSolido(8, "Comino", 8, medidas.get(3), 0.75));
+
+        // // Add more InsumoLiquido objects
+        // insumos.add(new InsumoLiquido(1.5, 9, "Leche", 30, medidas.get(1), 3.2));
+        // insumos.add(new InsumoLiquido(2.3, 10, "Soda", 40, medidas.get(1), 4.5));
 
 
-        // Creating Bebida objects and adding them to the productos list
-        productos.add(new Bebida(1, "Jugo de Manzana", 100, 3, 0.2));
-        //productos.get(1).setMedida(medidas.get(1));
-        productos.add(new Bebida(2, "Agua de Coco", 50, 2, 0.25));
-        productos.add(new Bebida(3, "Refresco de Maracuyá", 75, 4, 0.15));
-        productos.add(new Bebida(4, "Té Frío de Durazno", 60, 2, 0.3));
-        productos.add(new Bebida(5, "Limonada", 80, 3, 0.2));
-        productos.add(new Bebida(6, "Cerveza Artesanal", 40, 4, 0.35));
-        productos.add(new Bebida(7, "Gaseosa de Naranja", 90, 2, 0.15));
-        productos.add(new Bebida(8, "Chicha Morada", 70, 4, 0.25));
-        productos.add(new Bebida(9, "Jugo de Mango", 50, 3, 0.2));
-        productos.add(new Bebida(10, "Agua Mineral", 120, 2, 0.1));
+        // // Adding InsumoLiquido objects
+        // insumos.add(new InsumoLiquido(1.2, 11, "Jugo de Manzana", 25, medidas.get(5), 11));
+        // insumos.add(new InsumoLiquido(1.5, 12, "Agua de Coco", 35, medidas.get(5), 12));
+        // insumos.add(new InsumoLiquido(2.7, 13, "Refresco de Maracuyá", 40, medidas.get(5), 13));
 
-        productos.forEach( prod -> prod.setMedida(medidas.get(1)) );
-        System.out.println("Productos with Medidas:\n" + productos);
+        // // Adding InsumoSolido objects
+        // insumos.add(new InsumoSolido(17, "Harina", 5, medidas.get(6), 1.5));
+        // insumos.add(new InsumoSolido(18, "Azúcar Glass", 3, medidas.get(4), 0.75));
+        // insumos.add(new InsumoSolido(19, "Café Molido", 4, medidas.get(6), 0.5));
 
-        // Add fake data to cache
-        this.cache.put("insumos", insumos);
-        this.cache.put("medidas", medidas);
-        this.cache.put("productos", productos);
-        this.cache.put("recetas", recetas);
+        // // Adding more InsumoLiquido objects
+        // insumos.add(new InsumoLiquido(2.2, 14, "Agua de Horchata", 30, medidas.get(5), 20));
+        // insumos.add(new InsumoLiquido(1.8, 15, "Jugo de Mango", 25, medidas.get(5), 21));
+        // insumos.add(new InsumoLiquido(2.5, 16, "Refresco de Fresa", 40, medidas.get(5), 22));
 
-        cu.storeCache(cache);
+        // // Adding more InsumoSolido objects
+        // insumos.add(new InsumoSolido(20, "Sal Marina", 2, medidas.get(4), 0.5));
+        // insumos.add(new InsumoSolido(21, "Chocolate en Polvo", 4, medidas.get(6), 0.25));
+        // insumos.add(new InsumoSolido(22, "Levadura", 3, medidas.get(4), 0.8));
+
+
+        // // Creating Bebida objects and adding them to the productos list
+        // productos.add(new Bebida(1, "Jugo de Manzana", 100, 3, 0.2));
+        // //productos.get(1).setMedida(medidas.get(1));
+        // productos.add(new Bebida(2, "Agua de Coco", 50, 2, 0.25));
+        // productos.add(new Bebida(3, "Refresco de Maracuyá", 75, 4, 0.15));
+        // productos.add(new Bebida(4, "Té Frío de Durazno", 60, 2, 0.3));
+        // productos.add(new Bebida(5, "Limonada", 80, 3, 0.2));
+        // productos.add(new Bebida(6, "Cerveza Artesanal", 40, 4, 0.35));
+        // productos.add(new Bebida(7, "Gaseosa de Naranja", 90, 2, 0.15));
+        // productos.add(new Bebida(8, "Chicha Morada", 70, 4, 0.25));
+        // productos.add(new Bebida(9, "Jugo de Mango", 50, 3, 0.2));
+        // productos.add(new Bebida(10, "Agua Mineral", 120, 2, 0.1));
+
+        // productos.forEach( prod -> prod.setMedida(medidas.get(1)) );
+        // System.out.println("Productos with Medidas:\n" + productos);
+
+        // // Add fake data to cache
+        // this.cache.put("insumos", insumos);
+        // this.cache.put("medidas", medidas);
+        // this.cache.put("productos", productos);
+        // this.cache.put("recetas", recetas);
+        // cu.storeCache(cache);
+
+        Map<String, List<?>> histCache = cu.loadCache();
+        this.cache.put("insumos", (List<Insumo>) histCache.get("insumos"));
+        this.cache.put("medidas", (List<Medida>) histCache.get("medidas"));
+        this.cache.put("productos", (List<Producto>) histCache.get("productos"));
+        this.cache.put("recetas", (List<Receta>) histCache.get("recetas"));
+
 
     }
 
