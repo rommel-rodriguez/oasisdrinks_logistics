@@ -15,11 +15,14 @@ import java.util.*;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toCollection;
 
+import com.oasisdrinks.app.utils.general.CacheUtils;
+
 
 public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
     Map<String, List<?>> cache;
     List<Receta> recetas = new ArrayList<>();
     List<Producto> productos;
+    CacheUtils cu = null;
 
     public RecetaCacheDao (Map cache){
         this.cache = cache;
@@ -31,12 +34,15 @@ public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
         //             recetas.add(prod.getReceta());
         //         });
         this.recetas = (List<Receta>) this.cache.get("recetas");
+
+        this.cu = new CacheUtils();
         System.out.println("[INFO] Inside RecetaCacheDao const. recetas: " + this.recetas);
     }
 
     @Override
     public void agregar(Receta t) {
         this.recetas.add(t);
+        cu.storeCache(cache);
     }
 
     @Override
@@ -63,6 +69,8 @@ public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
                   recetas.set(index, updatedReceta);
               }); 
 
+        cu.storeCache(cache);
+
     }
 
     @Override
@@ -70,6 +78,7 @@ public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
         recetas.removeIf(receta -> receta.getCodReceta() == codReceta);
         // List<Object> updatedObjects = new ArrayList<>(recetas);
         // cache.put("recetas", updatedObjects);
+        cu.storeCache(cache);
     }
 
     @Override

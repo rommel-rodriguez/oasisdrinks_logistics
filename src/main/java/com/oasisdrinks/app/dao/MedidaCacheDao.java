@@ -11,22 +11,23 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.*;
 
+import com.oasisdrinks.app.utils.general.CacheUtils;
 
-/**
- *
- * @author shadowthrone
- */
+
 public class MedidaCacheDao implements BasicCRUDInterface <Medida>, MedidaDaoInterface {
     Map<String, List<?>> cache;
     List<Medida> medidas;
+    CacheUtils cu = null;
 
     public MedidaCacheDao (Map cache){
         this.cache = cache;
         this.medidas = (List<Medida>) this.cache.get("medidas");
+        this.cu = new CacheUtils();
     }
     @Override
     public void agregar(Medida t) {
         this.medidas.add(t);
+        cu.storeCache(cache);
     }
 
     @Override
@@ -46,11 +47,13 @@ public class MedidaCacheDao implements BasicCRUDInterface <Medida>, MedidaDaoInt
                   int index = medidas.indexOf(medida);
                   medidas.set(index, updatedMedida);
               }); 
+        cu.storeCache(cache);
     }
 
     @Override
     public void eliminar(int id) {
         medidas.removeIf(medida -> medida.getId() == id);
+        cu.storeCache(cache);
     }
 
     @Override

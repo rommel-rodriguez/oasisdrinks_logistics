@@ -7,19 +7,24 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.*;
 
+import com.oasisdrinks.app.utils.general.CacheUtils;
+
 
 public class ProductoCacheDao implements BasicCRUDInterface <Producto>{
     Map<String, List<?>> cache;
     List<Producto> productos;
+    CacheUtils cu = null;
 
     public ProductoCacheDao (Map cache){
         this.cache = cache;
         this.productos = (List<Producto>) this.cache.get("productos");
+        this.cu = new CacheUtils();
     }
 
     @Override
     public void agregar(Producto t) {
         this.productos.add(t);
+        cu.storeCache(cache);
     }
 
     @Override
@@ -42,6 +47,8 @@ public class ProductoCacheDao implements BasicCRUDInterface <Producto>{
                   productos.set(index, updatedProducto);
               }); 
 
+        cu.storeCache(cache);
+
         // List<Object> updatedObjects = new ArrayList<>(productos);
         // cache.put("productos", updatedObjects);
     }
@@ -51,6 +58,7 @@ public class ProductoCacheDao implements BasicCRUDInterface <Producto>{
         productos.removeIf(producto -> producto.getCodProducto() == codProducto);
         // List<Object> updatedObjects = new ArrayList<>(productos);
         // cache.put("productos", updatedObjects);
+        cu.storeCache(cache);
     }
 
     @Override

@@ -14,10 +14,6 @@ import com.oasisdrinks.app.models.Insumo;
 import com.oasisdrinks.app.utils.general.CacheUtils;
 
 
-/**
- *
- * @author shadowthrone
- */
 public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
     Map<String, List<?>> cache;
     List<Insumo> insumos;
