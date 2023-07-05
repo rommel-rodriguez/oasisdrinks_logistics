@@ -7,6 +7,7 @@ import com.oasisdrinks.app.models.InsumoSolido;
 import com.oasisdrinks.app.models.Medida;
 import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Receta;
+import com.oasisdrinks.app.models.Usuario;
 import com.oasisdrinks.app.utils.general.CacheUtils;
 import javax.swing.JFrame;
 import java.util.*;
@@ -83,6 +84,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jMenu4 = new javax.swing.JMenu();
         MNUVENDER = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -161,6 +163,15 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
             }
         });
         MNUMantenimiento.add(jRadioButtonMenuItem1);
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("Usuarios");
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem2ActionPerformed(evt);
+            }
+        });
+        MNUMantenimiento.add(jRadioButtonMenuItem2);
 
         jMenuBar1.add(MNUMantenimiento);
 
@@ -333,6 +344,7 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         this.cache.put("medidas", (List<Medida>) histCache.get("medidas"));
         this.cache.put("productos", (List<Producto>) histCache.get("productos"));
         this.cache.put("recetas", (List<Receta>) histCache.get("recetas"));
+        this.cache.put("usuarios", (List<Usuario>) histCache.get("usuarios"));
 
 
     }
@@ -417,6 +429,15 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
         productoView.setVisible(true);
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
+    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
+
+        UsuariosView usuarioView = new UsuariosView();
+        usuarioView.setCache(cache);
+        usuarioView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        usuarioView.setVisible(true);
+
+    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -477,5 +498,6 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
