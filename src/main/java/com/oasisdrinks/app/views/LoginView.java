@@ -28,6 +28,7 @@ public class LoginView extends javax.swing.JFrame {
         CacheUtils cu = new CacheUtils();
         Map<String, List<?>> histCache = cu.loadCache();
         this.cache.put("usuarios", (List<Usuario>) histCache.get("usuarios"));
+        setLocationRelativeTo(null);
     }
 
     /**

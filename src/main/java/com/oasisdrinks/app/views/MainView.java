@@ -32,6 +32,7 @@ public class MainView extends javax.swing.JFrame {
     public static int contenido1 = 13;
     public static double peso1 = 130;
     public static String sabor1 = "Chicha";
+
     Map<String, List<?>> cache = new HashMap<>();
 
 
