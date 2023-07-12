@@ -14,8 +14,11 @@ import com.oasisdrinks.app.models.InsumoSolido;
 import com.oasisdrinks.app.models.Medida;
 import java.util.*;
 import javax.print.attribute.standard.Media;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -560,6 +563,51 @@ public class InsumoView extends javax.swing.JFrame {
         System.out.println("Whole");
         System.out.println(cache);
     }
+
+    public DefaultTableModel getTblModel() {
+        return tblModel;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public JButton getBtnNuevo() {
+        return btnNuevo;
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public JTable getTblDatos() {
+        return tblDatos;
+    }
+
+    public JTextField getTxtCantidad() {
+        return txtCantidad;
+    }
+
+    public JTextField getTxtCodigo() {
+        return txtCodigo;
+    }
+
+    public JTextField getTxtDensidad() {
+        return txtDensidad;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public JTextField getTxtPrecioCosto() {
+        return txtPrecioCosto;
+    }
+
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
+
 
     /**
      * @param args the command line arguments
