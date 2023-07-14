@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import com.oasisdrinks.app.models.Medida;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,11 @@ public class MedidaCacheDao implements BasicCRUDInterface <Medida>, MedidaDaoInt
                ).findFirst();
 
         return foundMedida.orElse(null);
+    }
+
+    @Override
+    public List<Medida> buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

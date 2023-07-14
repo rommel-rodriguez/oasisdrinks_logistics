@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import java.util.List;
 
 /**
@@ -34,6 +35,11 @@ public class ProductoDao implements BasicCRUDInterface {
 
     @Override
     public Object buscarPorID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

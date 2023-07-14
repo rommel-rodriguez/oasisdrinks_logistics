@@ -1,5 +1,6 @@
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import com.oasisdrinks.app.models.Producto;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +83,11 @@ public class ProductoCacheDao implements BasicCRUDInterface <Producto>{
         tipos = new ArrayList<>(uniqueTypes);
 
         return tipos;
+    }
+
+    @Override
+    public List<Producto> buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Receta;
 import com.oasisdrinks.app.models.RecetaDetalle;
@@ -89,6 +90,11 @@ public class RecetaCacheDao implements BasicCRUDInterface <Receta>{
                ).findFirst();
 
         return foundReceta.orElse(null);
+    }
+
+    @Override
+    public List<Receta> buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

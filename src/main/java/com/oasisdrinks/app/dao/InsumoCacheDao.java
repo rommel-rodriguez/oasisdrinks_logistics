@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,11 @@ public class InsumoCacheDao implements BasicCRUDInterface <Insumo>{
                ).findFirst();
 
         return foundInsumo.orElse(null);
+    }
+
+    @Override
+    public List<Insumo> buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
