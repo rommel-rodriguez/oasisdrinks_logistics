@@ -24,15 +24,15 @@ public class ControllerWithService {
     }
 
     public void addInsumo(Insumo insumo) {
-        insumoService.addInsumo(insumo);
+        insumoService.add(insumo);
     }
 
     public void updateInsumo(Insumo insumo) {
-        insumoService.updateInsumo(insumo);
+        insumoService.update(insumo);
     }
 
     public void deleteInsumo(Insumo insumo) {
-        insumoService.deleteInsumo(insumo);
+        insumoService.delete(insumo);
     }
 
     // Other methods for interacting with the service layer

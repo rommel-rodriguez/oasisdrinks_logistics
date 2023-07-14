@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Rommel Rodriguez Perez<0812058@utp.edu.pe>
  */
-public class InsumoService {
+public class MedidaService {
     private InsumoDao insumoDao;
 
-    public InsumoService(InsumoDao insumoDao) {
+    public MedidaService(InsumoDao insumoDao) {
         this.insumoDao = insumoDao;
     }
 

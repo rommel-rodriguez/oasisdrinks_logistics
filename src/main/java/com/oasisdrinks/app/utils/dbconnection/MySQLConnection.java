@@ -19,7 +19,7 @@ public class MySQLConnection  extends ConnectionFactory {
     }
 
     @Override
-    public Connection getNewConnection() {
+    public Connection getNewConnection() throws SQLException  {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 	

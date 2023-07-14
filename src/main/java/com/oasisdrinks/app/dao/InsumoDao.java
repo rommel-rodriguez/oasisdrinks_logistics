@@ -5,6 +5,7 @@
 package com.oasisdrinks.app.dao;
 
 import com.oasisdrinks.app.models.Insumo;
+import com.oasisdrinks.app.utils.dbconnection.ConnectionFactory;
 import java.util.List;
 import java.util.*;
 import java.sql.*;
@@ -15,7 +16,7 @@ import java.sql.*;
  */
 public class InsumoDao implements BasicCRUDInterface <Insumo> {
 
-    public InsumoDao(Connection con) {
+    public InsumoDao(ConnectionFactory dataSource) {
 
     }
 

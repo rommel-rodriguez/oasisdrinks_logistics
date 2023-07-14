@@ -7,24 +7,16 @@ package com.oasisdrinks.app.utils.dbconnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- *
- * @author shadowthrone
- */
 public abstract class ConnectionFactory {
     boolean initialized;
     
 
     protected abstract void init();
-    public abstract Connection getNewConnection();
+    public abstract Connection getNewConnection() throws SQLException;
     // public abstract Connection getConnection() throws SQLException;
 
     public Connection getConnection() throws SQLException {
 
-        if (!this.initialized)
-            this.init();
-
-        // NOTE: Maybe surround this with try/catch
         Connection con = getNewConnection();
 
         return con;

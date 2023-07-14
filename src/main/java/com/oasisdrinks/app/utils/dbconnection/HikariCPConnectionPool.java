@@ -5,9 +5,7 @@
 package com.oasisdrinks.app.utils.dbconnection;
 
 
-import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -30,27 +28,27 @@ public class HikariCPConnectionPool extends ConnectionFactory {
     private static Properties dbProperties = new ConfigurationManager().getProperties();
     private static HikariConfig config = new HikariConfig(dbProperties);
 
-    private DataSource dataSource;
+    private static HikariDataSource dataSource;
+
+    static {
+        dataSource = new HikariDataSource(config);
+    }
 
     public HikariCPConnectionPool() {
-        init();
+    }
+
+
+    @Override
+    public Connection getNewConnection() throws SQLException {
+        // } catch (SQLException ex) {
+        //     Logger.getLogger(HikariCPConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
+        // }
+        return dataSource.getConnection();
     }
 
     @Override
     protected void init() {
-        this.initialized = true;
-        dataSource = new HikariDataSource(config);
-    }
-
-
-    @Override
-    public Connection getNewConnection() {
-        try {
-            return dataSource.getConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(HikariCPConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 
