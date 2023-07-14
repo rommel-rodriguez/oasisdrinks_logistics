@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import com.oasisdrinks.app.models.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,11 @@ public class UsuarioCacheDao implements BasicCRUDInterface <Usuario> {
                ).findFirst();
 
         return foundUsuario.orElse(null);
+    }
+
+    @Override
+    public List<Usuario> buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
