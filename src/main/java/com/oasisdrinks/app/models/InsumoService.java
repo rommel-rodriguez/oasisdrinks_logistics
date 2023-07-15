@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.oasisdrinks.app.service;
+package com.oasisdrinks.app.models;
 
 import com.oasisdrinks.app.dao.InsumoDao;
+import com.oasisdrinks.app.exceptions.BusinessException;
 import com.oasisdrinks.app.models.Insumo;
 import java.util.List;
 
@@ -12,16 +13,20 @@ import java.util.List;
  *
  * @author Rommel Rodriguez Perez<0812058@utp.edu.pe>
  */
-public class ProductoService {
+public class InsumoService {
+    // TODO: Add the Business Layer validation inside the service
     private InsumoDao insumoDao;
 
-    public ProductoService(InsumoDao insumoDao) {
+    public InsumoService(InsumoDao insumoDao) {
         this.insumoDao = insumoDao;
     }
 
-    public void add(Insumo insumo) {
+    public void add(Insumo insumo) throws BusinessException.DensidadRangoNoPermitido {
         // Perform validation or other business logic checks
         // before adding the insumo to the data store
+        InsumoLiquido insu = (InsumoLiquido) insumo;
+        if ( insu.getDensidad() < 0)
+            throw new BusinessException.DensidadRangoNoPermitido("La densidad ingresadda es menor a 0");
         insumoDao.agregar(insumo);
     }
 
@@ -37,7 +42,7 @@ public class ProductoService {
         insumoDao.eliminar(id );
     }
 
-    public List<Insumo> getAllInsumos() {
+    public List<Insumo> getAll() {
         // Retrieve all insumos from the data store
         return insumoDao.listar();
     }

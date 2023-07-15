@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.oasisdrinks.app.service;
+package com.oasisdrinks.app.models;
 
 import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.models.Insumo;
@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Rommel Rodriguez Perez<0812058@utp.edu.pe>
  */
-public class InsumoService {
+public class RecetaService {
     private InsumoDao insumoDao;
 
-    public InsumoService(InsumoDao insumoDao) {
+    public RecetaService(InsumoDao insumoDao) {
         this.insumoDao = insumoDao;
     }
 

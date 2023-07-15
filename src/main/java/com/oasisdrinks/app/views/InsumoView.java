@@ -37,7 +37,7 @@ public class InsumoView extends javax.swing.JFrame {
         this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
         this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
 
-        loadDataToView();
+        // loadDataToView();
     }
 
     /**
@@ -225,47 +225,9 @@ public class InsumoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // Asignando valores en blanco
-        this.emptyForm();
-        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // MM, Se programa el boton guardar:
-        int cod, cant;
-        String nom, und;
-        double pcosto, dens;
-        Medida med = null;
-        
-        nom = txtNombre.getText();
-        und = (String) medidasCombo.getSelectedItem();
-
-        try {
-            cod = Integer.parseInt(txtCodigo.getText());
-            cant = Integer.parseInt(txtCantidad.getText());
-            pcosto = Double.parseDouble(txtPrecioCosto.getText());
-            dens = Double.parseDouble(txtDensidad.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        MedidaController medidaCtrl = new MedidaController();
-        medidaCtrl.setCache(cache);
-
-        med = medidaCtrl.buscarMedidaPorAbrev(und);
-
-        if (med ==  null)
-            med = new Medida(0, "Not Found", "N.F.");
-
-        
-        Insumo insu = new InsumoLiquido(dens, cod, nom, cant, med, pcosto);
-        agregarFila(insu); //MM, sino se invoca, no se adiciona registros
-        addRecord(insu); //MM, sino se invoca, no se adiciona registros
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -273,27 +235,6 @@ public class InsumoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
-        int codigo = 0;
-
-        try {
-            codigo = Integer.parseInt(this.txtCodigo.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "El codigo indicado no es un entero",
-                  "Error no es entero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (codigo == 0)
-            return;
-
-        InsumoController inCon = new InsumoController();
-        inCon.setCache(cache);
-        inCon.borrarInsumo(codigo);
-        loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
@@ -327,7 +268,7 @@ public class InsumoView extends javax.swing.JFrame {
         InsumoController inCon = new InsumoController();
         inCon.setCache(cache);
         inCon.actualizarInsumo(insu);
-        loadDataToTable();
+        // loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
@@ -359,7 +300,7 @@ public class InsumoView extends javax.swing.JFrame {
             }
         }
 
-        loadDataToView();
+//        loadDataToView();
     }
 
 
@@ -382,70 +323,7 @@ public class InsumoView extends javax.swing.JFrame {
         return med;
     } 
 
-    private void fillCombo(JComboBox combo, List<String> items){
-        combo.removeAllItems();
-        items.forEach(combo::addItem);
-    }
 
-
-    private void loadDataToTable(){
-        List<Insumo> ins = new ArrayList<>();
-
-        this.tblModel.setRowCount(0);
-
-        InsumoController insumoCtrl = new InsumoController();
-
-        if (this.useCache) {
-            if (this.cache == null || this.insumos == null)
-                return;
-
-            insumoCtrl.setUseCache(true);
-            insumoCtrl.setCache(cache);
-        }
-
-        ins = insumoCtrl.listarInsumos();
-
-        if (ins  == null)
-            return;
-
-        for (Insumo insu: ins) {
-            agregarFila(insu);
-        }
-    }
-
-    private void fillMedidasCombo () {
-        List<Medida> meds = null;
-        List<String> abrevList = new ArrayList<>();
-        MedidaController medidaCtrl = new MedidaController();
-
-        if (this.useCache) {
-            if (this.cache == null || this.medidas == null)
-                return;
-
-            medidaCtrl.setUseCache(true);
-            medidaCtrl.setCache(cache);
-        }
-
-
-        meds = medidaCtrl.listarMedidas();
-
-        if (meds == null) {
-            JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
-                           "Error Medidas", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        meds.forEach(medida -> abrevList.add(medida.getAbrev()));
-
-
-        fillCombo(medidasCombo, abrevList);
-    }
-
-    private void loadDataToView() {
-        loadDataToTable();
-        fillMedidasCombo();
-        
-    }
 
     private void emptyForm () {
         this.txtCantidad.setText("");
@@ -521,48 +399,7 @@ public class InsumoView extends javax.swing.JFrame {
         return modelArray;
     }
 
-    private void agregarFila(Insumo insu){
-        //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        String insumoFQClass; // Fully Qualified name of the Insumo subclass
-        String insumoClass;
-        String classParts[] = null;
-
-
-        insumoFQClass = insu.getClass().toString();
-        classParts = insumoFQClass.split("\\.");
-        insumoClass = classParts[classParts.length - 1];
-        switch (insumoClass){
-            case "InsumoLiquido":
-                InsumoLiquido i = (InsumoLiquido) insu;
-                tblModel.addRow(new Object[]{i.getCodInsumo(), 
-                    i.getNomInsumo(), i.getCantInsumo(), i.getMedidaCompra().getAbrev(), i.getDensidad(), i.getPrecioCosto()
-                });
-                break;
-            case "InsumoSolido":
-                Insumo s = (InsumoSolido) insu;
-                tblModel.addRow(new Object[]{s.getCodInsumo(), 
-                    s.getNomInsumo(), s.getCantInsumo(), s.getMedidaCompra().getAbrev(), 0, s.getPrecioCosto()
-                });
-                break;
-
-        }
-    }
             
-    private void addRecord(Insumo insu){
-    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        System.out.println("Adding Record to DB");
-        // InsumoDao inDao = new InsumoCacheDao(cache);
-        InsumoController inCon = new InsumoController();
-        inCon.setCache(cache);
-        inCon.agregarInsumo(insu);
-
-        System.out.printf("Insumos Record's Size: ");
-        System.out.println(cache.get("insumos").size());
-        System.out.println("Insumos Record:");
-        System.out.println(cache.get("insumos"));
-        System.out.println("Whole");
-        System.out.println(cache);
-    }
 
     public DefaultTableModel getTblModel() {
         return tblModel;
@@ -665,4 +502,8 @@ public class InsumoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioCosto;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
+
+    public JComboBox<String> getMedidasCombo() {
+        return medidasCombo;
+    }
 }

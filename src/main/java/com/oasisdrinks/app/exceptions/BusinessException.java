@@ -24,6 +24,12 @@ public class BusinessException extends Exception {
             super(message);
         }
     }
+
+    public static class DensidadRangoNoPermitido extends BusinessException {
+        public DensidadRangoNoPermitido (String message) {
+            super(message);
+        }
+    }
     
     public static class DuplicateUserException extends BusinessException {
         public DuplicateUserException(String message) {
