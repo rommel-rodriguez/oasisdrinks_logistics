@@ -19,6 +19,7 @@ import com.oasisdrinks.app.views.InsumoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -43,6 +44,8 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
         view.getBtnGuardar().addActionListener(this);
         view.getDeleteButton().addActionListener(this);
         view.getUpdateButton().addActionListener(this);
+        view.getRefreshButton().addActionListener(this);
+        view.getFilterButton().addActionListener(this);
         view.getTblDatos()
             .getSelectionModel()
             .addListSelectionListener(this);
@@ -52,12 +55,13 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
 
     public void init() {
         fillMedidasCombo();
+        fillFilterCombo();
         readAction();
     }
 
-    public void refreshView() {
-        // List<Insumo> insumos = modelService.getAllInsumos();
-        // view.displayInsumos(insumos);
+    public void refreshAction() {
+        emptyForm();
+        readAction();
     }
 
     @Override
@@ -75,7 +79,13 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
         } else if ( source ==  view.getUpdateButton()) {
             System.out.println("[DEBUG]  Update button pressed");
             updateAction();
-        } 
+        } else if ( source ==  view.getFilterButton()) {
+            System.out.println("[DEBUG]  Filter button pressed");
+            filterAction();
+        } else if ( source ==  view.getRefreshButton()) {
+            System.out.println("[DEBUG]  Filter button pressed");
+            refreshAction();
+        }
     }
 
     @Override
@@ -154,30 +164,53 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
 
         modelService.delete(codigo);
         loadDataToTable();
-
     }
 
     private void readAction() {
         loadDataToTable();
     }
 
+    private void filterAction() {
+                                             
+        List<Insumo> insumos = modelService.getAll();
+        List<Insumo> filtered = new ArrayList<>();
+        String property = view.getFilterCombo().getSelectedItem().toString();
+
+        System.out.println("[DEBUG] Inside filter action, insumos: " + insumos);
+        System.out.println("[DEBUG] Inside filter action, insumos size: " + insumos.size());
+        System.out.println("[DEBUG] Inside filter action, property: " + property);
+        switch (property) {
+            case "id":
+                // TODO: Needs validation
+                int value = Integer.parseInt( view.getFilterValue().getText() );
+                insumos.stream()
+                    .filter((insumo) -> insumo.getCodInsumo() == value)
+                    .forEach(filtered::add);
+                    //.forEach( (insumo) -> filtered.add(insumo));
+                // for (Insumo insumo: insumos) {
+                //     System.out.println("[DEBUG] Trying Value: " + insumo.getCodInsumo());
+                //     if (insumo.getCodInsumo() == value)
+                //         System.out.println("DEBUG: Value found!!!: " + value);
+                // }
+
+                break;
+            case "nombre":
+                break;
+            default:
+                break;
+        }
+        System.out.println("[DEBUG] Filter result:\n " + filtered);
+        loadListToTable(filtered);
+
+    }
+
     private void loadDataToTable(){
         List<Insumo> insumos = new ArrayList<>();
-        // DefaultTableModel tableModel = null;
-        // tableModel =  (DefaultTableModel) view.getTblDatos().getModel();
-
-        // tableModel.setRowCount(0);
 
         insumos = modelService.getAll();
 
         loadListToTable(insumos);
 
-        // if (insumos == null || insumos.isEmpty())
-        //     return;
-
-        // for (Insumo insu: insumos) {
-        //     agregarFila(insu, tableModel);
-        // }
     }
 
     private void loadListToTable(List<Insumo> insumos){
@@ -267,6 +300,11 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
 
 
         fillCombo(medidasCombo, abrevList);
+    }
+
+    private void fillFilterCombo() {
+        JComboBox<String> filterCombo = view.getFilterCombo();
+        fillCombo(filterCombo, Arrays.asList("id", "nombre", "tipo"));
     }
     
     private void emptyForm () {

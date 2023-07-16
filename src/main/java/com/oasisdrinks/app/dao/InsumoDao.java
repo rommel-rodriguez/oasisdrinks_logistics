@@ -109,7 +109,7 @@ public class InsumoDao implements AltCRUDInterface<Insumo> {
 
     @Override
     public int eliminar(int id) throws DataAccessException {
-        String query = "DELETE FROM insumos  WHERE codInsumo = ?";
+        String query = "DELETE FROM Insumo  WHERE codInsumo = ?";
 
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
