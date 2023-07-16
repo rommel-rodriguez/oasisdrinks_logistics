@@ -71,6 +71,8 @@ public class Main {
             UIManager.put("TableHeader.foreground", Color.WHITE); 
             Color hoverColor = new Color(92, 99, 106);
             UIManager.put("TableHeader.hoverBackground", hoverColor);
+            Color alternateRowColor = new Color(50, 50, 50); // Custom color
+            UIManager.put("Table.alternateRowColor", alternateRowColor);
 
             // Set the color for labels
             UIManager.put("Label.foreground", Color.GREEN);

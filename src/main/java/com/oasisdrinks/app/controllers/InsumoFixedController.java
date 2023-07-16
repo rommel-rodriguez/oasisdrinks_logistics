@@ -163,12 +163,28 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
 
     private void loadDataToTable(){
         List<Insumo> insumos = new ArrayList<>();
+        // DefaultTableModel tableModel = null;
+        // tableModel =  (DefaultTableModel) view.getTblDatos().getModel();
+
+        // tableModel.setRowCount(0);
+
+        insumos = modelService.getAll();
+
+        loadListToTable(insumos);
+
+        // if (insumos == null || insumos.isEmpty())
+        //     return;
+
+        // for (Insumo insu: insumos) {
+        //     agregarFila(insu, tableModel);
+        // }
+    }
+
+    private void loadListToTable(List<Insumo> insumos){
         DefaultTableModel tableModel = null;
         tableModel =  (DefaultTableModel) view.getTblDatos().getModel();
 
         tableModel.setRowCount(0);
-
-        insumos = modelService.getAll();
 
         if (insumos == null || insumos.isEmpty())
             return;
