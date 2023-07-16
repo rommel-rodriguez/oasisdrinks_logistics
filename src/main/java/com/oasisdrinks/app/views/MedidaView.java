@@ -58,6 +58,7 @@ public class MedidaView extends javax.swing.JFrame {
 
         jLabel3.setText("Abreviation");
 
+        txtCodigo.setEditable(false);
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);

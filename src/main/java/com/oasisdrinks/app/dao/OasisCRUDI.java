@@ -3,7 +3,7 @@ import java.util.*;
 import com.oasisdrinks.app.models.Insumo;
 import com.oasisdrinks.app.exceptions.DataAccessException;
 
-public interface AltCRUDInterface <T> {
+public interface OasisCRUDI <T> {
     int agregar (T t);
     List<T> listar();
     int actualizar (T t);

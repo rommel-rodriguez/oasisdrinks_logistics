@@ -4,14 +4,6 @@
  */
 package com.oasisdrinks.app.views;
 
-import com.oasisdrinks.app.controllers.InsumoController;
-import com.oasisdrinks.app.controllers.MedidaController;
-import com.oasisdrinks.app.dao.InsumoDao;
-import com.oasisdrinks.app.dao.InsumoCacheDao;
-import com.oasisdrinks.app.models.Insumo;
-import com.oasisdrinks.app.models.InsumoLiquido;
-import com.oasisdrinks.app.models.InsumoSolido;
-import com.oasisdrinks.app.models.Medida;
 import java.util.*;
 import javax.print.attribute.standard.Media;
 import javax.swing.JButton;
@@ -26,16 +18,9 @@ import javax.swing.table.DefaultTableModel;
 public class InsumoView extends javax.swing.JFrame {
     
     DefaultTableModel tblModel; //MM, se asigna variable 
-    Map<String, List<?>> cache;
-    List<Insumo> insumos = null;
-    List<Medida> medidas = null;
-    boolean useCache = true;
     
     public InsumoView() {
         initComponents();
-        tblDatos.getSelectionModel().addListSelectionListener(tableSelectionListener);
-        this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
-        this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
 
         // loadDataToView();
     }
@@ -285,133 +270,14 @@ public class InsumoView extends javax.swing.JFrame {
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (!e.getValueIsAdjusting()) {
-                int selectedRow = tblDatos.getSelectedRow();
-                if (selectedRow >= 0) {
-                    int columnCount = tblDatos.getColumnCount();
-                    List<Object> rowObjects = new ArrayList<>();
-
-                    // Assuming the desired columns are at index 0, 1, and 2
-                    for (int i = 0; i < columnCount; i++) {
-                        Object obj = tblDatos.getValueAt(selectedRow, i);
-                        rowObjects.add(obj);
-                    }
-                    fillForm(rowObjects);
-                }
-            }
         }
     };
 
 
-    public void setCache(Map<String, List<?>> cache) {
-        if (cache != null) {
-            this.cache = cache;
-            if (this.useCache){
-                this.insumos = (List<Insumo>) cache.get("insumos");
-                this.medidas = (List<Medida>) cache.get("medidas");
-            }
-        }
-
-//        loadDataToView();
-    }
 
 
 
 
-    private Medida createMedidaFromCombo(){
-        Medida med = null;
-        String und;
-        und = (String) medidasCombo.getSelectedItem();
-        MedidaController medidaCtrl = new MedidaController();
-
-        if (this.useCache)
-            medidaCtrl.setCache(cache);
-
-        med = medidaCtrl.buscarMedidaPorAbrev(und);
-
-        if (med ==  null)
-            med = new Medida(0, "Not Found", "N.F.");
-
-        return med;
-    } 
-
-
-
-    private void emptyForm () {
-        this.txtCantidad.setText("");
-        this.txtCodigo.setText("");
-        this.txtDensidad.setText("");
-        this.txtNombre.setText("");
-        this.txtPrecioCosto.setText("");
-        //this.txtUnidad.setText("");
-    }
-
-
-    private void fillForm(List<Object> rowObjects) {
-        emptyForm();
-        this.txtCodigo.setText(rowObjects.get(0).toString());
-        this.txtNombre.setText(rowObjects.get(1).toString());
-        this.txtCantidad.setText(rowObjects.get(2).toString());
-        // TODO: This way of setting medidaCombo might not be the best
-        this.medidasCombo.setSelectedItem(rowObjects.get(3).toString());
-        this.txtDensidad.setText(rowObjects.get(4).toString());
-        this.txtPrecioCosto.setText(rowObjects.get(5).toString());
-        
-    }
-
-    private Object[]  insumoModelToArray (Insumo model) {
-
-        String insumoFQClass; // Fully Qualified name of the Insumo subclass
-        String insumoClass;
-        String classParts[] = null;
-        Object[] modelArray;
-
-        insumoFQClass = model.getClass().toString();
-        classParts = insumoFQClass.split("\\.");
-        insumoClass = classParts[classParts.length - 1];
-
-        if (model == null)
-            return null;
-        
-        modelArray = new Object[]{
-            model.getCodInsumo(), 
-            model.getNomInsumo(),
-            model.getCantInsumo(),
-            model.getMedidaCompra().getAbrev(),
-            0,
-            model.getPrecioCosto()
-        };
-
-        switch (insumoClass){
-            case "InsumoLiquido":
-                modelArray = new Object[]{
-                    model.getCodInsumo(), 
-                    model.getNomInsumo(),
-                    model.getCantInsumo(),
-                    model.getMedidaCompra().getAbrev(),
-                    ((InsumoLiquido) model).getDensidad(), // NOTE: Quite sure this is a bad practice.
-                    model.getPrecioCosto()
-                };
-                break;
-            case "InsumoSolido":
-                modelArray = new Object[]{
-                    model.getCodInsumo(), 
-                    model.getNomInsumo(),
-                    model.getCantInsumo(),
-                    model.getMedidaCompra().getAbrev(),
-                    0, // NOTE: Quite sure this is a bad practice.
-                    model.getPrecioCosto()
-                };
-                break;
-
-            default:
-                return null;
-
-        }
-        return modelArray;
-    }
-
-            
 
     public DefaultTableModel getTblModel() {
         return tblModel;

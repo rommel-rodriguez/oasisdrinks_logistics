@@ -18,7 +18,7 @@ import java.sql.*;
  *
  * @author shadowthrone
  */
-public class InsumoDao implements AltCRUDInterface<Insumo> {
+public class InsumoDao implements OasisCRUDI<Insumo> {
     private DataSource ds = null;
 
     public InsumoDao(DataSource ds) {

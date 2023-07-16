@@ -40,6 +40,7 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
     public InsumoFixedController(InsumoService modelService, InsumoView view) {
         this.modelService = modelService;
         this.view = view;
+
         view.getBtnNuevo().addActionListener(this);
         view.getBtnGuardar().addActionListener(this);
         view.getDeleteButton().addActionListener(this);

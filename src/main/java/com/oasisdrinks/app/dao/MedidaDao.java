@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import java.util.*;
 import java.sql.*;
 
-public class MedidaDao implements AltCRUDInterface<Medida> {
+public class MedidaDao implements OasisCRUDI<Medida> {
     private DataSource ds = null;
 
     public MedidaDao(DataSource ds) {
