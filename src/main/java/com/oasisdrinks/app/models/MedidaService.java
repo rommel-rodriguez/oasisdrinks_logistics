@@ -41,10 +41,13 @@ public class MedidaService {
     }
 
     public Medida buscarMedidaPorAbrev(String abrev) {
+        System.out.println("[DEBUG] Service: Searching for medida with abrev: " + abrev);
         List<Medida> medidas = new ArrayList<>();
         
         medidas = medidaDao.buscarPorPropiedad("abrev", abrev);
 
+        System.out.println("[DEBUG] Service: Size Medidas returned by dao:  " + medidas.size());
+        System.out.println("[DEBUG] Service: Medidas by dao:  " + medidas);
         return medidas.stream().findFirst().orElse(null);
     }
 

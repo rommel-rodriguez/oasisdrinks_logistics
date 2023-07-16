@@ -105,6 +105,10 @@ public class MedidaDao implements AltCRUDInterface<Medida> {
     public List<Medida> buscarPorPropiedad(String propiedad, Object valor){
         List<Medida> medidas = new ArrayList<>();
         String sql = "SELECT * FROM Medida WHERE " + propiedad + " = ?";
+        System.out.println("[DEBUG] DAO Search by Prop: Medida criteria:  propiedad: "
+            + propiedad
+            + " valor: "
+            + valor);
 
         try (
             Connection connection = ds.getConnection();
@@ -116,7 +120,7 @@ public class MedidaDao implements AltCRUDInterface<Medida> {
 
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
+                    String name = resultSet.getString("nombre");
                     String abrev = resultSet.getString("abrev");
                     
                     Medida medida = new Medida(id, name, abrev);
@@ -129,6 +133,8 @@ public class MedidaDao implements AltCRUDInterface<Medida> {
             // Handle or rethrow the exception as needed
             // throw new SQLDataAccessException(ex.getStackTrace().toString()); 
             System.err.println(ex.getStackTrace().toString());
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
         }
         return medidas;
     }

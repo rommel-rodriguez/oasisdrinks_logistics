@@ -68,4 +68,10 @@ public abstract class Insumo implements Serializable {
     public void setMedidaCompra(Medida medidaCompra) {
         this.medidaCompra = medidaCompra;
     }
+
+    @Override
+    public String toString() {
+        return "Insumo{" + "codInsumo=" + codInsumo + ", nomInsumo=" + nomInsumo + ", cantInsumo=" + cantInsumo + ", medidaCompra=" + medidaCompra + ", precioCosto=" + precioCosto + '}';
+    }
+
 }

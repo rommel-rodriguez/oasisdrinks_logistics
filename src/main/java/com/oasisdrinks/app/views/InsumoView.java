@@ -238,37 +238,6 @@ public class InsumoView extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        // TODO add your handling code here:
-        int cod, cant;
-        String nom;
-        Medida med = null;
-        double pcosto, dens;
-        
-        nom = txtNombre.getText();
-        med = createMedidaFromCombo();
-        try {
-            cod = Integer.parseInt(txtCodigo.getText());
-            cant = Integer.parseInt(txtCantidad.getText());
-            pcosto = Double.parseDouble(txtPrecioCosto.getText());
-            dens = Double.parseDouble(txtDensidad.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-        
-        Insumo insu = new InsumoLiquido(
-            dens, cod, nom, cant, med, pcosto);
-
-        InsumoController inCon = new InsumoController();
-        inCon.setCache(cache);
-        inCon.actualizarInsumo(insu);
-        // loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override

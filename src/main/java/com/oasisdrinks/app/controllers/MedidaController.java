@@ -25,8 +25,6 @@ public class MedidaController {
     }
 
     public void setCache(Map<String, List<?>> cache) {
-        this.cache = cache;
-        this.medidas = (List<Medida>) this.cache.get("medidas");
     }
 
     public List<Medida> listarMedidas() {

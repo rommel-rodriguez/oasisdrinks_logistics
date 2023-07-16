@@ -28,6 +28,11 @@ public class InsumoLiquido extends Insumo implements Serializable {
         return densidad;
     }  
 
+    @Override
+    public String toString() {
+        return "InsumoLiquido: " + super.toString() + "densidad=" + densidad + '}';
+    }
+
 }
 
 

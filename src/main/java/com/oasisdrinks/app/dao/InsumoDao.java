@@ -27,13 +27,13 @@ public class InsumoDao implements AltCRUDInterface<Insumo> {
 
     @Override
     public int agregar(Insumo t) throws DataAccessException {
-        String query = "INSERT INTO insumos (nomInsumo, cantInsumo, medidaCompra, precioCosto, densidad) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Insumo (nomInsumo, cantInsumo, medidaCompraId, precioCosto, densidad) VALUES (?, ?, ?, ?, ?)";
         InsumoLiquido insumo = (InsumoLiquido) t;
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, insumo.getNomInsumo());
             statement.setInt(2, insumo.getCantInsumo());
-            statement.setString(3, insumo.getMedidaCompra().toString());
+            statement.setInt(3, insumo.getMedidaCompra().getId());
             statement.setDouble(4, insumo.getPrecioCosto());
             statement.setDouble(5, insumo.getDensidad());
             statement.executeUpdate();
@@ -69,7 +69,9 @@ public class InsumoDao implements AltCRUDInterface<Insumo> {
                     Double densidad = resultSet.getDouble("densidad");
                     Insumo insumo = new InsumoLiquido(
                         id, name,
-                        cantInsumo, medida, densidad);
+                        cantInsumo, medida, precioCosto);
+                    if (densidad != 0)
+                        ((InsumoLiquido) insumo ).setDensidad(densidad);
 
                     insumos.add(insumo);
                 }
@@ -86,14 +88,14 @@ public class InsumoDao implements AltCRUDInterface<Insumo> {
 
     @Override
     public int actualizar(Insumo t) throws DataAccessException {
-        String query = "UPDATE insumos SET nomInsumo = ?, cantInsumo = ?, medidaCompra = ?, precioCosto = ?, densidad = ? WHERE codInsumo = ?";
+        String query = "UPDATE Insumo SET nomInsumo = ?, cantInsumo = ?, medidaCompraId = ?, precioCosto = ?, densidad = ? WHERE codInsumo = ?";
 
         InsumoLiquido insumo = (InsumoLiquido) t;
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, insumo.getNomInsumo());
             statement.setInt(2, insumo.getCantInsumo());
-            statement.setString(3, insumo.getMedidaCompra().toString());
+            statement.setInt(3, insumo.getMedidaCompra().getId());
             statement.setDouble(4, insumo.getPrecioCosto());
             statement.setDouble(5, insumo.getDensidad());
             statement.setInt(6, insumo.getCodInsumo());

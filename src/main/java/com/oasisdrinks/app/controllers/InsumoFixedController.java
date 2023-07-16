@@ -71,8 +71,10 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
             emptyForm();
         } else if ( source == view.getDeleteButton() ) {
             System.out.println("[DEBUG]  Delete button pressed");
+            deleteAction();
         } else if ( source ==  view.getUpdateButton()) {
             System.out.println("[DEBUG]  Update button pressed");
+            updateAction();
         } 
     }
 
@@ -99,11 +101,6 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
 
         System.out.println("[DEBUG]  Guardar button pressed");
                                            
-        // MM, Se programa el boton guardar:
-        // int cod, cant;
-        // String nom, und;
-        // double pcosto, dens;
-        // Medida med = null;
         Insumo insumo = null;
         
         insumo = getModelFromForm();
@@ -113,17 +110,21 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
             return;
         }
         
-        agregarFila(insumo, (DefaultTableModel) view.getTblDatos().getModel()); //MM, sino se invoca, no se adiciona registros
+        // agregarFila(insumo, (DefaultTableModel) view.getTblDatos().getModel()); //MM, sino se invoca, no se adiciona registros
 
         try {
             modelService.add(insumo);
         } catch ( BusinessException.DensidadRangoNoPermitido ble) {
             JOptionPane.showMessageDialog(null, ble.getMessage());
         }
+        readAction();
     }
 
     private void updateAction () {
+                                             
+        Insumo insu =  getModelFromForm();
 
+        modelService.update(insu);
     }
 
     private void deleteAction () {
@@ -185,15 +186,19 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
         Medida med = null;
         JComboBox<String> medidasCombo = null;
 
-        MedidaService medidaSrv = new MedidaService(new MedidaDao( new MySQLPool()));
 
         medidasCombo = view.getMedidasCombo();
 
         nom = view.getTxtNombre().getText();
-        abrev = (String) medidasCombo.getSelectedItem();
+        // abrev = (String) medidasCombo.getSelectedItem();
 
-        try {
+        // TODO: This field should never be inputted manually
+        try{
             cod = Integer.parseInt(view.getTxtCodigo().getText());
+        } catch (NumberFormatException e) {
+            System.out.println("[INFO] No code");
+        }
+        try {
             cant = Integer.parseInt(view.getTxtCantidad().getText());
             pcosto = Double.parseDouble(view.getTxtPrecioCosto().getText());
             dens = Double.parseDouble(view.getTxtDensidad().getText());
@@ -207,7 +212,9 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
             return null;
         }
 
-        med = medidaSrv.buscarMedidaPorAbrev(abrev);
+        System.out.println("[DEBUG] Searching for medida with abrev: " + abrev);
+
+        med = createMedidaFromCombo();
         // med = medidaSrv.buscarMedidaPorNombre(abrev);
 
         if (med ==  null) {
@@ -257,6 +264,7 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
 
     private void agregarFila(Insumo mod, DefaultTableModel tblModel){
         //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
+        System.out.println("[DEBUG] Trying to add tor table row insumo:  " + mod);
         String insumoFQClass; // Fully Qualified name of the Insumo subclass
         String insumoClass;
         String classParts[] = null;
@@ -298,5 +306,17 @@ public class InsumoFixedController implements ActionListener, ListSelectionListe
         return new Object[] {
         };
     }
+
+    private Medida createMedidaFromCombo(){
+        Medida med = null;
+        String abrev;
+        MedidaService medidaSrv = new MedidaService(new MedidaDao( new MySQLPool()));
+
+        abrev = (String) view.getMedidasCombo().getSelectedItem();
+
+        med = medidaSrv.buscarMedidaPorAbrev(abrev);
+
+        return med;
+    } 
             
 }
