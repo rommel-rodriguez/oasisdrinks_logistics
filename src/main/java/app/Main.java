@@ -54,14 +54,15 @@ public class Main {
 
             UIManager.setLookAndFeel(new FlatMaterialDesignDarkIJTheme());
             // Set the font size for all Swing components
-            int fontSize = 16; // Set your desired font size here
+            int fontSize = 20; // Set your desired font size here
             int buttonFontSize= 16; // Set your desired font size here
-            int tableFontSize = 14; // Set your desired font size here
+            int tableFontSize = 16; // Set your desired font size here
+            int inputFontSize = 16; // Set your desired font size here
             UIManager.put("Label.font", UIManager.getFont("Label.font").deriveFont((float) fontSize));
-            UIManager.put("Button.font", UIManager.getFont("Button.font").deriveFont((float) fontSize));
-            UIManager.put("TextField.font", UIManager.getFont("TextField.font").deriveFont((float) fontSize));
+            UIManager.put("Button.font", UIManager.getFont("Button.font").deriveFont((float) buttonFontSize));
+            UIManager.put("TextField.font", UIManager.getFont("TextField.font").deriveFont((float) inputFontSize));
             UIManager.put("Table.font", UIManager.getFont("Table.font").deriveFont((float) tableFontSize));
-            UIManager.put("TableHeader.font", UIManager.getFont("TableHeader.font").deriveFont((float) fontSize));
+            UIManager.put("TableHeader.font", UIManager.getFont("TableHeader.font").deriveFont((float) tableFontSize));
             // Set the color for buttons 
             // UIManager.put("Button.background", Color.BLUE);
             // UIManager.put("Button.foreground", Color.WHITE);
@@ -72,7 +73,7 @@ public class Main {
             UIManager.put("TableHeader.hoverBackground", hoverColor);
 
             // Set the color for labels
-            // UIManager.put("Label.foreground", Color.GREEN);
+            UIManager.put("Label.foreground", Color.GREEN);
 
             // Set the color for text fields
             UIManager.put("TextField.background", Color.LIGHT_GRAY);
