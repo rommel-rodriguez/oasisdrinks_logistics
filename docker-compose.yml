@@ -10,7 +10,7 @@ services:
       - mysql-data:/var/lib/mysql
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
-      - MYSQL_DATABASE=oasisdb
+      - MYSQL_DATABASE=BD_OASISDRINK
       - MYSQL_USER=devuser
       - MYSQL_PASSWORD=changeme
       - MYSQL_ROOT_PASSWORD=thisisnotsafe

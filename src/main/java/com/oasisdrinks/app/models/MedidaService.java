@@ -44,7 +44,7 @@ public class MedidaService {
         System.out.println("[DEBUG] Service: Searching for medida with abrev: " + abrev);
         List<Medida> medidas = new ArrayList<>();
         
-        medidas = medidaDao.buscarPorPropiedad("abrev", abrev);
+        medidas = medidaDao.buscarPorPropiedad("abreviacion", abrev);
 
         System.out.println("[DEBUG] Service: Size Medidas returned by dao:  " + medidas.size());
         System.out.println("[DEBUG] Service: Medidas by dao:  " + medidas);

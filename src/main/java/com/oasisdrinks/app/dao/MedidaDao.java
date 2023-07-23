@@ -33,9 +33,9 @@ public class MedidaDao implements OasisCRUDI<Medida> {
             try (ResultSet resultSet = statement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
+                    int id = resultSet.getInt("idMedida");
                     String name = resultSet.getString("nombre");
-                    String abrev = resultSet.getString("abrev");
+                    String abrev = resultSet.getString("abreviacion");
                     Medida medida = new Medida(id, name, abrev);
 
                     medidas.add(medida);
@@ -66,7 +66,7 @@ public class MedidaDao implements OasisCRUDI<Medida> {
     @Override
     public Medida buscarPorID(int id) {
         List<Medida> medidas = new ArrayList<>();
-        String sql = "SELECT * FROM Medida WHERE id=?";
+        String sql = "SELECT * FROM Medida WHERE idMedida=?";
 
         try (
             Connection connection = ds.getConnection();
@@ -81,7 +81,7 @@ public class MedidaDao implements OasisCRUDI<Medida> {
                 while (resultSet.next()) {
                     // int id = resultSet.getInt("id");
                     String name = resultSet.getString("nombre");
-                    String abrev = resultSet.getString("abrev");
+                    String abrev = resultSet.getString("abreviacion");
 
                     Medida medida = new Medida(id, name, abrev);
 

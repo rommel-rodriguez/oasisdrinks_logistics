@@ -27,7 +27,7 @@ public class InsumoDao implements OasisCRUDI<Insumo> {
 
     @Override
     public int agregar(Insumo t) throws DataAccessException {
-        String query = "INSERT INTO Insumo (nomInsumo, cantInsumo, medidaCompraId, precioCosto, densidad) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Insumo (nomInsumo, cantInsumo, idMedida, precioCosto, densidad) VALUES (?, ?, ?, ?, ?)";
         InsumoLiquido insumo = (InsumoLiquido) t;
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -61,7 +61,7 @@ public class InsumoDao implements OasisCRUDI<Insumo> {
                     int id = resultSet.getInt("codInsumo");
                     String name = resultSet.getString("nomInsumo");
                     int cantInsumo = resultSet.getInt("cantInsumo");
-                    int medidaId = resultSet.getInt("medidaCompraId");
+                    int medidaId = resultSet.getInt("idMedida");
 
                     Medida medida = medidaDao.buscarPorID(medidaId);
 
@@ -88,7 +88,7 @@ public class InsumoDao implements OasisCRUDI<Insumo> {
 
     @Override
     public int actualizar(Insumo t) throws DataAccessException {
-        String query = "UPDATE Insumo SET nomInsumo = ?, cantInsumo = ?, medidaCompraId = ?, precioCosto = ?, densidad = ? WHERE codInsumo = ?";
+        String query = "UPDATE Insumo SET nomInsumo = ?, cantInsumo = ?, idMedida = ?, precioCosto = ?, densidad = ? WHERE codInsumo = ?";
 
         InsumoLiquido insumo = (InsumoLiquido) t;
         try (Connection connection = ds.getConnection();
