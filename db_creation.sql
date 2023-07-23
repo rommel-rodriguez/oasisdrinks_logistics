@@ -2,11 +2,12 @@ CREATE DATABASE BD_OASISDRINK;
 use BD_OASISDRINK;
 
 CREATE TABLE Usuarios(
-idUsuario int primary key auto_increment,
-nombreUsuario	varchar(40),
-clave		char(8),
-flagEstado	ENUM('0','1') 
+  idUsuario int primary key auto_increment,
+  nombreUsuario varchar(40),
+  clave varchar(80), -- Use VARCHAR instead of CHAR, and length for the BCrypt hash.
+  flagEstado ENUM('0','1')
 );
+
 
 /* 
 insert into Usuarios(nombreUsuario, clave, flagEstado)
@@ -137,12 +138,12 @@ FOREIGN KEY (codReceta) REFERENCES Receta(codReceta)
 
 -- DATA
 -- Insert data into Usuarios table
-INSERT INTO Usuarios (nombreUsuario, clave, flagEstado) VALUES
-  ('Marco Moran', '12345', '1'),
-  ('Ana Lopez', 'abcdef', '1'),
-  ('Diego Perez', 'p@ssw0rd', '1'),
-  ('Laura Martinez', 'secure12', '1'),
-  ('Carlos Ramirez', 'hello123', '1');
+-- INSERT INTO Usuarios (nombreUsuario, clave, flagEstado) VALUES
+--   ('Marco Moran', '12345', '1'),
+--   ('Ana Lopez', 'abcdef', '1'),
+--   ('Diego Perez', 'p@ssw0rd', '1'),
+--   ('Laura Martinez', 'secure12', '1'),
+--   ('Carlos Ramirez', 'hello123', '1');
 
 -- Insert data into Medida table
 INSERT INTO Medida (nombre, abreviacion, flagEstado) VALUES
