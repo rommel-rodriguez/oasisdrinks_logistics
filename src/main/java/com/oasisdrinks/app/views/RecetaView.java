@@ -19,8 +19,11 @@ import com.oasisdrinks.app.models.Receta;
 import com.oasisdrinks.app.models.RecetaDetalle;
 import java.util.*;
 import javax.print.attribute.standard.Media;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -57,12 +60,12 @@ public class RecetaView extends javax.swing.JFrame {
         tblDatos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtCodigoReceta = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtCodigoProducto = new javax.swing.JTextField();
         txtNombreProducto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        deleteButton1 = new javax.swing.JButton();
+        deleteRecetaButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         insumosCombo = new javax.swing.JComboBox<>();
@@ -70,7 +73,7 @@ public class RecetaView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        btnAgregarDetalle = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,9 +99,9 @@ public class RecetaView extends javax.swing.JFrame {
 
         jLabel1.setText("Codigo Receta");
 
-        txtCodigoReceta.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoRecetaActionPerformed(evt);
+                txtCodigoActionPerformed(evt);
             }
         });
 
@@ -120,11 +123,11 @@ public class RecetaView extends javax.swing.JFrame {
 
         jLabel8.setText("Nombre Producto");
 
-        deleteButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/delete.png"))); // NOI18N
-        deleteButton1.setText("Eliminar Receta");
-        deleteButton1.addActionListener(new java.awt.event.ActionListener() {
+        deleteRecetaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/delete.png"))); // NOI18N
+        deleteRecetaButton.setText("Eliminar Receta");
+        deleteRecetaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButton1ActionPerformed(evt);
+                deleteRecetaButtonActionPerformed(evt);
             }
         });
 
@@ -143,11 +146,11 @@ public class RecetaView extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(jLabel1)
                         .addGap(23, 23, 23)
-                        .addComponent(txtCodigoReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(deleteButton1)
+                        .addComponent(deleteRecetaButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
@@ -170,8 +173,8 @@ public class RecetaView extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCodigoReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteRecetaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -199,11 +202,11 @@ public class RecetaView extends javax.swing.JFrame {
             }
         });
 
-        btnAgregarDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/boton_guardar.png"))); // NOI18N
-        btnAgregarDetalle.setText("Agregar Detalle");
-        btnAgregarDetalle.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/boton_guardar.png"))); // NOI18N
+        btnGuardar.setText("Agregar Detalle");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarDetalleActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -234,7 +237,7 @@ public class RecetaView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnNuevo)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAgregarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,7 +245,7 @@ public class RecetaView extends javax.swing.JFrame {
                 .addGap(90, 90, 90))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAgregarDetalle, btnNuevo});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnGuardar, btnNuevo});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,12 +264,12 @@ public class RecetaView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAgregarDetalle, btnNuevo, deleteButton, updateButton});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnGuardar, btnNuevo, deleteButton, updateButton});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,7 +307,7 @@ public class RecetaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //// TODO: Assumes that, if the product does not yet have any Recipe linked to it, the codReceta will be
         //// zero.
         //int codReceta = 0, codProducto;
@@ -392,90 +395,18 @@ public class RecetaView extends javax.swing.JFrame {
         //recetaCtrl.agregarReceta(receta);
         //recetaCtrl.actualizarReceta(receta);
     
-    }//GEN-LAST:event_btnAgregarDetalleActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void txtCodigoRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoRecetaActionPerformed
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoRecetaActionPerformed
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 
-        //int codigo = 0;
 
-        //try {
-        //    codigo = Integer.parseInt(this.txtCodigoReceta.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "El codigo indicado no es un entero",
-        //          "Error no es entero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //if (codigo == 0)
-        //    return;
-
-        //InsumoController inCon = new InsumoController();
-        //inCon.setCache(cache);
-        //inCon.borrarInsumo(codigo);
-        //loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        //int codReceta, codProducto;
-        //double cant;
-        //String nomInsumo;
-        //Insumo insumo = null;
-        //Receta receta = null;
-
-
-        //InsumoController insumoCtrl = new InsumoController();
-        //RecetaController recetaCtrl = new RecetaController();
-        //insumoCtrl.setCache(cache);
-
-        //nomInsumo = (String) insumosCombo.getSelectedItem();
-        //try {
-        //    codProducto = Integer.parseInt(txtCodigoProducto.getText());
-        //    codReceta = Integer.parseInt(txtCodigoReceta.getText());
-        //    cant = Double.parseDouble(txtCantidad.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "Uno de los campos numericos posee un valor invalido",
-        //          "Error no es numero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //// Create receta if none exists
-        //if (codReceta == 0) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "No se puede actualizar sin codigo de receta",
-        //          "Error no hay codigo de receta",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-        //insumo = insumoCtrl.buscarPorNombre(nomInsumo);
-
-        //if (insumo ==  null)
-        //    JOptionPane.showMessageDialog(this, "Insumo to be add returned null");
-        //
-        //
-        //// Create a new detail
-        //RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
-
-        //// First lets update the receta
-        //receta.agregarDetalle(detalle);
-
-        //// Second, assign the updated receta to the Product
-        //this.producto.setReceta(receta);
-        //        
-
-        //recetaCtrl.actualizarReceta(receta);
-        //
-        //loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void txtCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoProductoActionPerformed
@@ -486,25 +417,13 @@ public class RecetaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreProductoActionPerformed
 
-    private void deleteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton1ActionPerformed
+    private void deleteRecetaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecetaButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteButton1ActionPerformed
+    }//GEN-LAST:event_deleteRecetaButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()) {
-                int selectedRow = tblDatos.getSelectedRow();
-                if (selectedRow >= 0) {
-                    int columnCount = tblDatos.getColumnCount();
-                    List<Object> rowObjects = new ArrayList<>();
-
-                    // Assuming the desired columns are at index 0, 1, and 2
-                    for (int i = 0; i < columnCount; i++) {
-                        Object obj = tblDatos.getValueAt(selectedRow, i);
-                        rowObjects.add(obj);
-                    }
-                    fillForm(rowObjects);
-                }
             }
         }
     };
@@ -533,7 +452,7 @@ public class RecetaView extends javax.swing.JFrame {
         if (producto.getReceta() != null)
             codReceta = producto.getReceta().getCodReceta();
 
-        txtCodigoReceta.setText("" + codReceta);
+        txtCodigo.setText("" + codReceta);
         // this.receta = producto.getReceta();
     }
 
@@ -565,29 +484,29 @@ public class RecetaView extends javax.swing.JFrame {
 
 
     private void loadDataToTable(){
-        List<RecetaDetalle> detalles = new ArrayList<>();
+        //List<RecetaDetalle> detalles = new ArrayList<>();
 
-        this.tblModel.setRowCount(0);
+        //this.tblModel.setRowCount(0);
 
-        RecetaController insumoCtrl = new RecetaController();
+        //RecetaController insumoCtrl = new RecetaController();
 
-        if (this.useCache) {
-            if (this.cache == null || this.receta == null)
-                return;
+        //if (this.useCache) {
+        //    if (this.cache == null || this.receta == null)
+        //        return;
 
-            insumoCtrl.setUseCache(true);
-            insumoCtrl.setCache(cache);
-        }
+        //    insumoCtrl.setUseCache(true);
+        //    insumoCtrl.setCache(cache);
+        //}
 
-        // detalles = insumoCtrl.listarRecetaDetalles();
-        detalles = this.receta.getDetalles();
+        //// detalles = insumoCtrl.listarRecetaDetalles();
+        //detalles = this.receta.getDetalles();
 
-        if (detalles  == null)
-            return;
+        //if (detalles  == null)
+        //    return;
 
-        for (RecetaDetalle insu: detalles) {
-            agregarFila(insu);
-        }
+        //for (RecetaDetalle insu: detalles) {
+        //    agregarFila(insu);
+        //}
     }
 
     private void fillInsumosCombo () {
@@ -642,7 +561,7 @@ public class RecetaView extends javax.swing.JFrame {
         this.txtNombreProducto.setText(this.producto.getNomProducto());
 
         if (this.receta != null)
-            this.txtCodigoReceta.setText("" + this.receta.getCodReceta());
+            this.txtCodigo.setText("" + this.receta.getCodReceta());
 
     }
 
@@ -676,6 +595,53 @@ public class RecetaView extends javax.swing.JFrame {
         // System.out.println("Whole");
         // System.out.println(cache);
     }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+
+    public JButton getBtnNuevo() {
+        return btnNuevo;
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public JButton getDeleteRecetaButton() {
+        return deleteRecetaButton;
+    }
+
+    public JComboBox<String> getInsumosCombo() {
+        return insumosCombo;
+    }
+
+    public JTable getTblDatos() {
+        return tblDatos;
+    }
+
+    public JTextField getTxtCantidad() {
+        return txtCantidad;
+    }
+
+    public JTextField getTxtCodigoProducto() {
+        return txtCodigoProducto;
+    }
+
+    public JTextField getTxtCodigo() {
+        return txtCodigo;
+    }
+
+
+    public JTextField getTxtNombreProducto() {
+        return txtNombreProducto;
+    }
+
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
+
 
     /**
      * @param args the command line arguments
@@ -716,10 +682,10 @@ public class RecetaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarDetalle;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JButton deleteButton1;
+    private javax.swing.JButton deleteRecetaButton;
     private javax.swing.JComboBox<String> insumosCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -731,8 +697,8 @@ public class RecetaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCodigoProducto;
-    private javax.swing.JTextField txtCodigoReceta;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables

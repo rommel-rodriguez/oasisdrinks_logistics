@@ -4,8 +4,9 @@
  */
 package com.oasisdrinks.app.models;
 
-import com.oasisdrinks.app.dao.InsumoDao;
-import com.oasisdrinks.app.models.Insumo;
+import com.oasisdrinks.app.dao.RecetaDao;
+import com.oasisdrinks.app.dao.RecetaDao;
+import com.oasisdrinks.app.models.Receta;
 import java.util.List;
 
 /**
@@ -13,35 +14,39 @@ import java.util.List;
  * @author Rommel Rodriguez Perez<0812058@utp.edu.pe>
  */
 public class RecetaService {
-    private InsumoDao insumoDao;
+    private RecetaDao recetaDao;
 
-    public RecetaService(InsumoDao insumoDao) {
-        this.insumoDao = insumoDao;
+    public RecetaService(RecetaDao recetaDao) {
+        this.recetaDao = recetaDao;
     }
 
-    public void add(Insumo insumo) {
+    public void add(Receta receta) {
         // Perform validation or other business logic checks
-        // before adding the insumo to the data store
-        insumoDao.agregar(insumo);
+        // before adding the receta to the data store
+        recetaDao.agregar(receta);
     }
 
-    public void update(Insumo insumo) {
+    public void update(Receta receta) {
         // Perform validation or other business logic checks
-        // before updating the insumo in the data store
-        insumoDao.actualizar(insumo);
+        // before updating the receta in the data store
+        recetaDao.actualizar(receta);
     }
 
     public void delete(int id) {
         // Perform validation or other business logic checks
-        // before deleting the insumo from the data store
-        insumoDao.eliminar(id );
+        // before deleting the receta from the data store
+        recetaDao.eliminar(id );
     }
 
-    public List<Insumo> getAllInsumos() {
-        // Retrieve all insumos from the data store
-        return insumoDao.listar();
+    public List<Receta> getAll() {
+        // Retrieve all recetas from the data store
+        return recetaDao.listar();
+    }
+
+    public Receta buscarPorID(int codReceta) {
+        return recetaDao.buscarPorID(codReceta);
     }
 
     // Other methods for interacting with the data store or performing
-    // additional business logic operations on insumos
+    // additional business logic operations on recetas
 }

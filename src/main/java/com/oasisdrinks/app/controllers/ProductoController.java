@@ -6,6 +6,7 @@ package com.oasisdrinks.app.controllers;
 
 import com.oasisdrinks.app.dao.MedidaDao;
 import com.oasisdrinks.app.dao.ProductoDao;
+import com.oasisdrinks.app.dao.RecetaDao;
 import com.oasisdrinks.app.models.Bebida;
 import com.oasisdrinks.app.models.Medida;
 import com.oasisdrinks.app.models.MedidaService;
@@ -13,15 +14,18 @@ import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.ProductoService;
 import com.oasisdrinks.app.models.ProductoService;
+import com.oasisdrinks.app.models.RecetaService;
 import com.oasisdrinks.app.utils.dbconnection.ConnectionFactory;
 import com.oasisdrinks.app.utils.dbconnection.HikariCPConnectionPool;
 import com.oasisdrinks.app.utils.dbconnection.MySQLPool;
 import com.oasisdrinks.app.views.ProductoView;
+import com.oasisdrinks.app.views.RecetaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -190,7 +194,7 @@ public class ProductoController implements ActionListener, ListSelectionListener
         producto.setCodProducto(cod);
         producto.setNomProducto(nombre);
         producto.setCantProducto(cantidad);
-        producto.setTipo(modelService.getTipoProductoFomNombre(tipo));
+        producto.setTipo(modelService.getTipoProductoFromNombre(tipo));
         producto.setDiasCaducidad(diasCaducidad);
         producto.setMedida(medida);
         producto.setEstado(1);
@@ -233,11 +237,13 @@ public class ProductoController implements ActionListener, ListSelectionListener
         emptyForm();
         view.getTxtCodigo().setText(rowObjects.get(0).toString());
         view.getTxtNombre().setText(rowObjects.get(1).toString());
-        view.getTiposCombo().setSelectedItem(rowObjects.get(2).toString());
-        view.getMedidasCombo().setSelectedItem(rowObjects.get(3).toString());
         view.getTxtCantidad().setText(rowObjects.get(4).toString());
         view.getTxtDiasCaducidad().setText(rowObjects.get(5).toString());
         view.getTxtMargen().setText(rowObjects.get(6).toString());
+
+        //view.getTiposCombo().setSelectedItem(rowObjects.get(2).toString());
+        view.getTiposCombo().setSelectedItem( modelService.getNombreTipoFromTipoProducto((String) rowObjects.get(2)) );
+        view.getMedidasCombo().setSelectedItem(rowObjects.get(3).toString());
         
     }
 
@@ -269,13 +275,19 @@ public class ProductoController implements ActionListener, ListSelectionListener
     // } 
 
     public void createAction() {
+        Producto localModel = getModelFromForm();
+        if (localModel == null)
+            return;
 
-        modelService.add(getModelFromForm());
+        modelService.add(localModel);
         readAction();
     }
 
     public void updateAction() {
-        modelService.update(getModelFromForm());
+        Producto localModel = getModelFromForm();
+        if (localModel == null)
+            return;
+        modelService.update(localModel);
         readAction();
     }
 
@@ -330,6 +342,9 @@ public class ProductoController implements ActionListener, ListSelectionListener
         } else if ( source ==  view.getUpdateButton()) {
             System.out.println("[DEBUG]  Update button pressed");
             updateAction();
+        } else if ( source ==  view.getDetailButton()) {
+            System.out.println("[DEBUG]  Details button pressed");
+            showDetails();
         }
     }
 
@@ -350,6 +365,53 @@ public class ProductoController implements ActionListener, ListSelectionListener
                 fillForm(rowObjects);
             }
         }
+    }
+
+    private void showDetails() {
+        int codigo = 0;
+
+        try {
+            codigo = Integer.parseInt(view.getTxtCodigo().getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+           null,
+               "El codigo indicado no es un entero",
+                  "Error no es entero",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (codigo <= 0) {
+            JOptionPane.showMessageDialog(
+           null,
+               "El codigo indicado no es un entero",
+                  "Error no es entero",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+
+        RecetaDao recetaDao = null;
+        try{
+            recetaDao = new RecetaDao( new MySQLPool());
+        } catch (Exception e) {
+            // NOTE: I am assuming tthis will be a MySQL communications exception
+            // new ErrorView("Database Conexion", "No se pudo establecer connection con la Base de Datos");
+            System.out.println("[INFO] Showing details error:" + e);
+            e.printStackTrace();
+            return;
+        }
+
+        RecetaService recetaService = new RecetaService(recetaDao);
+        RecetaView recetaView = new RecetaView();
+        recetaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        RecetaController controller = new RecetaController(recetaService, recetaView, codigo);
+
+
+        recetaView.setLocationRelativeTo(null); // Center the frame
+        recetaView.setVisible(true);
+
     }
 
 

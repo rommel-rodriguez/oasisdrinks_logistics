@@ -47,8 +47,15 @@ public class ProductoService {
         return productoDao.listarTipos();
     }
 
-    public String getTipoProductoFomNombre(String tipoNombre) {
+    public String getTipoProductoFromNombre(String tipoNombre) {
         return productoDao.getTipoProductoFomNombre(tipoNombre);
+    }
+    public String getNombreTipoFromTipoProducto(String tipoProducto) {
+        return productoDao.getNombreTipoFromTipoProducto(tipoProducto);
+    }
+
+    public Producto buscarPorID(int codProducto) {
+        return productoDao.buscarPorID(codProducto);
     }
     // Other methods for interacting with the data store or performing
     // additional business logic operations on productos

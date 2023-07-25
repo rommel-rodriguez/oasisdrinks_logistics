@@ -136,13 +136,13 @@
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           <Component id="jLabel1" linkSize="3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="txtCodigoReceta" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Component id="txtCodigo" min="-2" pref="91" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="deleteButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="deleteRecetaButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -173,8 +173,8 @@
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCodigoReceta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="deleteButton1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="txtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteRecetaButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="51" max="32767" attributes="0"/>
               </Group>
@@ -187,9 +187,9 @@
             <Property name="text" type="java.lang.String" value="Codigo Receta"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCodigoReceta">
+        <Component class="javax.swing.JTextField" name="txtCodigo">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoRecetaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -218,7 +218,7 @@
             <Property name="text" type="java.lang.String" value="Nombre Producto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="deleteButton1">
+        <Component class="javax.swing.JButton" name="deleteRecetaButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/oasisdrinks/app/views/imagen/delete.png"/>
@@ -226,7 +226,7 @@
             <Property name="text" type="java.lang.String" value="Eliminar Receta"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteRecetaButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -260,7 +260,7 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btnNuevo" linkSize="1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnAgregarDetalle" linkSize="1" max="32767" attributes="0"/>
+                          <Component id="btnGuardar" linkSize="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -291,7 +291,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="updateButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" linkSize="2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="btnAgregarDetalle" linkSize="2" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" linkSize="2" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="btnNuevo" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -349,7 +349,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAgregarDetalle">
+        <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/oasisdrinks/app/views/imagen/boton_guardar.png"/>
@@ -357,7 +357,7 @@
             <Property name="text" type="java.lang.String" value="Agregar Detalle"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarDetalleActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNuevo">

@@ -47,6 +47,10 @@ public class InsumoService {
         return insumoDao.listar();
     }
 
-    // Other methods for interacting with the data store or performing
-    // additional business logic operations on insumos
+    public Insumo buscarPorNombre(String nombre) {
+        return insumoDao
+            .buscarPorPropiedad("nomInsumo", nombre)
+            .stream()
+            .findFirst().orElse(null);
+    }
 }

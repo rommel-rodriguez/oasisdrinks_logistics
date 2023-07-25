@@ -129,7 +129,7 @@ public class ProductoDao implements OasisCRUDI<Producto>{
     @Override
     public List<Producto> buscarPorPropiedad(String propiedad, Object valor) {
         List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT * FROM Producto WHERE " + propiedad + " = ?";
+        String sql = "SELECT * FROM Producto p WHERE " + propiedad + " = ?";
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             if (valor instanceof String) {
@@ -162,13 +162,16 @@ public class ProductoDao implements OasisCRUDI<Producto>{
         String nomProducto = resultSet.getString("nomProducto");
         int cantProducto = resultSet.getInt("cantProducto");
         int diasCaducidad = resultSet.getInt("diasCaducidad");
+        double margen =  resultSet.getDouble("porcMargenGanancia");
         String tipo = resultSet.getString("tipoProducto");
         int estado = resultSet.getInt("flagEstado");
         int idMedida = resultSet.getInt("idMedida");
         // Get the Medida object using idMedida from the MedidaDAO or MedidaDataSource
         MedidaDao medidaDao = new MedidaDao(ds); // Assuming MedidaDAOImpl implements MedidaDAO
         Medida medida = medidaDao.buscarPorID(idMedida);
-        return new Bebida(codProducto, nomProducto, cantProducto, diasCaducidad, tipo, estado, medida);
+        Producto producto = new Bebida(codProducto, nomProducto, cantProducto, diasCaducidad, tipo, estado, medida);
+        producto.setMargenGanancia(margen);
+        return producto;
     }
 
     public List<String> listarTipos() {
@@ -198,6 +201,25 @@ public class ProductoDao implements OasisCRUDI<Producto>{
                 if (resultSet.next()) {
                     tipoProducto = resultSet.getString("tipoProducto");
                     return tipoProducto;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or rethrow it as needed.
+        }
+        return null; // Indicates no record found.
+    }
+
+    public String getNombreTipoFromTipoProducto(String tipoProducto) {
+        String nombreTipo = null;
+        String sql = "SELECT nomTipoProducto FROM ProductoTipo WHERE tipoProducto=?";
+        try (Connection connection = ds.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, tipoProducto);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    nombreTipo = resultSet.getString("nomTipoProducto");
+                    return nombreTipo;
                 }
             }
         } catch (SQLException e) {

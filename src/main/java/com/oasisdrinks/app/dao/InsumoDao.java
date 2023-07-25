@@ -129,7 +129,47 @@ public class InsumoDao implements OasisCRUDI<Insumo> {
 
     @Override
     public List<Insumo> buscarPorPropiedad(String propiedad, Object valor) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Insumo> insumos = new ArrayList<>();
+        String sql = "SELECT * FROM Insumo WHERE " + propiedad + " = ?";
+        try (Connection connection = ds.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            // Set the parameter value based on the data type of the property
+            if (valor instanceof String) {
+                statement.setString(1, (String) valor);
+            } else if (valor instanceof Integer) {
+                statement.setInt(1, (Integer) valor);
+            } else if (valor instanceof Double) {
+                statement.setDouble(1, (Double) valor);
+            } else {
+                // Handle other data types if needed
+                throw new IllegalArgumentException("Unsupported data type for property value: " + valor.getClass());
+            }
+
+            MedidaDao medidaDao = new MedidaDao(ds);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Create and populate the Insumo object from the result set
+                    int idMedida = 0;
+                    Medida medida = null;
+                    Insumo insumo = new InsumoLiquido();
+                    insumo.setCodInsumo(resultSet.getInt("codInsumo"));
+                    idMedida = resultSet.getInt("idMedida");
+                    medida = medidaDao.buscarPorID(idMedida);
+                    insumo.setMedidaCompra(medida);
+                    insumo.setNomInsumo(resultSet.getString("nomInsumo"));
+                    insumo.setPrecioCosto(resultSet.getDouble("precioCosto"));
+                    insumo.setCantInsumo(resultSet.getInt("cantInsumo"));
+                    //insumo.setDensidad(resultSet.getDouble("densidad"));
+                    //insumo.setFlagEstado(resultSet.getString("flagEstado"));
+                    // Add the Insumo object to the list
+                    insumos.add(insumo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error while searching for Insumo by property: " + e.getMessage(), e);
+        }
+        return insumos;
     }
 
     

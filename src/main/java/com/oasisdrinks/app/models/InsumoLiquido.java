@@ -6,6 +6,9 @@ import java.io.Serializable;
 
 public class InsumoLiquido extends Insumo implements Serializable {
     private double densidad;
+
+    public InsumoLiquido() {
+    }
     
 
     public InsumoLiquido(double densidad, int codInsumo, String nomInsumo, 
