@@ -293,55 +293,51 @@ public class ProductoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // MM, Se programa el boton guardar:
-        // TODO: Note that precio costo is a calculated property
-        // TODO:  Shoould precio venta also be calculated? Like according to a margin or expected profit? 
-        int cod, cant, diasCaducidad=0;
-        String nom, tipo;
-        double margen;
-        Producto producto = null;
-        Medida medida = new Medida();
-        String medidaAbrev = null;
-        MedidaController medidaCtrl = new MedidaController();
+        //// MM, Se programa el boton guardar:
+        //// TODO: Note that precio costo is a calculated property
+        //// TODO:  Shoould precio venta also be calculated? Like according to a margin or expected profit? 
+        //int cod, cant, diasCaducidad=0;
+        //String nom, tipo;
+        //double margen;
+        //Producto producto = null;
+        //Medida medida = new Medida();
+        //String medidaAbrev = null;
+        //MedidaController medidaCtrl = new MedidaController();
 
-        medidaCtrl.setCache(cache);
-        
-        nom = txtNombre.getText();
-        tipo = (String) tiposCombo.getSelectedItem();
-        medidaAbrev = (String) medidasCombo.getSelectedItem();
-        medida = medidaCtrl.buscarMedidaPorAbrev(medidaAbrev);
+        //medidaCtrl.setCache(cache);
+        //
+        //nom = txtNombre.getText();
+        //tipo = (String) tiposCombo.getSelectedItem();
+        //medidaAbrev = (String) medidasCombo.getSelectedItem();
+        //medida = medidaCtrl.buscarMedidaPorAbrev(medidaAbrev);
 
-        try {
-            cod = Integer.parseInt(txtCodigo.getText());
-            diasCaducidad = Integer.parseInt(txtDiasCaducidad.getText());
-            cant = Integer.parseInt(txtCantidad.getText());
-            margen = Double.parseDouble(txtMargen.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
+        //try {
+        //    cod = Integer.parseInt(txtCodigo.getText());
+        //    diasCaducidad = Integer.parseInt(txtDiasCaducidad.getText());
+        //    cant = Integer.parseInt(txtCantidad.getText());
+        //    margen = Double.parseDouble(txtMargen.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "Uno de los campos numericos posee un valor invalido",
+        //          "Error no es numero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
+        //
 
+        //
+        //switch ( tipo ) {
+        //    case "bebida":
+        //        producto = new Bebida(cod, nom);
+        //        producto.setMedida(medida);
+        //        ;
+        //    default:
+        //        ;
+        //}
 
-
-
-
-        
-        switch ( tipo ) {
-            case "bebida":
-                producto = new Bebida(cod, nom);
-                producto.setMedida(medida);
-                ;
-            default:
-                ;
-        }
-
-        agregarFila(producto); //MM, sino se invoca, no se adiciona registros
-        addRecord(producto); //MM, sino se invoca, no se adiciona registros
+        //agregarFila(producto); //MM, sino se invoca, no se adiciona registros
+        //addRecord(producto); //MM, sino se invoca, no se adiciona registros
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -578,31 +574,31 @@ public class ProductoView extends javax.swing.JFrame {
 
 
     private void fillMedidasCombo () {
-        List<Medida> meds = null;
-        List<String> abrevList = new ArrayList<>();
-        MedidaController medidaCtrl = new MedidaController();
+        //List<Medida> meds = null;
+        //List<String> abrevList = new ArrayList<>();
+        //MedidaController medidaCtrl = new MedidaController();
 
-        if (this.useCache) {
-            if (this.cache == null || this.medidas == null)
-                return;
+        //if (this.useCache) {
+        //    if (this.cache == null || this.medidas == null)
+        //        return;
 
-            medidaCtrl.setUseCache(true);
-            medidaCtrl.setCache(cache);
-        }
-
-
-        meds = medidaCtrl.listarMedidas();
-
-        if (meds == null) {
-            JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
-                           "Error Medidas", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        meds.forEach(medida -> abrevList.add(medida.getAbrev()));
+        //    medidaCtrl.setUseCache(true);
+        //    medidaCtrl.setCache(cache);
+        //}
 
 
-        fillCombo(medidasCombo, abrevList);
+        //meds = medidaCtrl.listarMedidas();
+
+        //if (meds == null) {
+        //    JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
+        //                   "Error Medidas", JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
+
+        //meds.forEach(medida -> abrevList.add(medida.getAbrev()));
+
+
+        //fillCombo(medidasCombo, abrevList);
     }
 
     private void loadDataToView() {

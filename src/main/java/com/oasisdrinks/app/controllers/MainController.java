@@ -84,7 +84,7 @@ public class MainController implements ActionListener {
         MedidaService medidaSrv = new MedidaService(medidaDao);
         MedidaView view = new MedidaView();
         view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        MedidaFixedController controller = new MedidaFixedController(medidaSrv, view);
+        MedidaController controller = new MedidaController(medidaSrv, view);
 
         view.setLocationRelativeTo(null); // Center the frame
         view.setVisible(true);

@@ -20,11 +20,9 @@ public class MedidaView extends javax.swing.JFrame {
     
     public MedidaView() {
         initComponents();
-        tblDatos.getSelectionModel().addListSelectionListener(tableSelectionListener);
-        this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
-        this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
+        //tblDatos.getSelectionModel().addListSelectionListener(tableSelectionListener);
+        //this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
 
-        loadDataToView();
     }
 
     /**
@@ -202,168 +200,23 @@ public class MedidaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        //// MM, Se programa el boton guardar:
-        //int id, cant;
-        //String nombre, und;
-        //String abrev;
-        //Medida medida = new Medida();
-        //
-        //nombre = txtNombre.getText();
-        //abrev = txtAbrev.getText();
-
-
-        //try {
-        //    id = Integer.parseInt(txtCodigo.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "Uno de los campos numericos posee un valor invalido",
-        //          "Error no es numero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //medida.setId(id);
-        //medida.setNombre(nombre);
-        //medida.setAbrev(abrev);
-
-        //MedidaController medidaCtrl = new MedidaController();
-        //
-        //agregarFila(medida); //MM, sino se invoca, no se adiciona registros
-        //addRecord(medida); //MM, sino se invoca, no se adiciona registros
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
-        //int codigo = 0;
-
-        //try {
-        //    codigo = Integer.parseInt(this.txtCodigo.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "El codigo indicado no es un entero",
-        //          "Error no es entero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //if (codigo == 0)
-        //    return;
-
-        //MedidaController inCon = new MedidaController();
-        //inCon.borrarMedida(codigo);
-        //loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-
-
-        //int id, cant;
-        //String nombre, und;
-        //String abrev;
-        //Medida medida = new Medida();
-        //MedidaController medidaCtrl = new MedidaController();
-        //
-        //nombre = txtNombre.getText();
-        //abrev = txtAbrev.getText();
-
-
-        //try {
-        //    id = Integer.parseInt(txtCodigo.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "Uno de los campos numericos posee un valor invalido",
-        //          "Error no es numero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-        //medida.setId(id);
-        //medida.setNombre(nombre);
-        //medida.setAbrev(abrev);
-
-        //medidaCtrl.actualizarMedida(medida);
-
-        //loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            //if (!e.getValueIsAdjusting()) {
-            //    int selectedRow = tblDatos.getSelectedRow();
-            //    if (selectedRow >= 0) {
-            //        int columnCount = tblDatos.getColumnCount();
-            //        List<Object> rowObjects = new ArrayList<>();
-
-            //        // Assuming the desired columns are at index 0, 1, and 2
-            //        for (int i = 0; i < columnCount; i++) {
-            //            Object obj = tblDatos.getValueAt(selectedRow, i);
-            //            rowObjects.add(obj);
-            //        }
-            //        fillForm(rowObjects);
-            //    }
-            //}
         }
     };
 
 
-
-    private void loadDataToTable(){
-        //List<Medida> meds = new ArrayList<>();
-
-        //this.tblModel.setRowCount(0);
-
-        //MedidaController medidaCtrl = new MedidaController();
-
-
-        //meds = medidaCtrl.listarMedidas();
-
-        //if (meds  == null)
-        //    return;
-
-        //for (Medida insu: meds) {
-        //    agregarFila(insu);
-        //}
-    }
-
-
-    private void loadDataToView() {
-        loadDataToTable();
-    }
-
-    private void emptyForm () {
-        this.txtCodigo.setText("");
-        this.txtNombre.setText("");
-        this.txtAbrev.setText("");
-    }
-
-
-    private void fillForm(List<Object> rowObjects) {
-        emptyForm();
-        this.txtCodigo.setText(rowObjects.get(0).toString());
-        this.txtNombre.setText(rowObjects.get(1).toString());
-        this.txtAbrev.setText(rowObjects.get(2).toString());
-    }
-    private void agregarFila(Medida medida){
-    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        Medida i = (Medida) medida;
-        tblModel.addRow(new Object[]{i.getId(), 
-            i.getNombre(), i.getAbrev()
-        });
-    }
-            
-    private void addRecord(Medida medida){
-    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        System.out.println("Adding Record to DB");
-        MedidaController inCon = new MedidaController();
-        inCon.agregarMedida(medida);
-
-    }
 
     /**
      * @param args the command line arguments

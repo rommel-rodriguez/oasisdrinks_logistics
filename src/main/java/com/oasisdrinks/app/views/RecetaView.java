@@ -541,20 +541,21 @@ public class RecetaView extends javax.swing.JFrame {
 
 
     private Medida createMedidaFromCombo(){
-        Medida med = null;
-        String und;
-        und = (String) insumosCombo.getSelectedItem();
-        MedidaController medidaCtrl = new MedidaController();
+        //Medida med = null;
+        //String und;
+        //und = (String) insumosCombo.getSelectedItem();
+        //MedidaController medidaCtrl = new MedidaController();
 
-        if (this.useCache)
-            medidaCtrl.setCache(cache);
+        //if (this.useCache)
+        //    medidaCtrl.setCache(cache);
 
-        med = medidaCtrl.buscarMedidaPorAbrev(und);
+        //med = medidaCtrl.buscarMedidaPorAbrev(und);
 
-        if (med ==  null)
-            med = new Medida(0, "Not Found", "N.F.");
+        //if (med ==  null)
+        //    med = new Medida(0, "Not Found", "N.F.");
 
-        return med;
+        //return med;
+        return null;
     } 
 
     private void fillCombo(JComboBox combo, List<String> items){
