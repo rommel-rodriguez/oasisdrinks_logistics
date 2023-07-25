@@ -23,8 +23,10 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,6 +60,13 @@ public class InsumoController implements ActionListener, ListSelectionListener {
         fillMedidasCombo();
         fillFilterCombo();
         readAction();
+        centerTableCells();
+    }
+
+    private void centerTableCells() {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        view.getTblDatos().setDefaultRenderer(Object.class, centerRenderer);
     }
 
     public void refreshAction() {

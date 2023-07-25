@@ -2,12 +2,14 @@ package com.oasisdrinks.app.views;
 
 import com.oasisdrinks.app.controllers.MedidaController;
 import com.oasisdrinks.app.dao.MedidaDao;
-import com.oasisdrinks.app.dao.MedidaCacheDao;
 import com.oasisdrinks.app.models.Medida;
 import java.util.*;
 import javax.print.attribute.standard.Media;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +17,6 @@ import javax.swing.table.DefaultTableModel;
 public class MedidaView extends javax.swing.JFrame {
     
     DefaultTableModel tblModel; //MM, se asigna variable 
-    Map<String, List<?>> cache;
-    List<Medida> medidas = null;
-    boolean useCache = true;
     
     public MedidaView() {
         initComponents();
@@ -37,33 +36,21 @@ public class MedidaView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
         txtAbrev = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Codigo");
-
-        jLabel2.setText("Nombre");
-
-        jLabel3.setText("Abreviation");
-
-        txtCodigo.setEditable(false);
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
-            }
-        });
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/oasisdrinks/app/views/imagen/boton_nuevo.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
@@ -109,6 +96,59 @@ public class MedidaView extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        txtCodigo.setEditable(false);
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Codigo");
+
+        jLabel2.setText("Nombre");
+
+        jLabel3.setText("Abreviation");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 101, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAbrev, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(339, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtAbrev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,56 +157,37 @@ public class MedidaView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNuevo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardar)
-                        .addGap(32, 32, 32)
-                        .addComponent(deleteButton)
-                        .addGap(28, 28, 28)
-                        .addComponent(updateButton)
-                        .addGap(0, 74, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAbrev, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(35, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNuevo)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(deleteButton)
+                                .addGap(28, 28, 28)
+                                .addComponent(updateButton)
+                                .addGap(21, 21, 21))))))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtAbrev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(30, 30, 30)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(updateButton)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnGuardar, btnNuevo, deleteButton, updateButton});
@@ -176,41 +197,40 @@ public class MedidaView extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // Asignando valores en blanco
-        this.emptyForm();
+        // this.emptyForm();
         
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // MM, Se programa el boton guardar:
-        int id, cant;
-        String nombre, und;
-        String abrev;
-        Medida medida = new Medida();
-        
-        nombre = txtNombre.getText();
-        abrev = txtAbrev.getText();
+        //// MM, Se programa el boton guardar:
+        //int id, cant;
+        //String nombre, und;
+        //String abrev;
+        //Medida medida = new Medida();
+        //
+        //nombre = txtNombre.getText();
+        //abrev = txtAbrev.getText();
 
 
-        try {
-            id = Integer.parseInt(txtCodigo.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //try {
+        //    id = Integer.parseInt(txtCodigo.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "Uno de los campos numericos posee un valor invalido",
+        //          "Error no es numero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        medida.setId(id);
-        medida.setNombre(nombre);
-        medida.setAbrev(abrev);
+        //medida.setId(id);
+        //medida.setNombre(nombre);
+        //medida.setAbrev(abrev);
 
-        MedidaController medidaCtrl = new MedidaController();
-        medidaCtrl.setCache(cache);
-        
-        agregarFila(medida); //MM, sino se invoca, no se adiciona registros
-        addRecord(medida); //MM, sino se invoca, no se adiciona registros
+        //MedidaController medidaCtrl = new MedidaController();
+        //
+        //agregarFila(medida); //MM, sino se invoca, no se adiciona registros
+        //addRecord(medida); //MM, sino se invoca, no se adiciona registros
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -219,91 +239,79 @@ public class MedidaView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 
-        int codigo = 0;
+        //int codigo = 0;
 
-        try {
-            codigo = Integer.parseInt(this.txtCodigo.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "El codigo indicado no es un entero",
-                  "Error no es entero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //try {
+        //    codigo = Integer.parseInt(this.txtCodigo.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "El codigo indicado no es un entero",
+        //          "Error no es entero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        if (codigo == 0)
-            return;
+        //if (codigo == 0)
+        //    return;
 
-        MedidaController inCon = new MedidaController();
-        inCon.setCache(cache);
-        inCon.borrarMedida(codigo);
-        loadDataToTable();
+        //MedidaController inCon = new MedidaController();
+        //inCon.borrarMedida(codigo);
+        //loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
 
 
-        int id, cant;
-        String nombre, und;
-        String abrev;
-        Medida medida = new Medida();
-        MedidaController medidaCtrl = new MedidaController();
-        
-        nombre = txtNombre.getText();
-        abrev = txtAbrev.getText();
+        //int id, cant;
+        //String nombre, und;
+        //String abrev;
+        //Medida medida = new Medida();
+        //MedidaController medidaCtrl = new MedidaController();
+        //
+        //nombre = txtNombre.getText();
+        //abrev = txtAbrev.getText();
 
 
-        try {
-            id = Integer.parseInt(txtCodigo.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        medida.setId(id);
-        medida.setNombre(nombre);
-        medida.setAbrev(abrev);
+        //try {
+        //    id = Integer.parseInt(txtCodigo.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "Uno de los campos numericos posee un valor invalido",
+        //          "Error no es numero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
+        //medida.setId(id);
+        //medida.setNombre(nombre);
+        //medida.setAbrev(abrev);
 
-        medidaCtrl.setCache(cache);
-        medidaCtrl.actualizarMedida(medida);
+        //medidaCtrl.actualizarMedida(medida);
 
-        loadDataToTable();
+        //loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (!e.getValueIsAdjusting()) {
-                int selectedRow = tblDatos.getSelectedRow();
-                if (selectedRow >= 0) {
-                    int columnCount = tblDatos.getColumnCount();
-                    List<Object> rowObjects = new ArrayList<>();
+            //if (!e.getValueIsAdjusting()) {
+            //    int selectedRow = tblDatos.getSelectedRow();
+            //    if (selectedRow >= 0) {
+            //        int columnCount = tblDatos.getColumnCount();
+            //        List<Object> rowObjects = new ArrayList<>();
 
-                    // Assuming the desired columns are at index 0, 1, and 2
-                    for (int i = 0; i < columnCount; i++) {
-                        Object obj = tblDatos.getValueAt(selectedRow, i);
-                        rowObjects.add(obj);
-                    }
-                    fillForm(rowObjects);
-                }
-            }
+            //        // Assuming the desired columns are at index 0, 1, and 2
+            //        for (int i = 0; i < columnCount; i++) {
+            //            Object obj = tblDatos.getValueAt(selectedRow, i);
+            //            rowObjects.add(obj);
+            //        }
+            //        fillForm(rowObjects);
+            //    }
+            //}
         }
     };
 
 
-    public void setCache(Map<String, List<?>> cache) {
-        if (cache != null) {
-            this.cache = cache;
-            if (this.useCache){
-                this.medidas = (List<Medida>) cache.get("medidas");
-            }
-        }
-
-        loadDataToView();
-    }
 
     private void loadDataToTable(){
         List<Medida> meds = new ArrayList<>();
@@ -312,13 +320,6 @@ public class MedidaView extends javax.swing.JFrame {
 
         MedidaController medidaCtrl = new MedidaController();
 
-        if (this.useCache) {
-            if (this.cache == null || this.medidas == null)
-                return;
-
-            medidaCtrl.setUseCache(true);
-            medidaCtrl.setCache(cache);
-        }
 
         meds = medidaCtrl.listarMedidas();
 
@@ -359,17 +360,9 @@ public class MedidaView extends javax.swing.JFrame {
     private void addRecord(Medida medida){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
         System.out.println("Adding Record to DB");
-        // medidaDao inDao = new medidaCacheDao(cache);
         MedidaController inCon = new MedidaController();
-        inCon.setCache(cache);
         inCon.agregarMedida(medida);
 
-        System.out.printf("medidas Record's Size: ");
-        System.out.println(cache.get("medidas").size());
-        System.out.println("medidas Record:");
-        System.out.println(cache.get("medidas"));
-        System.out.println("Whole");
-        System.out.println(cache);
     }
 
     /**
@@ -410,6 +403,38 @@ public class MedidaView extends javax.swing.JFrame {
         });
     }
 
+    public JTextField getTxtAbrev() {
+        return txtAbrev;
+    }
+
+    public JTextField getTxtCodigo() {
+        return txtCodigo;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public JButton getBtnNuevo() {
+        return btnNuevo;
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public JTable getTblDatos() {
+        return tblDatos;
+    }
+
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
@@ -417,6 +442,7 @@ public class MedidaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtAbrev;

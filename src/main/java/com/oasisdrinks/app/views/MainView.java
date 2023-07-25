@@ -341,11 +341,6 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     }//GEN-LAST:event_insumosBtnActionPerformed
 
     private void medidasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medidasBtnActionPerformed
-        // TODO add your handling code here:
-        MedidaView medidaView = new MedidaView();
-        medidaView.setCache(cache);
-        medidaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        medidaView.setVisible(true);
     }//GEN-LAST:event_medidasBtnActionPerformed
 
     private void productosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosBtnActionPerformed
