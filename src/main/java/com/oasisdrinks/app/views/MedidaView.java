@@ -314,21 +314,21 @@ public class MedidaView extends javax.swing.JFrame {
 
 
     private void loadDataToTable(){
-        List<Medida> meds = new ArrayList<>();
+        //List<Medida> meds = new ArrayList<>();
 
-        this.tblModel.setRowCount(0);
+        //this.tblModel.setRowCount(0);
 
-        MedidaController medidaCtrl = new MedidaController();
+        //MedidaController medidaCtrl = new MedidaController();
 
 
-        meds = medidaCtrl.listarMedidas();
+        //meds = medidaCtrl.listarMedidas();
 
-        if (meds  == null)
-            return;
+        //if (meds  == null)
+        //    return;
 
-        for (Medida insu: meds) {
-            agregarFila(insu);
-        }
+        //for (Medida insu: meds) {
+        //    agregarFila(insu);
+        //}
     }
 
 

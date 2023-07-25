@@ -196,12 +196,6 @@ public class InsumoController implements ActionListener, ListSelectionListener {
                 insumos.stream()
                     .filter((insumo) -> insumo.getCodInsumo() == value)
                     .forEach(filtered::add);
-                    //.forEach( (insumo) -> filtered.add(insumo));
-                // for (Insumo insumo: insumos) {
-                //     System.out.println("[DEBUG] Trying Value: " + insumo.getCodInsumo());
-                //     if (insumo.getCodInsumo() == value)
-                //         System.out.println("DEBUG: Value found!!!: " + value);
-                // }
 
                 break;
             case "nombre":

@@ -206,10 +206,12 @@ public class MedidaFixedController implements ActionListener, ListSelectionListe
     public void createAction() {
 
         modelService.add(getModelFromForm());
+        readAction();
     }
 
     public void updateAction() {
         modelService.update(getModelFromForm());
+        readAction();
     }
 
     public void deleteAction() {
@@ -237,6 +239,7 @@ public class MedidaFixedController implements ActionListener, ListSelectionListe
         }
 
         modelService.delete(codigo);
+        //readAction();
         loadDataToTable();
         //modelService.delete(id);
     }

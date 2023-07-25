@@ -17,7 +17,32 @@ public class MedidaDao implements OasisCRUDI<Medida> {
 
     @Override
     public int agregar(Medida t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Medida medida = (Medida) t;
+
+        String sql = "INSERT INTO Medida (nombre, abreviacion) VALUES (?, ?)";
+        try (Connection connection = ds.getConnection();
+            PreparedStatement statement = connection
+                .prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+             ) {
+            statement.setString(1, medida.getNombre());
+            statement.setString(2, medida.getAbrev());
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new SQLException("Creating Medida failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating Medida failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Indicates failure.
     }
 
     @Override
@@ -55,12 +80,37 @@ public class MedidaDao implements OasisCRUDI<Medida> {
 
     @Override
     public int actualizar(Medida t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Medida medida = (Medida) t;
+        String sql = "UPDATE Medida SET nombre=?, abreviacion=? WHERE idMedida=?";
+        try (Connection connection = ds.getConnection();
+            PreparedStatement statement = connection
+                .prepareStatement(sql)
+             ) {
+            statement.setString(1, medida.getNombre());
+            statement.setString(2, medida.getAbrev());
+            statement.setInt(3, medida.getId());
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or rethrow it as needed.
+        }
+        return -1; // Indicates failure.
     }
 
     @Override
     public int eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM Medida WHERE idMedida=?";
+        try (Connection connection = ds.getConnection();
+            PreparedStatement statement = connection
+                .prepareStatement(sql)
+             ) {
+            statement.setInt(1, id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or rethrow it as needed.
+        }
+        return -1; // Indicates failure.
     }
 
     @Override
