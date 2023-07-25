@@ -1,7 +1,5 @@
 package com.oasisdrinks.app.dao;
 
-import com.oasisdrinks.app.exceptions.DataAccessException;
-import com.oasisdrinks.app.exceptions.SQLDataAccessException;
 import com.oasisdrinks.app.models.Medida;
 import java.util.List;
 import javax.sql.DataSource;

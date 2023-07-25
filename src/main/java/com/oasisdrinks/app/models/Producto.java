@@ -10,6 +10,7 @@ public abstract class Producto  implements Serializable {
     private int diasCaducidad;
     private Receta receta = null;
     private String tipo;
+    private int estado;
     private double margenGanancia = 0; // NOTE: Should be a percentage of the total cost after adding the
     private Medida medida; // NOTE: Should be a percentage of the total cost after adding the
     // packaging costs.
@@ -17,6 +18,18 @@ public abstract class Producto  implements Serializable {
     public Producto() {  
 
     }
+
+    public Producto(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, String tipo, int estado, Medida medida) {
+        this.codProducto = codProducto;
+        this.nomProducto = nomProducto;
+        this.cantProducto = cantProducto;
+        this.diasCaducidad = diasCaducidad;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.medida = medida;
+    }
+
+
 
     public Producto(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, Receta receta, String tipo, double margenGanancia) {
         this.codProducto = codProducto;
@@ -154,6 +167,16 @@ public abstract class Producto  implements Serializable {
     public void setMedida(Medida medida) {
         this.medida = medida;
     }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+
 
     @Override
     public String toString() {

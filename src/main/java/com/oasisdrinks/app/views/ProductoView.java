@@ -12,9 +12,12 @@ import com.oasisdrinks.app.models.Producto;
 import com.oasisdrinks.app.models.Receta;
 import java.util.*;
 import javax.print.attribute.standard.Media;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -662,6 +665,67 @@ public class ProductoView extends javax.swing.JFrame {
         System.out.println("Whole");
         System.out.println(cache);
     }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public JButton getBtnNuevo() {
+        return btnNuevo;
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public JButton getDetailButton() {
+        return detailButton;
+    }
+
+    public JButton getRefreshButton() {
+        return refreshButton;
+    }
+
+    public JTable getTblDatos() {
+        return tblDatos;
+    }
+
+    public JTextField getTxtCantidad() {
+        return txtCantidad;
+    }
+
+    public JTextField getTxtCodigo() {
+        return txtCodigo;
+    }
+
+    public JTextField getTxtDiasCaducidad() {
+        return txtDiasCaducidad;
+    }
+
+    public JTextField getTxtMargen() {
+        return txtMargen;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
+
+    public JButton getUpdateButton1() {
+        return updateButton1;
+    }
+
+    public JComboBox<String> getMedidasCombo() {
+        return medidasCombo;
+    }
+
+    public JComboBox<String> getTiposCombo() {
+        return tiposCombo;
+    }
+
 
     /**
      * @param args the command line arguments
