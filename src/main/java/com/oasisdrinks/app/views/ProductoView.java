@@ -88,6 +88,7 @@ public class ProductoView extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo");
 
+        txtCodigo.setEditable(false);
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);

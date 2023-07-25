@@ -305,92 +305,92 @@ public class RecetaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetalleActionPerformed
-        // TODO: Assumes that, if the product does not yet have any Recipe linked to it, the codReceta will be
-        // zero.
-        int codReceta = 0, codProducto;
-        double cant;
-        String nomInsumo;
-        Insumo insumo = null;
-        //Receta receta = null;
+        //// TODO: Assumes that, if the product does not yet have any Recipe linked to it, the codReceta will be
+        //// zero.
+        //int codReceta = 0, codProducto;
+        //double cant;
+        //String nomInsumo;
+        //Insumo insumo = null;
+        ////Receta receta = null;
 
 
-        InsumoController insumoCtrl = new InsumoController();
-        RecetaController recetaCtrl = new RecetaController();
-        ProductoController productoCtrl = new ProductoController();
+        //InsumoController insumoCtrl = new InsumoController();
+        //RecetaController recetaCtrl = new RecetaController();
+        //ProductoController productoCtrl = new ProductoController();
 
-        insumoCtrl.setCache(cache);
-        recetaCtrl.setCache(cache);
-        productoCtrl.setCache(cache);
+        //insumoCtrl.setCache(cache);
+        //recetaCtrl.setCache(cache);
+        //productoCtrl.setCache(cache);
 
-        nomInsumo = (String) insumosCombo.getSelectedItem();
-        try {
-            codProducto = Integer.parseInt(txtCodigoProducto.getText());
-            codReceta = Integer.parseInt(txtCodigoReceta.getText());
-            cant = Double.parseDouble(txtCantidad.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //nomInsumo = (String) insumosCombo.getSelectedItem();
+        //try {
+        //    codProducto = Integer.parseInt(txtCodigoProducto.getText());
+        //    codReceta = Integer.parseInt(txtCodigoReceta.getText());
+        //    cant = Double.parseDouble(txtCantidad.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "Uno de los campos numericos posee un valor invalido",
+        //          "Error no es numero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        // Create receta if none exists
-        if (codReceta == 0) {
-            // NOTE: This section has to be done prob, with the controller's buscarPorID
-            // until it returns null;
-            // The above will be unnecessary when using databases.
-            int nuevoCodigo = 1;
-            // if (cache.get("recetas") == null) {
-            if (recetaCtrl.listarRecetas().size() != 0) {
-                for (Receta rec: recetaCtrl.listarRecetas() ) {
-                    if (rec.getCodReceta() != nuevoCodigo)
-                        break;
+        //// Create receta if none exists
+        //if (codReceta == 0) {
+        //    // NOTE: This section has to be done prob, with the controller's buscarPorID
+        //    // until it returns null;
+        //    // The above will be unnecessary when using databases.
+        //    int nuevoCodigo = 1;
+        //    // if (cache.get("recetas") == null) {
+        //    if (recetaCtrl.listarRecetas().size() != 0) {
+        //        for (Receta rec: recetaCtrl.listarRecetas() ) {
+        //            if (rec.getCodReceta() != nuevoCodigo)
+        //                break;
 
-                    nuevoCodigo += 1;
-                }
-            }
+        //            nuevoCodigo += 1;
+        //        }
+        //    }
 
-            receta = new Receta(nuevoCodigo); // TODO: I have to assign a reasonable code here
-            recetaCtrl.agregarReceta(receta);
-        } else {
-            // receta = // TODO: I need to implemente th controller for this to work
-            receta = recetaCtrl.buscarPorId(codReceta);
-        }
+        //    receta = new Receta(nuevoCodigo); // TODO: I have to assign a reasonable code here
+        //    recetaCtrl.agregarReceta(receta);
+        //} else {
+        //    // receta = // TODO: I need to implemente th controller for this to work
+        //    receta = recetaCtrl.buscarPorId(codReceta);
+        //}
 
 
-        System.out.println("[INFO] State of recetas cache " + cache.get("recetas"));
-        System.out.println("[INFO] before assign to txtCodigoReceta, codigo: " + receta.getCodReceta());
-        txtCodigoReceta.setText(""+receta.getCodReceta());
+        //System.out.println("[INFO] State of recetas cache " + cache.get("recetas"));
+        //System.out.println("[INFO] before assign to txtCodigoReceta, codigo: " + receta.getCodReceta());
+        //txtCodigoReceta.setText(""+receta.getCodReceta());
 
-        // this.producto.setReceta(receta);
+        //// this.producto.setReceta(receta);
 
-        insumo = insumoCtrl.buscarPorNombre(nomInsumo);
+        //insumo = insumoCtrl.buscarPorNombre(nomInsumo);
 
-        if (insumo ==  null)
-            JOptionPane.showMessageDialog(this, "Insumo to be add returned null");
-        
-        
-        // Create a new detail
-        RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
+        //if (insumo ==  null)
+        //    JOptionPane.showMessageDialog(this, "Insumo to be add returned null");
+        //
+        //
+        //// Create a new detail
+        //RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
 
-        // First lets update the receta
-        receta.agregarDetalle(detalle);
+        //// First lets update the receta
+        //receta.agregarDetalle(detalle);
 
-        // Second, assign the updated receta to the Product
-        this.producto.setReceta(receta);
-        productoCtrl.actualizarProducto(producto);
-                
+        //// Second, assign the updated receta to the Product
+        //this.producto.setReceta(receta);
+        //productoCtrl.actualizarProducto(producto);
+        //        
 
-        // Third, send all the changes through the controller and the daos
-        agregarFila(detalle); //MM, sino se invoca, no se adiciona registros
-        // addRecord(detalle); //MM, sino se invoca, no se adiciona registros
-        // This adds, deletes or modifies 
-        // recetaCtrl.actualizarReceta(receta);
-        // TODO: Need a store method here that does create or update the receta
-        recetaCtrl.agregarReceta(receta);
-        recetaCtrl.actualizarReceta(receta);
+        //// Third, send all the changes through the controller and the daos
+        //agregarFila(detalle); //MM, sino se invoca, no se adiciona registros
+        //// addRecord(detalle); //MM, sino se invoca, no se adiciona registros
+        //// This adds, deletes or modifies 
+        //// recetaCtrl.actualizarReceta(receta);
+        //// TODO: Need a store method here that does create or update the receta
+        //recetaCtrl.agregarReceta(receta);
+        //recetaCtrl.actualizarReceta(receta);
     
     }//GEN-LAST:event_btnAgregarDetalleActionPerformed
 
@@ -400,82 +400,82 @@ public class RecetaView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 
-        int codigo = 0;
+        //int codigo = 0;
 
-        try {
-            codigo = Integer.parseInt(this.txtCodigoReceta.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "El codigo indicado no es un entero",
-                  "Error no es entero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //try {
+        //    codigo = Integer.parseInt(this.txtCodigoReceta.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "El codigo indicado no es un entero",
+        //          "Error no es entero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        if (codigo == 0)
-            return;
+        //if (codigo == 0)
+        //    return;
 
-        InsumoController inCon = new InsumoController();
-        inCon.setCache(cache);
-        inCon.borrarInsumo(codigo);
-        loadDataToTable();
+        //InsumoController inCon = new InsumoController();
+        //inCon.setCache(cache);
+        //inCon.borrarInsumo(codigo);
+        //loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        int codReceta, codProducto;
-        double cant;
-        String nomInsumo;
-        Insumo insumo = null;
-        Receta receta = null;
+        //int codReceta, codProducto;
+        //double cant;
+        //String nomInsumo;
+        //Insumo insumo = null;
+        //Receta receta = null;
 
 
-        InsumoController insumoCtrl = new InsumoController();
-        RecetaController recetaCtrl = new RecetaController();
-        insumoCtrl.setCache(cache);
+        //InsumoController insumoCtrl = new InsumoController();
+        //RecetaController recetaCtrl = new RecetaController();
+        //insumoCtrl.setCache(cache);
 
-        nomInsumo = (String) insumosCombo.getSelectedItem();
-        try {
-            codProducto = Integer.parseInt(txtCodigoProducto.getText());
-            codReceta = Integer.parseInt(txtCodigoReceta.getText());
-            cant = Double.parseDouble(txtCantidad.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //nomInsumo = (String) insumosCombo.getSelectedItem();
+        //try {
+        //    codProducto = Integer.parseInt(txtCodigoProducto.getText());
+        //    codReceta = Integer.parseInt(txtCodigoReceta.getText());
+        //    cant = Double.parseDouble(txtCantidad.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "Uno de los campos numericos posee un valor invalido",
+        //          "Error no es numero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        // Create receta if none exists
-        if (codReceta == 0) {
-            JOptionPane.showMessageDialog(
-           this,
-               "No se puede actualizar sin codigo de receta",
-                  "Error no hay codigo de receta",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        insumo = insumoCtrl.buscarPorNombre(nomInsumo);
+        //// Create receta if none exists
+        //if (codReceta == 0) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "No se puede actualizar sin codigo de receta",
+        //          "Error no hay codigo de receta",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
+        //insumo = insumoCtrl.buscarPorNombre(nomInsumo);
 
-        if (insumo ==  null)
-            JOptionPane.showMessageDialog(this, "Insumo to be add returned null");
-        
-        
-        // Create a new detail
-        RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
+        //if (insumo ==  null)
+        //    JOptionPane.showMessageDialog(this, "Insumo to be add returned null");
+        //
+        //
+        //// Create a new detail
+        //RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
 
-        // First lets update the receta
-        receta.agregarDetalle(detalle);
+        //// First lets update the receta
+        //receta.agregarDetalle(detalle);
 
-        // Second, assign the updated receta to the Product
-        this.producto.setReceta(receta);
-                
+        //// Second, assign the updated receta to the Product
+        //this.producto.setReceta(receta);
+        //        
 
-        recetaCtrl.actualizarReceta(receta);
-        
-        loadDataToTable();
+        //recetaCtrl.actualizarReceta(receta);
+        //
+        //loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void txtCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoProductoActionPerformed
@@ -590,31 +590,31 @@ public class RecetaView extends javax.swing.JFrame {
     }
 
     private void fillInsumosCombo () {
-        List<Insumo> meds = null;
-        List<String> abrevList = new ArrayList<>();
-        InsumoController insumoCtrl = new InsumoController();
+        //List<Insumo> meds = null;
+        //List<String> abrevList = new ArrayList<>();
+        //InsumoController insumoCtrl = new InsumoController();
 
-        if (this.useCache) {
-            if (this.cache == null)
-                return;
+        //if (this.useCache) {
+        //    if (this.cache == null)
+        //        return;
 
-            insumoCtrl.setUseCache(true);
-            insumoCtrl.setCache(cache);
-        }
-
-
-        meds = insumoCtrl.listarInsumos();
-
-        if (meds == null) {
-            JOptionPane.showMessageDialog(this, "No se pudieron conseguir las insumos!",
-                           "Error Insumos", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        meds.forEach(insumo -> abrevList.add(insumo.getNomInsumo()));
+        //    insumoCtrl.setUseCache(true);
+        //    insumoCtrl.setCache(cache);
+        //}
 
 
-        fillCombo(insumosCombo, abrevList);
+        //meds = insumoCtrl.listarInsumos();
+
+        //if (meds == null) {
+        //    JOptionPane.showMessageDialog(this, "No se pudieron conseguir las insumos!",
+        //                   "Error Insumos", JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
+
+        //meds.forEach(insumo -> abrevList.add(insumo.getNomInsumo()));
+
+
+        //fillCombo(insumosCombo, abrevList);
     }
 
     private void loadDataToView() {
@@ -662,18 +662,18 @@ public class RecetaView extends javax.swing.JFrame {
             
     private void addRecord(Insumo insu){
     //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        System.out.println("Adding Record to DB");
-        // InsumoDao inDao = new InsumoCacheDao(cache);
-        InsumoController inCon = new InsumoController();
-        inCon.setCache(cache);
-        inCon.agregarInsumo(insu);
+        // System.out.println("Adding Record to DB");
+        // // InsumoDao inDao = new InsumoCacheDao(cache);
+        // InsumoController inCon = new InsumoController();
+        // inCon.setCache(cache);
+        // inCon.agregarInsumo(insu);
 
-        System.out.printf("Insumos Record's Size: ");
-        System.out.println(cache.get("insumos").size());
-        System.out.println("Insumos Record:");
-        System.out.println(cache.get("insumos"));
-        System.out.println("Whole");
-        System.out.println(cache);
+        // System.out.printf("Insumos Record's Size: ");
+        // System.out.println(cache.get("insumos").size());
+        // System.out.println("Insumos Record:");
+        // System.out.println(cache.get("insumos"));
+        // System.out.println("Whole");
+        // System.out.println(cache);
     }
 
     /**

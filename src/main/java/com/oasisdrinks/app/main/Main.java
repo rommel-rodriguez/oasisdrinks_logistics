@@ -10,7 +10,7 @@ import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import javax.swing.*;
 
 import com.oasisdrinks.app.controllers.InsumoController;
-import com.oasisdrinks.app.controllers.InsumoFixedController;
+import com.oasisdrinks.app.controllers.InsumoController;
 import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.models.InsumoService;
 import com.oasisdrinks.app.utils.dbconnection.MySQLPool;
@@ -37,7 +37,7 @@ public class Main {
         }
         InsumoService insumoSrv = new InsumoService(insumoDao);
         InsumoView view = new InsumoView();
-        InsumoFixedController controller = new InsumoFixedController(insumoSrv, view);
+        InsumoController controller = new InsumoController(insumoSrv, view);
 
         view.setLocationRelativeTo(null); // Center the frame
         view.setVisible(true);
