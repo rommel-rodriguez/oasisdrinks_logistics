@@ -344,18 +344,10 @@ public static String premioSorpresa = "Peluche de nuestra mascota";
     }//GEN-LAST:event_medidasBtnActionPerformed
 
     private void productosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosBtnActionPerformed
-        ProductoView productoView = new ProductoView();
-        productoView.setCache(cache);
-        productoView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        productoView.setVisible(true);
     }//GEN-LAST:event_productosBtnActionPerformed
 
     private void usuariosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosBtnActionPerformed
 
-        UsuariosView usuarioView = new UsuariosView();
-        usuarioView.setCache(cache);
-        usuarioView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        usuarioView.setVisible(true);
 
     }//GEN-LAST:event_usuariosBtnActionPerformed
 

@@ -27,7 +27,7 @@ public class ProductoDao implements OasisCRUDI<Producto>{
     @Override
     public int agregar(Producto t) {
         Producto producto = (Producto) t;
-        String sql = "INSERT INTO Producto (nomProducto, cantProducto, diasCaducidad, tipoProducto, estado, idMedida) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Producto (nomProducto, cantProducto, diasCaducidad, tipoProducto, flagEstado, idMedida) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, producto.getNomProducto());
@@ -106,6 +106,7 @@ public class ProductoDao implements OasisCRUDI<Producto>{
         }
         return -1; // Indicates failure.
     }
+
     @Override
     public Producto buscarPorID(int codProducto) {
         String sql = "SELECT * FROM Producto WHERE codProducto=?";
@@ -162,11 +163,47 @@ public class ProductoDao implements OasisCRUDI<Producto>{
         int cantProducto = resultSet.getInt("cantProducto");
         int diasCaducidad = resultSet.getInt("diasCaducidad");
         String tipo = resultSet.getString("tipoProducto");
-        int estado = resultSet.getInt("estado");
+        int estado = resultSet.getInt("flagEstado");
         int idMedida = resultSet.getInt("idMedida");
         // Get the Medida object using idMedida from the MedidaDAO or MedidaDataSource
         MedidaDao medidaDao = new MedidaDao(ds); // Assuming MedidaDAOImpl implements MedidaDAO
         Medida medida = medidaDao.buscarPorID(idMedida);
         return new Bebida(codProducto, nomProducto, cantProducto, diasCaducidad, tipo, estado, medida);
+    }
+
+    public List<String> listarTipos() {
+        List<String> tipos = new ArrayList<>();
+        String sql = "SELECT nomTipoProducto FROM ProductoTipo";
+        try (Connection connection = ds.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    tipos.add(resultSet.getString("nomTipoProducto"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or rethrow it as needed.
+        }
+        return tipos;
+    }
+
+    public String getTipoProductoFomNombre(String tipoNombre) {
+        String tipoProducto = null;
+        String sql = "SELECT tipoProducto FROM ProductoTipo WHERE nomTipoProducto=?";
+        try (Connection connection = ds.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, tipoNombre);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    tipoProducto = resultSet.getString("tipoProducto");
+                    return tipoProducto;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or rethrow it as needed.
+        }
+        return null; // Indicates no record found.
     }
 }

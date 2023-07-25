@@ -6,13 +6,16 @@ package com.oasisdrinks.app.controllers;
 
 import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.dao.MedidaDao;
+import com.oasisdrinks.app.dao.ProductoDao;
 import com.oasisdrinks.app.models.InsumoService;
 import com.oasisdrinks.app.models.MedidaService;
+import com.oasisdrinks.app.models.ProductoService;
 import com.oasisdrinks.app.utils.dbconnection.MySQLPool;
 import com.oasisdrinks.app.views.ErrorView;
 import com.oasisdrinks.app.views.InsumoView;
 import com.oasisdrinks.app.views.MainView;
 import com.oasisdrinks.app.views.MedidaView;
+import com.oasisdrinks.app.views.ProductoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -46,6 +49,8 @@ public class MainController implements ActionListener {
             System.out.println("[DEBUG]  Update button pressed");
         } else if ( source ==  view.getProductosBtn()) {
             System.out.println("[DEBUG]  Filter button pressed");
+            showProductosView();
+
         } 
     }
 
@@ -64,6 +69,25 @@ public class MainController implements ActionListener {
         view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         InsumoController controller = new InsumoController(insumoSrv, view);
 
+
+        view.setLocationRelativeTo(null); // Center the frame
+        view.setVisible(true);
+    }
+
+    public void showProductosView() {
+        ProductoDao productoDao = null;
+        try{
+            productoDao = new ProductoDao( new MySQLPool());
+        } catch (Exception e) {
+            // NOTE: I am assuming tthis will be a MySQL communications exception
+            new ErrorView("Database Conexion", "No se pudo establecer connection con la Base de Datos");
+            return;
+        }
+
+        ProductoService productoSrv = new ProductoService(productoDao);
+        ProductoView view = new ProductoView();
+        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ProductoController controller = new ProductoController(productoSrv, view);
 
         view.setLocationRelativeTo(null); // Center the frame
         view.setVisible(true);

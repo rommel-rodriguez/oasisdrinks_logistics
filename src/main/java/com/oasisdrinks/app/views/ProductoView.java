@@ -349,69 +349,69 @@ public class ProductoView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 
-        int codigo = 0;
+        //int codigo = 0;
 
-        try {
-            codigo = Integer.parseInt(this.txtCodigo.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "El codigo indicado no es un entero",
-                  "Error no es entero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //try {
+        //    codigo = Integer.parseInt(this.txtCodigo.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "El codigo indicado no es un entero",
+        //          "Error no es entero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        if (codigo == 0)
-            return;
+        //if (codigo == 0)
+        //    return;
 
-        ProductoController inCon = new ProductoController();
-        inCon.setCache(cache);
-        inCon.borrarProducto(codigo);
-        loadDataToTable();
+        //ProductoController inCon = new ProductoController();
+        //inCon.setCache(cache);
+        //inCon.borrarProducto(codigo);
+        //loadDataToTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        int cod, cant, diasCaducidad=0;
-        String nom, tipo;
-        Producto producto = null;
-        
-        nom = txtNombre.getText();
-        tipo = (String) tiposCombo.getSelectedItem();
+        //int cod, cant, diasCaducidad=0;
+        //String nom, tipo;
+        //Producto producto = null;
+        //
+        //nom = txtNombre.getText();
+        //tipo = (String) tiposCombo.getSelectedItem();
 
-        try {
-            cod = Integer.parseInt(txtCodigo.getText());
-            diasCaducidad = Integer.parseInt(txtDiasCaducidad.getText());
-            cant = Integer.parseInt(txtCantidad.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(
-           this,
-               "Uno de los campos numericos posee un valor invalido",
-                  "Error no es numero",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //try {
+        //    cod = Integer.parseInt(txtCodigo.getText());
+        //    diasCaducidad = Integer.parseInt(txtDiasCaducidad.getText());
+        //    cant = Integer.parseInt(txtCantidad.getText());
+        //} catch (NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(
+        //   this,
+        //       "Uno de los campos numericos posee un valor invalido",
+        //          "Error no es numero",
+        //    JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
 
 
-        
-        switch ( tipo ) {
-            case "Bebida":
-                producto = new Bebida(cod, nom);
-                ;
-            default:
-                ;
-        }
+        //
+        //switch ( tipo ) {
+        //    case "Bebida":
+        //        producto = new Bebida(cod, nom);
+        //        ;
+        //    default:
+        //        ;
+        //}
 
-        agregarFila(producto); //MM, sino se invoca, no se adiciona registros
-        addRecord(producto); //MM, sino se invoca, no se adiciona registros
-        // TODO add your handling code here:
+        //agregarFila(producto); //MM, sino se invoca, no se adiciona registros
+        //addRecord(producto); //MM, sino se invoca, no se adiciona registros
+        //// TODO add your handling code here:
 
-        ProductoController productoCtrl = new ProductoController();
+        //ProductoController productoCtrl = new ProductoController();
 
-        productoCtrl.setCache(cache);
-        productoCtrl.actualizarProducto(producto);
-        loadDataToTable();
+        //productoCtrl.setCache(cache);
+        //productoCtrl.actualizarProducto(producto);
+        //loadDataToTable();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
@@ -420,52 +420,52 @@ public class ProductoView extends javax.swing.JFrame {
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         // TODO add your handling code here:
-        ProductoController productoCtrl = new ProductoController();
+        //ProductoController productoCtrl = new ProductoController();
 
-        productoCtrl.setCache(cache);
+        //productoCtrl.setCache(cache);
 
-        int codigo = 0;
-        Producto producto = null;
-        RecetaView recetaView = new RecetaView();
+        //int codigo = 0;
+        //Producto producto = null;
+        //RecetaView recetaView = new RecetaView();
 
 
-        if (txtCodigo.getText() == null) {
-            JOptionPane.showMessageDialog(this, "Se necesita un codigo de producto para mostrar los detalles",
-                           "Error Codigo", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //if (txtCodigo.getText() == null) {
+        //    JOptionPane.showMessageDialog(this, "Se necesita un codigo de producto para mostrar los detalles",
+        //                   "Error Codigo", JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        try{
+        //try{
 
-            codigo = Integer.parseInt(txtCodigo.getText());
+        //    codigo = Integer.parseInt(txtCodigo.getText());
 
-        } catch(NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "Necesitamos que el codigo sea entero",
-                           "Error Codigo no es numero", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //} catch(NumberFormatException nfe) {
+        //    JOptionPane.showMessageDialog(this, "Necesitamos que el codigo sea entero",
+        //                   "Error Codigo no es numero", JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        if (codigo == 0)
-            return;
+        //if (codigo == 0)
+        //    return;
 
-        producto = productoCtrl.buscarPorId(codigo);
-        System.out.println("Inside ProductoView bucando: " + codigo);
-        System.out.println("Inside ProductoView producto encontrado: " + producto);
+        //producto = productoCtrl.buscarPorId(codigo);
+        //System.out.println("Inside ProductoView bucando: " + codigo);
+        //System.out.println("Inside ProductoView producto encontrado: " + producto);
 
-        if (producto == null) {
-            JOptionPane.showMessageDialog(this, "Producto con codigo " + codigo + " no existe",
-                           "Error Codigo", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        //if (producto == null) {
+        //    JOptionPane.showMessageDialog(this, "Producto con codigo " + codigo + " no existe",
+        //                   "Error Codigo", JOptionPane.ERROR_MESSAGE);
+        //    return;
+        //}
 
-        System.out.println("Inside ProductoView bucando: " + codigo);
-        System.out.println("Inside ProductoView detailButton, producto: " + producto);
+        //System.out.println("Inside ProductoView bucando: " + codigo);
+        //System.out.println("Inside ProductoView detailButton, producto: " + producto);
 
-        recetaView.setProducto(producto);
-        recetaView.setCache(cache);
+        //recetaView.setProducto(producto);
+        //recetaView.setCache(cache);
 
-        recetaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        recetaView.setVisible(true);
+        //recetaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //recetaView.setVisible(true);
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void txtMargenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMargenActionPerformed
@@ -478,101 +478,22 @@ public class ProductoView extends javax.swing.JFrame {
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (!e.getValueIsAdjusting()) {
-                int selectedRow = tblDatos.getSelectedRow();
-                if (selectedRow >= 0) {
-                    int columnCount = tblDatos.getColumnCount();
-                    List<Object> rowObjects = new ArrayList<>();
-
-                    // Assuming the desired columns are at index 0, 1, and 2
-                    for (int i = 0; i < columnCount; i++) {
-                        Object obj = tblDatos.getValueAt(selectedRow, i);
-                        rowObjects.add(obj);
-                    }
-                    fillForm(rowObjects);
-                }
-            }
         }
     };
 
 
     public void setCache(Map<String, List<?>> cache) {
-        System.out.println("[INFO] ProductoView, inside setCache");
-        ProductoController productoCtrl = new ProductoController();
-        if (cache != null) {
-            System.out.println("[INFO] ProductoView, cache is not null");
-            this.cache = cache;
-            if (this.useCache){
-                this.productos = (List<Producto>) cache.get("productos");
-                this.medidas = (List<Medida>) cache.get("medidas");
-                productoCtrl.setCache(cache);
-                // TODO: Fix this later, this should come either from the parsing the List or straight from
-                // producto DAO, prefer the List version.
-                this.tipos = productoCtrl.listarTipos();
-            }
-        }
-
-        System.out.println("[INFO] ProductoView, before loading data to view");
-        loadDataToView();
     }
 
 
     private void fillCombo(JComboBox combo, List<String> items){
-        combo.removeAllItems();
-        items.forEach(combo::addItem);
     }
 
 
     private void loadDataToTable(){
-        List<Producto> productos = new ArrayList<>();
-
-        this.tblModel.setRowCount(0);
-
-        ProductoController productoCtrl = new ProductoController();
-
-        if (this.useCache) {
-            if (this.cache == null || this.productos == null)
-                return;
-
-            productoCtrl.setUseCache(true);
-            productoCtrl.setCache(cache);
-        }
-
-        productos = productoCtrl.listarProductos();
-
-        System.out.println("[INFO] Inside ProductoView's loadDataToTable, productos: " + productos);
-
-        if (productos  == null)
-            return;
-
-        for (Producto producto: productos) {
-            agregarFila(producto);
-        }
     }
 
     private void fillTiposCombo () {
-        List<String> tipos = null;
-        ProductoController productoCtrl = new ProductoController();
-
-        if (this.useCache) {
-            if (this.cache == null || this.tipos == null)
-                return;
-
-            productoCtrl.setUseCache(true);
-            productoCtrl.setCache(cache);
-        }
-
-
-        tipos = productoCtrl.listarTipos();
-
-        if (tipos == null) {
-            JOptionPane.showMessageDialog(this, "No se pudieron conseguir los tipos!",
-                           "Error Tipos", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-        fillCombo(tiposCombo, tipos);
     }
 
 
@@ -651,19 +572,6 @@ public class ProductoView extends javax.swing.JFrame {
     }
             
     private void addRecord(Producto insu){
-    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        System.out.println("Adding Record to DB");
-        // ProductoDao inDao = new ProductoCacheDao(cache);
-        ProductoController inCon = new ProductoController();
-        inCon.setCache(cache);
-        inCon.agregarProducto(insu);
-
-        System.out.printf("Productos Record's Size: ");
-        System.out.println(cache.get("productos").size());
-        System.out.println("Productos Record:");
-        System.out.println(cache.get("productos"));
-        System.out.println("Whole");
-        System.out.println(cache);
     }
 
     public JButton getBtnGuardar() {
