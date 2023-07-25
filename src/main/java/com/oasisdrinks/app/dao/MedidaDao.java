@@ -80,6 +80,7 @@ public class MedidaDao implements OasisCRUDI<Medida> {
 
     @Override
     public int actualizar(Medida t) {
+        System.out.println("[DEBUG] Inside MedidaDao actualizar method");
         Medida medida = (Medida) t;
         String sql = "UPDATE Medida SET nombre=?, abreviacion=? WHERE idMedida=?";
         try (Connection connection = ds.getConnection();

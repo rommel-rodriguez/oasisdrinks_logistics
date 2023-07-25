@@ -179,7 +179,7 @@ public class MedidaFixedController implements ActionListener, ListSelectionListe
         emptyForm();
         view.getTxtCodigo().setText(rowObjects.get(0).toString());
         view.getTxtNombre().setText(rowObjects.get(1).toString());
-        view.getTxtAbrev().setText(rowObjects.get(1).toString());
+        view.getTxtAbrev().setText(rowObjects.get(2).toString());
         
     }
 
