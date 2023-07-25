@@ -6,8 +6,15 @@ import java.io.Serializable;
 public class RecetaDetalle  implements Serializable {
     private Insumo insumo;
     private double cantidad;
+    private int codReceta;
 
     public RecetaDetalle() {
+    }
+
+    public RecetaDetalle(Insumo insumo, double cantidad, int codReceta) {
+        this.insumo = insumo;
+        this.cantidad = cantidad;
+        this.codReceta = codReceta;
     }
 
     public RecetaDetalle(Insumo insumo, double cantidad) {
@@ -46,6 +53,14 @@ public class RecetaDetalle  implements Serializable {
             return true;
 
         return false;
+    }
+
+    public int getCodReceta() {
+        return codReceta;
+    }
+
+    public void setCodReceta(int codReceta) {
+        this.codReceta = codReceta;
     }
 
 }

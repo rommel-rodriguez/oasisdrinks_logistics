@@ -11,6 +11,11 @@ public class Bebida extends Producto implements Serializable {
         setTipo("bebida");
     }
 
+    public Bebida(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, String tipo, int estado, Medida medida) {
+        super(codProducto, nomProducto, cantProducto, diasCaducidad, tipo, estado, medida);
+    }
+
+
     public Bebida(int codProducto, String nomProducto, int cantProducto, int diasCaducidad, Receta receta, double margenGanancia) {
         super(codProducto, nomProducto, cantProducto, diasCaducidad, receta, margenGanancia);
         setTipo("bebida");
