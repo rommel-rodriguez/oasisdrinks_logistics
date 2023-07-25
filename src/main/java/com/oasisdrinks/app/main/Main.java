@@ -11,11 +11,13 @@ import javax.swing.*;
 
 import com.oasisdrinks.app.controllers.InsumoController;
 import com.oasisdrinks.app.controllers.InsumoController;
+import com.oasisdrinks.app.controllers.MainController;
 import com.oasisdrinks.app.dao.InsumoDao;
 import com.oasisdrinks.app.models.InsumoService;
 import com.oasisdrinks.app.utils.dbconnection.MySQLPool;
 import com.oasisdrinks.app.views.ErrorView;
 import com.oasisdrinks.app.views.InsumoView;
+import com.oasisdrinks.app.views.MainView;
 import java.awt.Color;
 import javax.naming.CommunicationException;
 
@@ -27,20 +29,9 @@ public class Main {
     public static void main(String[] args) {
 
         setTheme();
-        InsumoDao insumoDao = null;
-        try{
-            insumoDao = new InsumoDao( new MySQLPool());
-        } catch (Exception e) {
-            // NOTE: I am assuming tthis will be a MySQL communications exception
-            new ErrorView("Database Conexion", "No se pudo establecer connection con la Base de Datos");
-            return;
-        }
-        InsumoService insumoSrv = new InsumoService(insumoDao);
-        InsumoView view = new InsumoView();
-        InsumoController controller = new InsumoController(insumoSrv, view);
-
-        view.setLocationRelativeTo(null); // Center the frame
-        view.setVisible(true);
+        MainView mainView = new MainView();
+        MainController mainCtrl = new MainController(mainView);
+        mainView.setVisible(true);
     }
 
     private static void init () {
@@ -49,11 +40,8 @@ public class Main {
 
     private static void setTheme () {
         try {
-            // UIManager.setLookAndFeel(new FlatDarkLaf());
-            // UIManager.setLookAndFeel(new FlatDarculaLaf());
 
             UIManager.setLookAndFeel(new FlatMaterialDesignDarkIJTheme());
-            // Set the font size for all Swing components
             int fontSize = 20; // Set your desired font size here
             int buttonFontSize= 16; // Set your desired font size here
             int tableFontSize = 16; // Set your desired font size here
@@ -63,9 +51,6 @@ public class Main {
             UIManager.put("TextField.font", UIManager.getFont("TextField.font").deriveFont((float) inputFontSize));
             UIManager.put("Table.font", UIManager.getFont("Table.font").deriveFont((float) tableFontSize));
             UIManager.put("TableHeader.font", UIManager.getFont("TableHeader.font").deriveFont((float) tableFontSize));
-            // Set the color for buttons 
-            // UIManager.put("Button.background", Color.BLUE);
-            // UIManager.put("Button.foreground", Color.WHITE);
             UIManager.put("Button.select", Color.YELLOW);
             UIManager.put("TableHeader.background", Color.DARK_GRAY); // Set background color
             UIManager.put("TableHeader.foreground", Color.WHITE); 
