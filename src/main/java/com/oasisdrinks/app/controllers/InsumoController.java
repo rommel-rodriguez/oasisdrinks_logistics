@@ -239,9 +239,9 @@ public class InsumoController implements ActionListener, ListSelectionListener {
 
     private Insumo getModelFromForm() {
         // TODO:  Need to add the validations for range and type
-        int cod = 0, cant = 0;
+        int code = 0, cantidad = 0;
         String nom = "", abrev = "";
-        double pcosto = 0, dens = 0;
+        double precioCosto = 0, densidad = 0;
         Medida med = null;
         JComboBox<String> medidasCombo = null;
 
@@ -253,14 +253,14 @@ public class InsumoController implements ActionListener, ListSelectionListener {
 
         // TODO: This field should never be inputted manually
         try{
-            cod = Integer.parseInt(view.getTxtCodigo().getText());
+            code = Integer.parseInt(view.getTxtCodigo().getText());
         } catch (NumberFormatException e) {
             System.out.println("[INFO] No code");
         }
         try {
-            cant = Integer.parseInt(view.getTxtCantidad().getText());
-            pcosto = Double.parseDouble(view.getTxtPrecioCosto().getText());
-            dens = Double.parseDouble(view.getTxtDensidad().getText());
+            cantidad = Integer.parseInt(view.getTxtCantidad().getText());
+            precioCosto = Double.parseDouble(view.getTxtPrecioCosto().getText());
+            densidad = Double.parseDouble(view.getTxtDensidad().getText());
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(
            null,
@@ -271,6 +271,23 @@ public class InsumoController implements ActionListener, ListSelectionListener {
             return null;
         }
 
+        if (cantidad < 0) {
+            // Mensaje de error si la cantidad es negativa
+            JOptionPane.showMessageDialog(view, "La cantidad debe ser un número entero positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        if (precioCosto < 0) {
+            // Mensaje de error si el precio de costo es negativo
+            JOptionPane.showMessageDialog(view, "El precio de costo debe ser un número positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        if (densidad <= 0) {
+            // Mensaje de error si la densidad es menor o igual a cero
+            JOptionPane.showMessageDialog(view, "La densidad debe ser un número positivo mayor que cero.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
         System.out.println("[DEBUG] Searching for medida with abrev: " + abrev);
 
         med = createMedidaFromCombo();
@@ -281,7 +298,7 @@ public class InsumoController implements ActionListener, ListSelectionListener {
             return null;
         }
         
-        Insumo insu = new InsumoLiquido(dens, cod, nom, cant, med, pcosto);
+        Insumo insu = new InsumoLiquido(densidad, code, nom, cantidad, med, precioCosto);
 
         return insu; 
     }

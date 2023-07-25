@@ -119,9 +119,9 @@ public class MedidaDao implements OasisCRUDI<Medida> {
             try (ResultSet resultSet = statement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
+                    int id = resultSet.getInt("idMedida");
                     String name = resultSet.getString("nombre");
-                    String abrev = resultSet.getString("abrev");
+                    String abrev = resultSet.getString("abreviacion");
                     
                     Medida medida = new Medida(id, name, abrev);
                     medidas.add(medida);
