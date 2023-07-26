@@ -4,6 +4,7 @@
  */
 package com.oasisdrinks.app.dao;
 
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import com.oasisdrinks.app.models.Receta;
 import com.oasisdrinks.app.models.RecetaDetalle;
 import java.sql.Connection;
@@ -29,20 +30,18 @@ public class RecetaDao implements OasisCRUDI<Receta> {
     @Override
     public int agregar(Receta receta) {
         int rowsAffected = 0;
-        String sql = "INSERT INTO Receta (cantidad) VALUES (?)";
+        String sql = "INSERT INTO Receta (cantidad,codProducto) VALUES (?, ?)";
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, receta.getCantidad());
+            statement.setInt(1, receta.getCodProducto());
             rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
-                int codReceta = getGeneratedKey(statement);
-                receta.setCodReceta(codReceta);
-                // Add RecetaDetalle objects associated with this Receta to the database
-                RecetaDetalleDao recetaDetalleDao = new RecetaDetalleDao(ds);
-                for (RecetaDetalle detalle : receta.getDetalles()) {
-                    detalle.setCodReceta(codReceta);
-                    recetaDetalleDao.agregar(detalle);
-                }
+            int codReceta = getGeneratedKey(statement);
+            receta.setCodReceta(codReceta);
+            RecetaDetalleDao recetaDetalleDao = new RecetaDetalleDao(ds);
+            for (RecetaDetalle detalle : receta.getDetalles()) {
+                detalle.setCodReceta(codReceta);
+                recetaDetalleDao.agregar(detalle);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,18 +74,17 @@ public class RecetaDao implements OasisCRUDI<Receta> {
     @Override
     public int actualizar(Receta receta) {
         int rowsAffected = 0;
-        String sql = "UPDATE Receta SET cantidad = ? WHERE codReceta = ?";
+        String sql = "UPDATE Receta SET observacion= ? WHERE codReceta = ?";
         try (Connection connection = ds.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, receta.getCantidad());
+            statement.setString(1, receta.getObservacion());
             statement.setInt(2, receta.getCodReceta());
             rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0) {
                 // Update RecetaDetalle objects associated with this Receta in the database
-                RecetaDetalleDao recetaDetalleDAO = new RecetaDetalleDao(ds);
-                for (RecetaDetalle detalle : receta.getDetalles()) {
-                    recetaDetalleDAO.actualizar(detalle);
-                }
+            RecetaDetalleDao recetaDetalleDAO = new RecetaDetalleDao(ds);
+            for (RecetaDetalle detalle : receta.getDetalles()) {
+                //recetaDetalleDAO.actualizar(detalle);
+                recetaDetalleDAO.store(detalle);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,7 +124,7 @@ public class RecetaDao implements OasisCRUDI<Receta> {
                 if (resultSet.next()) {
                     receta = new Receta();
                     receta.setCodReceta(resultSet.getInt("codReceta"));
-                    receta.setCantidad(resultSet.getInt("cantidad"));
+                    //receta.setCantidad(resultSet.getInt("cantidad"));
                     // Load RecetaDetalle objects using RecetaDetalleDAO
                     RecetaDetalleDao recetaDetalleDao = new RecetaDetalleDao(ds);
                     List<RecetaDetalle> detalles = recetaDetalleDao.buscarPorReceta(codReceta);
@@ -168,8 +166,8 @@ public class RecetaDao implements OasisCRUDI<Receta> {
 
     private Receta createRecetaFromResultSet(ResultSet resultSet) throws SQLException {
         int codReceta = resultSet.getInt("codReceta");
-        int cantidad = resultSet.getInt("cantidad");
-        Receta receta = new Receta(codReceta, cantidad);
+        ///int cantidad = resultSet.getInt("cantidad");
+        Receta receta = new Receta(codReceta);
         // Load RecetaDetalle objects using RecetaDetalleDAO
         RecetaDetalleDao recetaDetalleDAO = new RecetaDetalleDao(ds);
         List<RecetaDetalle> detalles = recetaDetalleDAO.buscarPorReceta(codReceta);
@@ -184,5 +182,29 @@ public class RecetaDao implements OasisCRUDI<Receta> {
             }
         }
         throw new SQLException("Failed to get generated key for Receta.");
+    }
+
+    public Receta buscarPorCodProducto(int codProducto) throws DataAccessException {
+        Receta receta = null;
+        String sql = "SELECT * FROM Receta WHERE codProducto = ?";
+        try (Connection connection = ds.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, codProducto);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    receta = new Receta();
+                    receta.setCodReceta(resultSet.getInt("codReceta"));
+                    //receta.setCantidad(resultSet.getInt("cantidad"));
+                    receta.setCodProducto(resultSet.getInt("codProducto"));
+                    //receta.setFlagEstado(resultSet.getString("flagEstado"));
+                    // If needed, you can set additional fields of Receta from the ResultSet
+                    // For example, you can use resultSet.getString("observacion") to get the observacion field.
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error while fetching Receta by codProducto: " + e.getMessage(), e);
+        }
+        return receta;
     }
 }

@@ -7,7 +7,10 @@ import java.util.List;
 
 public class Receta implements Serializable  {
     private int codReceta;
+    private int codProducto;
     private int cantidad = 1;
+    private String observacion = "";
+    
     private List<RecetaDetalle> detalles = new ArrayList<>();
 
     public Receta() {
@@ -71,12 +74,28 @@ public class Receta implements Serializable  {
            );
     }
 
+    public int getCodProducto() {
+        return codProducto;
+    }
+
+    public void setCodProducto(int codProducto) {
+        this.codProducto = codProducto;
+    }
+
 
 
     @Override
     public String toString() {
         return "Código de receta  : "+codReceta+
                "\nCantidad          : "+cantidad;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     

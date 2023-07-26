@@ -6,6 +6,7 @@ package com.oasisdrinks.app.models;
 
 import com.oasisdrinks.app.dao.RecetaDao;
 import com.oasisdrinks.app.dao.RecetaDao;
+import com.oasisdrinks.app.exceptions.DataAccessException;
 import com.oasisdrinks.app.models.Receta;
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class RecetaService {
         return recetaDao.buscarPorID(codReceta);
     }
 
+    public Receta buscarPorCodProducto(int codProducto) throws DataAccessException {
+        return recetaDao.buscarPorCodProducto(codProducto);
+    }
     // Other methods for interacting with the data store or performing
     // additional business logic operations on recetas
 }

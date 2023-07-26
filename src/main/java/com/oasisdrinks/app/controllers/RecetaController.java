@@ -48,10 +48,13 @@ public class RecetaController implements ActionListener, ListSelectionListener {
     private ConnectionFactory conFactory;
     private boolean isNewReceta = false;
 
-    public RecetaController(RecetaService modelService, RecetaView view, int idProdcuto) {
+    public RecetaController(RecetaService modelService, RecetaView view, int idProducto) {
         this.modelService = modelService;
         this.view = view;
 
+        System.out.println("[DEBUG] RecCtrl const. idProducto: " + idProducto);
+        setIdProducto(idProducto);
+        System.out.println("[DEBUG] Ctrl's Producto: " + this.producto);
         view.getBtnNuevo().addActionListener(this);
         view.getBtnGuardar().addActionListener(this);
         view.getDeleteButton().addActionListener(this);
@@ -62,7 +65,6 @@ public class RecetaController implements ActionListener, ListSelectionListener {
         view.getTblDatos()
             .getSelectionModel()
             .addListSelectionListener(this);
-        setIdProducto(idProdcuto);
         init();
     }
 
@@ -70,11 +72,23 @@ public class RecetaController implements ActionListener, ListSelectionListener {
     public void init() {
         fillInsumosCombo();
         centerTableCells();
-
-        if (idReceta == 0)
+        fillProductData();
+        if (idReceta == 0) {
+            System.err.println("[ERROR] Id Receta = 0");
             return;
+        }
 
         readAction();
+    }
+
+    private void fillProductData() {
+        emptyForm();
+        view.getTxtCodigoProducto().setText( "" + this.producto.getCodProducto());
+        view.getTxtNombreProducto().setText(this.producto.getNomProducto());
+
+        if (idReceta != 0)
+            view.getTxtCodigo().setText("" + idReceta);
+
     }
 
 
@@ -128,26 +142,13 @@ public class RecetaController implements ActionListener, ListSelectionListener {
 
     private void createAction () {
 
-        System.out.println("[DEBUG]  Guardar button pressed");
                                            
         Receta receta = null;
         
-        receta = getModelFromForm();
-
-        if (receta == null) {
-            System.out.println("[DEBUG]  Model could not be created from form");
-            return;
-        }
-        
-        /////////////////////////////////////////////////////////////////////
-
-        // TODO: Assumes that, if the product does not yet have any Recipe linked to it, the codReceta will be
-        // zero.
         int codProducto = this.producto.getCodProducto();
         double cant;
         String nomInsumo;
         Insumo insumo = null;
-        //Receta receta = null;
 
 
         InsumoService insumoSrv = new InsumoService(
@@ -172,19 +173,20 @@ public class RecetaController implements ActionListener, ListSelectionListener {
             return;
         }
 
+        if (cant <= 0) {
+           JOptionPane.showMessageDialog(
+           null,
+               "La cantidad tiene que ser un numero entero mayor que cero",
+                  "Error numero no valido",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+
         // Create receta if none exists
         if (idReceta == 0) {
-            int nuevoCodigo = 1;
-            if (modelService.getAll().size() != 0) {
-                for (Receta rec: modelService.getAll()) {
-                    if (rec.getCodReceta() != nuevoCodigo)
-                        break;
-
-                    nuevoCodigo += 1;
-                }
-            }
-
-            receta = new Receta(nuevoCodigo); // TODO: I have to assign a reasonable code here
+            receta = new Receta(); // TODO: I have to assign a reasonable code here
+            receta.setCodProducto(codProducto);
             modelService.add(receta);
         } else {
             // receta = // TODO: I need to implemente th controller for this to work
@@ -203,29 +205,15 @@ public class RecetaController implements ActionListener, ListSelectionListener {
             JOptionPane.showMessageDialog(null, "Insumo to be add returned null");
         
         
-        // Create a new detail
         RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
+        System.out.println("Detalle to be written: " +detalle);
 
-        // First lets update the receta
         receta.agregarDetalle(detalle);
-
-        // Second, assign the updated receta to the Product
-        this.producto.setReceta(receta);
-        productoSrv.update(producto);
                 
 
-        // Third, send all the changes through the controller and the daos
         DefaultTableModel tblModel = (DefaultTableModel) view.getTblDatos().getModel();
         agregarFila(detalle, tblModel); //MM, sino se invoca, no se adiciona registros
-        // addRecord(detalle); //MM, sino se invoca, no se adiciona registros
-        // This adds, deletes or modifies 
-        // recetaCtrl.actualizarReceta(receta);
-        // TODO: Need a store method here that does create or update the receta
-        // TODO: Really not sure about this.
-        modelService.add(receta);
         modelService.update(receta);
-
-
 
         readAction();
     }
@@ -236,59 +224,69 @@ public class RecetaController implements ActionListener, ListSelectionListener {
 
         modelService.update(insu);
 
-        //int codReceta, codProducto;
-        //double cant;
-        //String nomInsumo;
-        //Insumo insumo = null;
-        //Receta receta = null;
+        ////////////////////////
+        int codReceta, codProducto;
+        double cant;
+        String nomInsumo;
+        Insumo insumo = null;
+        Receta receta = null;
 
 
-        //InsumoController insumoCtrl = new InsumoController();
-        //RecetaController recetaCtrl = new RecetaController();
-        //insumoCtrl.setCache(cache);
+        InsumoService insumoSrv = new InsumoService(
+            new InsumoDao(new MySQLPool())
+        );
 
-        //nomInsumo = (String) insumosCombo.getSelectedItem();
-        //try {
-        //    codProducto = Integer.parseInt(txtCodigoProducto.getText());
-        //    codReceta = Integer.parseInt(txtCodigoReceta.getText());
-        //    cant = Double.parseDouble(txtCantidad.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "Uno de los campos numericos posee un valor invalido",
-        //          "Error no es numero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
+        nomInsumo = (String) view.getInsumosCombo().getSelectedItem();
+        try {
+            codProducto = Integer.parseInt(view.getTxtCodigoProducto().getText());
+            codReceta = Integer.parseInt(view.getTxtCodigo().getText());
+            cant = Double.parseDouble(view.getTxtCantidad().getText());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(
+           null,
+               "Uno de los campos numericos posee un valor invalido",
+                  "Error no es numero",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        //// Create receta if none exists
-        //if (codReceta == 0) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "No se puede actualizar sin codigo de receta",
-        //          "Error no hay codigo de receta",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-        //insumo = insumoCtrl.buscarPorNombre(nomInsumo);
+        if (cant <= 0) {
+           JOptionPane.showMessageDialog(
+           null,
+               "La cantidad tiene que ser un numero entero mayor que cero",
+                  "Error numero no valido",
+            JOptionPane.ERROR_MESSAGE);
+            return;
 
-        //if (insumo ==  null)
-        //    JOptionPane.showMessageDialog(this, "Insumo to be add returned null");
-        //
-        //
-        //// Create a new detail
-        //RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
+        }
+        // Create receta if none exists
+        if (codReceta == 0) {
+            JOptionPane.showMessageDialog(
+           null,
+               "No se puede actualizar sin codigo de receta",
+                  "Error no hay codigo de receta",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        insumo = insumoSrv.buscarPorNombre(nomInsumo);
 
-        //// First lets update the receta
-        //receta.agregarDetalle(detalle);
+        if (insumo ==  null)
+            JOptionPane.showMessageDialog(null, "Insumo to be add returned null");
+        
+        
+        // Create a new detail
+        RecetaDetalle detalle = new RecetaDetalle(insumo, cant);
 
-        //// Second, assign the updated receta to the Product
-        //this.producto.setReceta(receta);
-        //        
+        // First lets update the receta
+        receta.agregarDetalle(detalle);
 
-        //recetaCtrl.actualizarReceta(receta);
-        //
-        //loadDataToTable();
+        // Second, assign the updated receta to the Product
+        this.producto.setReceta(receta);
+                
+
+        modelService.update(receta);
+        
+        loadDataToTable();
     }
 
     private void deleteAction () {
@@ -318,29 +316,6 @@ public class RecetaController implements ActionListener, ListSelectionListener {
 
         modelService.delete(codigo);
         loadDataToTable();
-
-
-
-        //int codigo = 0;
-
-        //try {
-        //    codigo = Integer.parseInt(this.txtCodigoReceta.getText());
-        //} catch (NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(
-        //   this,
-        //       "El codigo indicado no es un entero",
-        //          "Error no es entero",
-        //    JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //if (codigo == 0)
-        //    return;
-
-        //InsumoController inCon = new InsumoController();
-        //inCon.setCache(cache);
-        //inCon.borrarInsumo(codigo);
-        //loadDataToTable();
     }
 
     private void readAction() {
@@ -475,15 +450,6 @@ public class RecetaController implements ActionListener, ListSelectionListener {
         view.getTxtCantidad().setText("");
     }
 
-    private void fillProductData() {
-        //emptyForm();
-        //this.txtCodigoProducto.setText( "" + this.producto.getCodProducto());
-        //this.txtNombreProducto.setText(this.producto.getNomProducto());
-
-        //if (this.receta != null)
-        //    this.txtCodigo.setText("" + this.receta.getCodReceta());
-
-    }
 
     private void agregarFila(RecetaDetalle mod, DefaultTableModel tblModel){
         //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
@@ -510,17 +476,19 @@ public class RecetaController implements ActionListener, ListSelectionListener {
     }
 
     public void setIdProducto(int idProducto) {
+        System.out.println("[DEBUG] Inside setIdProducto");
         Receta receta = null;
         ProductoService prodSrv = new ProductoService(
             new ProductoDao(new MySQLPool())
         );
         this.producto = prodSrv.buscarPorID(idProducto);
-        receta = this.producto.getReceta();
-        if (receta == null) {
-            isNewReceta = true;
-            return;
-        }
-        this.idReceta = receta.getCodReceta();
+        // receta = this.producto.getReceta();
+        receta = modelService.buscarPorCodProducto(idProducto);
+        
+
+        System.out.println("[DEBUG] setIdProd Id Receta: " + idProducto);
+        if (receta != null)
+            this.idReceta = receta.getCodReceta();
     }
 
             

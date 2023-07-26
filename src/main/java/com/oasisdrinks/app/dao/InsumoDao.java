@@ -124,7 +124,22 @@ public class InsumoDao implements OasisCRUDI<Insumo> {
 
     @Override
     public Insumo buscarPorID(int id) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Insumo insumo = null;
+        String sql = "SELECT * FROM Insumo WHERE codInsumo = ?";
+        try (Connection connection = ds.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    insumo = createInsumoFromResultSet(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception or rethrow it as needed.
+            throw new DataAccessException("Error while fetching Insumo from the database.", e);
+        }
+        return insumo;
     }
 
     @Override
@@ -171,6 +186,19 @@ public class InsumoDao implements OasisCRUDI<Insumo> {
         }
         return insumos;
     }
-
+    private Insumo createInsumoFromResultSet(ResultSet resultSet) throws SQLException {
+        int idMedida = resultSet.getInt("idMedida");
+        int codInsumo = resultSet.getInt("codInsumo");
+        String nomInsumo = resultSet.getString("nomInsumo");
+        double precioCosto = resultSet.getDouble("precioCosto");
+        int cantInsumo =(int) resultSet.getDouble("cantInsumo");
+        double densidad = resultSet.getDouble("densidad");
+        boolean flagEstado = resultSet.getString("flagEstado").equals("1");
+        // Load Medida using MedidaDAO or MedidaDataSource
+        MedidaDao medidaDao = new MedidaDao(ds); // Assuming MedidaDAOImpl implements MedidaDao
+        Medida medida = medidaDao.buscarPorID(idMedida);
+        //return new InsumoLiquido(id, medida, nomInsumo, precioCosto, cantInsumo, densidad, flagEstado);
+        return new InsumoLiquido(codInsumo, nomInsumo, cantInsumo, medida, precioCosto);
+    }
     
 }

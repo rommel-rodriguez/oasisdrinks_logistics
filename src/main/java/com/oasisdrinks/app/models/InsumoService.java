@@ -26,7 +26,7 @@ public class InsumoService {
         // before adding the insumo to the data store
         InsumoLiquido insu = (InsumoLiquido) insumo;
         if ( insu.getDensidad() < 0)
-            throw new BusinessException.DensidadRangoNoPermitido("La densidad ingresadda es menor a 0");
+            throw new BusinessException.DensidadRangoNoPermitido("La densidad ingresada es menor a 0");
         insumoDao.agregar(insumo);
     }
 

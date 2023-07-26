@@ -91,6 +91,17 @@ public class RecetaDetalleDao implements OasisCRUDI<RecetaDetalle> {
         }
         return rowsAffected;
     }
+    public int store(RecetaDetalle recetaDetalle) {
+        int rowsAffected = 0;
+        if (recetaDetalle.getCodReceta() == 0 || recetaDetalle.getInsumo().getCodInsumo() == 0) {
+            // If both codReceta and codInsumo are 0, it's a new RecetaDetalle, so insert it.
+            rowsAffected = agregar(recetaDetalle);
+        } else {
+            // If either codReceta or codInsumo is not 0, it already exists, so update it.
+            rowsAffected = actualizar(recetaDetalle);
+        }
+        return rowsAffected;
+    }
 
     public List<RecetaDetalle> buscarPorReceta(int codReceta) {
         List<RecetaDetalle> detalles = new ArrayList<>();
