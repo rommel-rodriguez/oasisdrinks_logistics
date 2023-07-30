@@ -4,7 +4,7 @@
 
 
 Prototype application for a small beverages company
-Domain Scopy: Inventory
+Domain Scope: Inventory
 
 
 
