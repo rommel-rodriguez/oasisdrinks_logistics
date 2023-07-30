@@ -20,7 +20,7 @@ Domain Scope: Inventory
 
 ## Author
 
-- Rodriguez Perez Rommel [@rommel-rodriguezperez](https://github.com/rommel-rodriguez)
+- Rodriguez Perez Rommel [@rommel-rodriguez](https://github.com/rommel-rodriguez)
 
 ## License
 
