@@ -4,6 +4,7 @@
 
 
 Prototype application for a small beverages company
+
 Domain Scope: Inventory
 
 
@@ -19,8 +20,7 @@ Domain Scope: Inventory
 
 ## Author
 
-- Rodriguez Perez Rommel [@rommel-rodriguezperez](https://github.com/rommel-rodriguezperez)
-
+- Rodriguez Perez Rommel [@rommel-rodriguezperez](https://github.com/rommel-rodriguez)
 
 ## License
 
