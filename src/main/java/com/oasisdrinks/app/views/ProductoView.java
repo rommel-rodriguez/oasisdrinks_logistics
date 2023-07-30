@@ -37,7 +37,6 @@ public class ProductoView extends javax.swing.JFrame {
         this.tblModel=(DefaultTableModel)tblDatos.getModel(); //MM, Se castea con DefaultTableModel
         this.tblModel.setNumRows(0); //MM, Para inicializar en la pantalla con 0 registros
 
-        loadDataToView();
     }
 
     /**
@@ -291,8 +290,6 @@ public class ProductoView extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // Asignando valores en blanco
-        this.emptyForm();
-        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -419,53 +416,6 @@ public class ProductoView extends javax.swing.JFrame {
     }//GEN-LAST:event_updateButton1ActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
-        // TODO add your handling code here:
-        //ProductoController productoCtrl = new ProductoController();
-
-        //productoCtrl.setCache(cache);
-
-        //int codigo = 0;
-        //Producto producto = null;
-        //RecetaView recetaView = new RecetaView();
-
-
-        //if (txtCodigo.getText() == null) {
-        //    JOptionPane.showMessageDialog(this, "Se necesita un codigo de producto para mostrar los detalles",
-        //                   "Error Codigo", JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //try{
-
-        //    codigo = Integer.parseInt(txtCodigo.getText());
-
-        //} catch(NumberFormatException nfe) {
-        //    JOptionPane.showMessageDialog(this, "Necesitamos que el codigo sea entero",
-        //                   "Error Codigo no es numero", JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //if (codigo == 0)
-        //    return;
-
-        //producto = productoCtrl.buscarPorId(codigo);
-        //System.out.println("Inside ProductoView bucando: " + codigo);
-        //System.out.println("Inside ProductoView producto encontrado: " + producto);
-
-        //if (producto == null) {
-        //    JOptionPane.showMessageDialog(this, "Producto con codigo " + codigo + " no existe",
-        //                   "Error Codigo", JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //System.out.println("Inside ProductoView bucando: " + codigo);
-        //System.out.println("Inside ProductoView detailButton, producto: " + producto);
-
-        //recetaView.setProducto(producto);
-        //recetaView.setCache(cache);
-
-        //recetaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //recetaView.setVisible(true);
     }//GEN-LAST:event_detailButtonActionPerformed
 
     private void txtMargenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMargenActionPerformed
@@ -473,7 +423,6 @@ public class ProductoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMargenActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        loadDataToTable();
     }//GEN-LAST:event_refreshButtonActionPerformed
     private ListSelectionListener tableSelectionListener = new ListSelectionListener() {
         @Override
@@ -481,98 +430,6 @@ public class ProductoView extends javax.swing.JFrame {
         }
     };
 
-
-    public void setCache(Map<String, List<?>> cache) {
-    }
-
-
-    private void fillCombo(JComboBox combo, List<String> items){
-    }
-
-
-    private void loadDataToTable(){
-    }
-
-    private void fillTiposCombo () {
-    }
-
-
-    private void fillMedidasCombo () {
-        //List<Medida> meds = null;
-        //List<String> abrevList = new ArrayList<>();
-        //MedidaController medidaCtrl = new MedidaController();
-
-        //if (this.useCache) {
-        //    if (this.cache == null || this.medidas == null)
-        //        return;
-
-        //    medidaCtrl.setUseCache(true);
-        //    medidaCtrl.setCache(cache);
-        //}
-
-
-        //meds = medidaCtrl.listarMedidas();
-
-        //if (meds == null) {
-        //    JOptionPane.showMessageDialog(this, "No se pudieron conseguir las medidas!",
-        //                   "Error Medidas", JOptionPane.ERROR_MESSAGE);
-        //    return;
-        //}
-
-        //meds.forEach(medida -> abrevList.add(medida.getAbrev()));
-
-
-        //fillCombo(medidasCombo, abrevList);
-    }
-
-    private void loadDataToView() {
-        loadDataToTable();
-        fillTiposCombo();
-        fillMedidasCombo();
-        
-    }
-
-    private void emptyForm () {
-        this.txtCantidad.setText("");
-        this.txtCodigo.setText("");
-        this.txtMargen.setText("");
-        this.txtNombre.setText("");
-        this.txtDiasCaducidad.setText("");
-    }
-
-
-    private void fillForm(List<Object> rowObjects) {
-        emptyForm();
-        this.txtCodigo.setText(rowObjects.get(0).toString());
-        this.txtNombre.setText(rowObjects.get(1).toString());
-        this.tiposCombo.setSelectedItem(rowObjects.get(2).toString());
-        this.medidasCombo.setSelectedItem(rowObjects.get(3).toString());
-        this.txtCantidad.setText(rowObjects.get(4).toString());
-        this.txtDiasCaducidad.setText(rowObjects.get(5).toString());
-        this.txtMargen.setText(rowObjects.get(6).toString());
-        
-    }
-    private void agregarFila(Producto producto){
-    //MM, esta funcion se tiene que implementar, porqque esta permite adicionar registro 
-        Producto prod = producto;
-
-        // TODO: Needs to be fixed
-
-        tblModel.addRow(new Object[]{
-                prod.getCodProducto(), 
-                prod.getNomProducto(),
-                prod.getTipo(),
-                prod.getMedida().getAbrev(),
-                prod.getCantProducto(),
-                prod.getDiasCaducidad(),
-                prod.getMargenGanancia(),
-                prod.calcularCostoTotal(),
-                prod.calcularPrecioDeVenta()
-        });
-    }
-            
-    private void addRecord(Producto insu){
-    }
 
     public JButton getBtnGuardar() {
         return btnGuardar;
